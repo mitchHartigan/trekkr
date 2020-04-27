@@ -8,6 +8,7 @@ const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 `;
 
 export default class Draggable extends React.Component {
@@ -21,7 +22,13 @@ export default class Draggable extends React.Component {
     console.log(result);
   };
 
-  handleAddTask = () => {};
+  handleAddTask = (task, column) => {
+    let state = this.state;
+
+    let newState = {
+      ...this.state,
+    };
+  };
 
   onDragEnd = (result) => {
     const { destination, source, draggableId } = result;

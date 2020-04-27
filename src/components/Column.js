@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Task from "./Task";
 import { Droppable } from "react-beautiful-dnd";
+import AddATask from "./AddATask";
 
 const Container = styled.div`
   margin: 8px;
@@ -11,12 +12,14 @@ const ColumnWrapper = styled.div`
   max-width: 25vw;
   min-width: 20vw;
   margin: 0px 10px 0px 10px;
-  border: 2px solid grey;
+  box-shadow: 3px 5px 5px #a4a29b;
   height: 40vh;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
-  background-color: ${(props) => (props.isDraggingOver ? "#95BD99" : "white")};
+  background-color: ${(props) =>
+    props.isDraggingOver ? "#F1EFE8" : "#E3E1DB"};
+  box-shadow: ${(props) =>
+    props.isDraggingOver ? "3px 5px 5px #6E8168" : "5px 7px 5px #a4a29b"};
   transition: background-color 0.3s ease;
 `;
 
@@ -37,20 +40,24 @@ const TaskList = styled.div`
 
 const Button = styled.button`
   margin: -8px 8px 8px 8px;
-  border: 2px solid #7dab87;
-  border-radius: 2px;
+  border: 2px solid #415a77;
+  border-radius: 0px;
   padding: 8px;
-  background-color: white;
   cursor: pointer;
+  background-color: ${(props) => (props.isDraggingOver ? "red" : "#415a77")};
+  color: white;
   &: hover {
-    border: 3px solid #598d5e;
-    transition: border 0.1s ease-out;
+    box-shadow: 2px 2px 2px #2e3843;
+    transition: background-color 0.1s ease;
+    transition: color 0.06s ease-out;
+    transition: box-shadow 0.1s ease-out;
   }
-  font-size: 15pt;
+  font-size: 14pt;
+  font-family: Open Sans Condensed;
 `;
 
 const PlusButton = (props) => {
-  return <Button onClick={props.onClick}>+</Button>;
+  return <AddATask />;
 };
 
 export default class Column extends Component {
@@ -69,7 +76,10 @@ export default class Column extends Component {
                   return <Task key={task.id} task={task} index={index} />;
                 })}
               </TaskList>
-              <PlusButton onClick={this.props.handleAddTask} />
+              <PlusButton
+                onClick={this.props.handleAddTask}
+                isDraggingOver={snapshot.isDraggingOver}
+              />
             </ColumnWrapper>
           )}
         </Droppable>
