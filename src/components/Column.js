@@ -16,9 +16,8 @@ const ColumnWrapper = styled.div`
   height: 40vh;
   display: flex;
   flex-direction: column;
-  background-color: ${(props) =>
-    props.isDraggingOver ? "#F1EFE8" : "#E3E1DB"};
-  box-shadow: ${(props) =>
+  background-color: ${props => (props.isDraggingOver ? "#F1EFE8" : "#E3E1DB")};
+  box-shadow: ${props =>
     props.isDraggingOver ? "3px 5px 5px #6E8168" : "5px 7px 5px #a4a29b"};
   transition: background-color 0.3s ease;
 `;
@@ -44,7 +43,7 @@ const Button = styled.button`
   border-radius: 0px;
   padding: 8px;
   cursor: pointer;
-  background-color: ${(props) => (props.isDraggingOver ? "red" : "#415a77")};
+  background-color: ${props => (props.isDraggingOver ? "red" : "#415a77")};
   color: white;
   &: hover {
     box-shadow: 2px 2px 2px #2e3843;
@@ -56,7 +55,7 @@ const Button = styled.button`
   font-family: Open Sans Condensed;
 `;
 
-const PlusButton = (props) => {
+const PlusButton = props => {
   return <AddATask />;
 };
 

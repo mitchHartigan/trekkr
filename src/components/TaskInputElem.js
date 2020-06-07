@@ -60,7 +60,6 @@ const AddTaskButton = styled.button`
   height: 30px;
   font-family: Open Sans Condensed;
   font-size: 16px;
-  width: 100%;
 `;
 
 export default class TaskInputElem extends Component {
@@ -68,7 +67,7 @@ export default class TaskInputElem extends Component {
     super(props);
 
     this.state = {
-      isEnteringInfo: false,
+      isEnteringInfo: false
     };
 
     this.nameInput = React.createRef();

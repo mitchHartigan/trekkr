@@ -8,7 +8,7 @@ const Button = styled.button`
   border-radius: 0px;
   padding: 8px;
   cursor: pointer;
-  background-color: ${(props) => (props.isDraggingOver ? "red" : "#415a77")};
+  background-color: ${props => (props.isDraggingOver ? "red" : "#415a77")};
   color: white;
   box-sizing: border-box;
   &: hover {
@@ -26,7 +26,7 @@ export default class AddATask extends Component {
     super(props);
 
     this.state = {
-      isEnteringData: false,
+      isEnteringData: false
     };
   }
 
@@ -38,6 +38,6 @@ export default class AddATask extends Component {
     if (!this.state.isEnteringData) {
       return <Button onClick={this.toggleEnteringData}>+ Add a task</Button>;
     }
-    return <TaskInputElem />;
+    return <TaskInputElem toggleEnteringData={this.toggleEnteringData} />;
   }
 }

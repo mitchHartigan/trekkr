@@ -18,7 +18,7 @@ export default class Draggable extends React.Component {
     const backgroundColor = undefined;
   }
 
-  onDragStart = (result) => {
+  onDragStart = result => {
     console.log(result);
   };
 
@@ -26,11 +26,11 @@ export default class Draggable extends React.Component {
     let state = this.state;
 
     let newState = {
-      ...this.state,
+      ...this.state
     };
   };
 
-  onDragEnd = (result) => {
+  onDragEnd = result => {
     const { destination, source, draggableId } = result;
 
     if (!destination) {
@@ -56,15 +56,15 @@ export default class Draggable extends React.Component {
 
       const newColumn = {
         ...start,
-        taskIds: newTaskIds,
+        taskIds: newTaskIds
       };
 
       const newState = {
         ...this.state,
         columns: {
           ...this.state.columns,
-          [newColumn.id]: newColumn,
-        },
+          [newColumn.id]: newColumn
+        }
       };
       this.setState(newState);
       return;
@@ -75,14 +75,14 @@ export default class Draggable extends React.Component {
     startTaskIds.splice(source.index, 1);
     const newStart = {
       ...start,
-      taskIds: startTaskIds,
+      taskIds: startTaskIds
     };
 
     const finishTaskIds = Array.from(finish.taskIds);
     finishTaskIds.splice(destination.index, 0, draggableId);
     const newFinish = {
       ...finish,
-      taskIds: finishTaskIds,
+      taskIds: finishTaskIds
     };
 
     const newState = {
@@ -90,8 +90,8 @@ export default class Draggable extends React.Component {
       columns: {
         ...this.state.columns,
         [newStart.id]: newStart,
-        [newFinish.id]: newFinish,
-      },
+        [newFinish.id]: newFinish
+      }
     };
 
     this.setState(newState);
@@ -105,10 +105,10 @@ export default class Draggable extends React.Component {
         onDragEnd={this.onDragEnd}
       >
         <Container>
-          {this.state.columnOrder.map((columnId) => {
+          {this.state.columnOrder.map(columnId => {
             const column = this.state.columns[columnId];
             const tasks = column.taskIds.map(
-              (taskId) => this.state.tasks[taskId]
+              taskId => this.state.tasks[taskId]
             );
             return <Column key={column.id} column={column} tasks={tasks} />;
           })}
