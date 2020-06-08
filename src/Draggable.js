@@ -15,7 +15,6 @@ export default class Draggable extends React.Component {
   constructor(props) {
     super(props);
     this.state = initialData;
-    const backgroundColor = undefined;
   }
 
   onDragStart = result => {
@@ -55,6 +54,7 @@ export default class Draggable extends React.Component {
       newTaskIds.splice(destination.index, 0, draggableId);
 
       const newColumn = {
+        // should be called updated Column...
         ...start,
         taskIds: newTaskIds
       };
@@ -73,6 +73,7 @@ export default class Draggable extends React.Component {
     // Moving from one list to another
     const startTaskIds = Array.from(start.taskIds);
     startTaskIds.splice(source.index, 1);
+    // remove the elem from the old list
     const newStart = {
       ...start,
       taskIds: startTaskIds

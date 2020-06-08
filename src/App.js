@@ -1,6 +1,5 @@
 import React from "react";
-import Draggable from "./Draggable";
-import BackpackData from "./pack/BackpackData/BackpackData";
+import BackpackData from "./pack/BackpackData/index";
 import "./index.css";
 
 function App() {

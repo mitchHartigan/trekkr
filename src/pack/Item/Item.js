@@ -7,7 +7,7 @@ export default class Item extends Component {
     this.state = {
       name: "",
       weight: 0,
-      quantity: 1
+      qty: 1
     };
   }
 
@@ -25,6 +25,7 @@ export default class Item extends Component {
             type="text"
             name="name"
             placeholder="Name"
+            value={this.props.name}
             onChange={this.handleUpdate}
           />
         </td>
@@ -33,6 +34,7 @@ export default class Item extends Component {
           <input
             name="weight"
             type="number"
+            value={this.props.weight}
             placeholder="0"
             onChange={this.handleUpdate}
           />
@@ -46,7 +48,8 @@ export default class Item extends Component {
           <p>Qty</p>
           <input
             type="number"
-            name="quantity"
+            value={this.props.qty}
+            name="qty"
             placeholder="1"
             onChange={this.handleUpdate}
           />
