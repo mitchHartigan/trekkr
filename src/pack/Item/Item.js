@@ -20,6 +20,7 @@ export default class Item extends Component {
   };
 
   render() {
+    const { name, weight, qty } = this.props.item;
     return (
       <Draggable draggableId={this.props.item.id} index={this.props.index}>
         {(provided, snapshot) => (
@@ -34,7 +35,7 @@ export default class Item extends Component {
                 type="text"
                 name="name"
                 placeholder={provided.placeholder || "Name"}
-                value={this.props.name}
+                value={name}
                 onChange={this.handleUpdate}
               />
             </div>
@@ -43,7 +44,7 @@ export default class Item extends Component {
               <input
                 name="weight"
                 type="number"
-                value={this.props.weight}
+                value={weight}
                 placeholder="0"
                 onChange={this.handleUpdate}
               />
@@ -57,7 +58,7 @@ export default class Item extends Component {
               <p>Qty</p>
               <input
                 type="number"
-                value={this.props.qty}
+                value={qty}
                 name="qty"
                 placeholder="1"
                 onChange={this.handleUpdate}
