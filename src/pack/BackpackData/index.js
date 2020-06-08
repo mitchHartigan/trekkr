@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Category from "../Category/Category";
 import { DragDropContext } from "react-beautiful-dnd";
 import { data } from "./data";
-
 export default class BackpackData extends Component {
   constructor(props) {
     super(props);
@@ -66,7 +65,7 @@ export default class BackpackData extends Component {
       itemIds: startItemIds
     };
 
-    const finishItemIds = Array.from(start.itemIds);
+    const finishItemIds = Array.from(finish.itemIds);
     finishItemIds.splice(destination.index, 0, draggableId);
 
     const updatedFinish = {

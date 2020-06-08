@@ -14,12 +14,12 @@ export const data = {
     "category-2": {
       id: "category-2",
       title: undefined,
-      itemIds: ["item-1", "item-2", "item-3"]
+      itemIds: []
     },
     "category-3": {
       id: "category-3",
       title: "First Aid",
-      itemIds: ["item-1", "item-2"]
+      itemIds: []
     }
   },
   // just to have a list of all of the category ids, to map through.

@@ -17,7 +17,7 @@ export default class Category extends Component {
 
   render() {
     return (
-      <>
+      <div>
         <input
           type="text"
           value={this.state.title}
@@ -25,24 +25,24 @@ export default class Category extends Component {
         />
         <Droppable droppableId={this.props.category.id}>
           {(provided, snapshot) => (
-            <table>
-              <tbody ref={provided.innerRef} {...provided.droppableProps}>
-                {this.props.items.map((item, index) => {
-                  return (
-                    <Item
-                      key={item.id}
-                      index={index}
-                      name={item.name}
-                      weight={item.weight}
-                      qty={item.qty}
-                    />
-                  );
-                })}
-              </tbody>
-            </table>
+            <section ref={provided.innerRef} {...provided.droppableProps}>
+              {this.props.items.map((item, index) => {
+                return (
+                  <Item
+                    key={item.id}
+                    index={index}
+                    item={item}
+                    name={item.name}
+                    weight={item.weight}
+                    qty={item.qty}
+                  ></Item>
+                );
+              })}
+              {provided.placeholder}
+            </section>
           )}
         </Droppable>
-      </>
+      </div>
     );
   }
 }
