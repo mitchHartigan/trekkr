@@ -14,9 +14,11 @@ export default class Item extends Component {
   }
 
   handleUpdate = evt => {
-    this.setState({ [evt.target.name]: evt.target.value }, () => {
-      // pass this state up to parent here...
-    });
+    this.props.updateItemContents(
+      this.props.item.id,
+      evt.target.name,
+      evt.target.value
+    );
   };
 
   render() {
@@ -34,7 +36,7 @@ export default class Item extends Component {
               <input
                 type="text"
                 name="name"
-                placeholder={provided.placeholder || "Name"}
+                placeholder={"Name"}
                 value={name}
                 onChange={this.handleUpdate}
               />

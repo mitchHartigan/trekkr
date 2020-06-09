@@ -27,7 +27,14 @@ export default class Category extends Component {
           {(provided, snapshot) => (
             <section ref={provided.innerRef} {...provided.droppableProps}>
               {this.props.items.map((item, index) => {
-                return <Item key={item.id} index={index} item={item}></Item>;
+                return (
+                  <Item
+                    key={item.id}
+                    index={index}
+                    item={item}
+                    updateItemContents={this.props.updateItemContents}
+                  />
+                );
               })}
               {provided.placeholder}
             </section>
