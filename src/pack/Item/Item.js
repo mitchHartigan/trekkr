@@ -51,8 +51,8 @@ export default class Item extends Component {
                 onChange={this.handleUpdate}
               />
               <select name="units">
-                <option value="kg">kg</option>
                 <option value="g">g</option>
+                <option value="kg">kg</option>
               </select>
             </div>
 

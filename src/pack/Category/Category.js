@@ -40,6 +40,7 @@ export default class Category extends Component {
             </section>
           )}
         </Droppable>
+        <button onClick={this.props.addItem}>+ Add item</button>
       </div>
     );
   }
