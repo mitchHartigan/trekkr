@@ -8,6 +8,7 @@ export default class Category extends Component {
 
     this.state = {
       title: this.props.category.title || "Category Title"
+      // TODO: pass title state handling up to parent component
     };
   }
 
@@ -35,8 +36,10 @@ export default class Category extends Component {
                   <Item
                     key={item.id}
                     index={index}
+                    category={this.props.category}
                     item={item}
                     updateItemContents={this.props.updateItemContents}
+                    deleteItem={this.props.deleteItem}
                   />
                 );
               })}

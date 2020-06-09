@@ -34,6 +34,34 @@ export default class BackpackData extends Component {
     this.setState(updatedState);
   };
 
+  deleteItem = (item, category) => {
+    const updatedItems = this.state.items;
+    delete updatedItems[item.id];
+
+    let updatedItemIds = this.state.categories[category.id].itemIds;
+
+    const index = updatedItemIds.indexOf(item.id);
+    updatedItemIds.splice(index, 1);
+
+    const updatedState = {
+      ...this.state,
+      items: {
+        ...updatedItems
+      },
+      categories: {
+        ...this.state.categories,
+        [category.id]: {
+          ...this.state.categories[category.id],
+          itemIds: updatedItemIds
+        }
+      }
+    };
+
+    console.log("updatedState", updatedState);
+
+    this.setState(updatedState);
+  };
+
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
@@ -50,6 +78,7 @@ export default class BackpackData extends Component {
               items={items}
               updateItemContents={this.updateItemContents}
               addItem={this.addItem}
+              deleteItem={this.deleteItem}
             />
           );
         })}

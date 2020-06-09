@@ -5,12 +5,8 @@ import "./_item.scss";
 export default class Item extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      name: "",
-      weight: 0,
-      qty: 1
-    };
+    this.state = {};
+    //TODO: refactor as functional component
   }
 
   handleUpdate = evt => {
@@ -19,6 +15,11 @@ export default class Item extends Component {
       evt.target.name,
       evt.target.value
     );
+  };
+
+  handleDelete = () => {
+    console.log("this.props.item", this.props.item);
+    this.props.deleteItem(this.props.item, this.props.category);
   };
 
   render() {
@@ -65,6 +66,10 @@ export default class Item extends Component {
                 placeholder="1"
                 onChange={this.handleUpdate}
               />
+            </div>
+
+            <div>
+              <button onClick={this.handleDelete}>Delete</button>
             </div>
           </section>
         )}
