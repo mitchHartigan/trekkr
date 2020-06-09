@@ -7,7 +7,7 @@ export default class Category extends Component {
     super(props);
 
     this.state = {
-      title: this.props.category.title || "Category Title"
+      title: this.props.category.title || ""
       // TODO: pass title state handling up to parent component
     };
   }
@@ -25,6 +25,7 @@ export default class Category extends Component {
       <div>
         <input
           type="text"
+          placeholder="Category Title"
           value={this.state.title}
           onChange={this.updateTitle}
         />

@@ -2,9 +2,13 @@ import React, { Component } from "react";
 import Category from "../Category/Category";
 import { DragDropContext } from "react-beautiful-dnd";
 import { data } from "./data";
-import { handleDrag, handleAddItem, handleDeleteItem } from "./utils";
-import { v4 as uuidv4 } from "uuid";
-import { throwStatement } from "@babel/types";
+import {
+  handleDrag,
+  handleAddItem,
+  handleAddCategory,
+  handleDeleteItem
+} from "./utils";
+
 export default class BackpackData extends Component {
   constructor(props) {
     super(props);
@@ -35,27 +39,7 @@ export default class BackpackData extends Component {
   };
 
   addCategory = () => {
-    const categoryId = uuidv4();
-
-    const newCategory = {
-      id: categoryId,
-      title: "Category Name",
-      itemIds: []
-    };
-
-    const updatedCategoryOrder = this.state.categoryOrder;
-    updatedCategoryOrder.push(categoryId);
-
-    const updatedState = {
-      ...this.state,
-      categories: {
-        ...this.state.categories,
-        [categoryId]: newCategory
-      },
-      categoryOrder: updatedCategoryOrder
-    };
-
-    this.setState(updatedState);
+    this.setState(handleAddCategory(this.state));
   };
 
   deleteItem = (item, category) => {

@@ -124,3 +124,26 @@ export const handleDeleteItem = (item, category, currentState) => {
   };
   return updatedState;
 };
+
+export const handleAddCategory = currentState => {
+  const categoryId = uuidv4();
+
+  const newCategory = {
+    id: categoryId,
+    title: "",
+    itemIds: []
+  };
+
+  const updatedCategoryOrder = currentState.categoryOrder;
+  updatedCategoryOrder.push(categoryId);
+
+  const updatedState = {
+    ...currentState,
+    categories: {
+      ...currentState.categories,
+      [categoryId]: newCategory
+    },
+    categoryOrder: updatedCategoryOrder
+  };
+  return updatedState;
+};
