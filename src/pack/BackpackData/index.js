@@ -6,7 +6,8 @@ import {
   handleDrag,
   handleAddItem,
   handleAddCategory,
-  handleDeleteItem
+  handleDeleteItem,
+  handleUpdateItem
 } from "./utils";
 
 export default class BackpackData extends Component {
@@ -21,17 +22,7 @@ export default class BackpackData extends Component {
   };
 
   updateItemContents = (itemId, key, value) => {
-    const item = this.state.items[itemId];
-    item[key] = value;
-
-    let updatedState = {
-      ...this.state,
-      items: {
-        ...this.state.items,
-        [itemId]: item
-      }
-    };
-    this.setState(updatedState);
+    this.setState(handleUpdateItem(itemId, key, value, this.state));
   };
 
   addItem = category => {

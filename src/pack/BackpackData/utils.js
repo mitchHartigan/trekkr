@@ -147,3 +147,17 @@ export const handleAddCategory = currentState => {
   };
   return updatedState;
 };
+
+export const handleUpdateItem = (itemId, key, value, currentState) => {
+  const item = currentState.items[itemId];
+  item[key] = value;
+
+  let updatedState = {
+    ...currentState,
+    items: {
+      ...currentState.items,
+      [itemId]: item
+    }
+  };
+  return updatedState;
+};
