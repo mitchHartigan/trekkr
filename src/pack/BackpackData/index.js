@@ -37,19 +37,28 @@ export default class BackpackData extends Component {
     let uniqueId = uuidv4();
     const newItem = { id: uniqueId, name: "Name", weight: 0, qty: 1 };
 
+    const updatedItemIds = this.state.categories[category.id].itemIds;
+
+    updatedItemIds.push(uniqueId);
+
     let updatedState = {
       ...this.state,
       items: {
         ...this.state.items,
         [uniqueId]: newItem
+      },
+      categories: {
+        ...this.state.categories,
+        [category.id]: {
+          ...this.state.categories[category.id],
+          itemIds: updatedItemIds
+        }
       }
-      // categories[category].itemIds: {
-
-      // }
-
-      // * TODO * add item to category where button was clicked...
     };
-    this.setState(updatedState);
+
+    this.setState(updatedState, () => {
+      console.log("this.state", this.state);
+    });
   };
 
   render() {

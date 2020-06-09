@@ -15,6 +15,10 @@ export default class Category extends Component {
     this.setState({ title: evt.target.value });
   };
 
+  handleAddItem = () => {
+    this.props.addItem(this.props.category);
+  };
+
   render() {
     return (
       <div>
@@ -40,7 +44,7 @@ export default class Category extends Component {
             </section>
           )}
         </Droppable>
-        <button onClick={this.props.addItem}>+ Add item</button>
+        <button onClick={this.handleAddItem}>+ Add item</button>
       </div>
     );
   }
