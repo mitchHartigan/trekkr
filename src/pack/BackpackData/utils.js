@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 export const handleDrag = (result, currentState) => {
   const { destination, source, draggableId } = result;
 
@@ -70,5 +72,30 @@ export const handleDrag = (result, currentState) => {
     }
   };
 
+  return updatedState;
+};
+
+export const handleAddItem = (category, currentState) => {
+  let uniqueId = uuidv4();
+  const newItem = { id: uniqueId, name: "Name", weight: 0, qty: 1 };
+
+  const updatedItemIds = currentState.categories[category.id].itemIds;
+
+  updatedItemIds.push(uniqueId);
+
+  let updatedState = {
+    ...currentState,
+    items: {
+      ...currentState.items,
+      [uniqueId]: newItem
+    },
+    categories: {
+      ...currentState.categories,
+      [category.id]: {
+        ...currentState.categories[category.id],
+        itemIds: updatedItemIds
+      }
+    }
+  };
   return updatedState;
 };
