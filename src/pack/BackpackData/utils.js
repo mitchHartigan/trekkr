@@ -99,3 +99,28 @@ export const handleAddItem = (category, currentState) => {
   };
   return updatedState;
 };
+
+export const handleDeleteItem = (item, category, currentState) => {
+  const updatedItems = currentState.items;
+  delete updatedItems[item.id];
+
+  let updatedItemIds = currentState.categories[category.id].itemIds;
+
+  const index = updatedItemIds.indexOf(item.id);
+  updatedItemIds.splice(index, 1);
+
+  const updatedState = {
+    ...currentState,
+    items: {
+      ...updatedItems
+    },
+    categories: {
+      ...currentState.categories,
+      [category.id]: {
+        ...currentState.categories[category.id],
+        itemIds: updatedItemIds
+      }
+    }
+  };
+  return updatedState;
+};
