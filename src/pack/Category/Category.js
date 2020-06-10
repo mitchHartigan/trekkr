@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import Item from "../Item/Item";
+import { CategoryContainer } from "./Category.elem";
 
 export default class Category extends Component {
   constructor(props) {
@@ -31,7 +32,11 @@ export default class Category extends Component {
         />
         <Droppable droppableId={this.props.category.id}>
           {(provided, snapshot) => (
-            <section ref={provided.innerRef} {...provided.droppableProps}>
+            <CategoryContainer
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              isDraggingOver={snapshot.isDraggingOver}
+            >
               {this.props.items.map((item, index) => {
                 return (
                   <Item
@@ -45,7 +50,7 @@ export default class Category extends Component {
                 );
               })}
               {provided.placeholder}
-            </section>
+            </CategoryContainer>
           )}
         </Droppable>
         <button onClick={this.handleAddItem}>+ Add item</button>

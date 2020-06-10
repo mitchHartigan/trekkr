@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import "./_item.scss";
+import { ItemContainer } from "./Item.elem";
 
 export default class Item extends Component {
   constructor(props) {
@@ -27,14 +28,15 @@ export default class Item extends Component {
     return (
       <Draggable draggableId={this.props.item.id} index={this.props.index}>
         {(provided, snapshot) => (
-          <section
-            className="item"
+          <ItemContainer
+            isDragging={snapshot.isDragging}
             {...provided.draggableProps}
             {...provided.dragHandleProps}
             ref={provided.innerRef}
           >
             <div>
               <input
+                className="item__input"
                 type="text"
                 name="name"
                 placeholder={"Name"}
@@ -45,8 +47,9 @@ export default class Item extends Component {
 
             <div>
               <input
+                className="item__weightInput"
                 name="weight"
-                type="number"
+                type="text"
                 value={weight}
                 placeholder="0"
                 onChange={this.handleUpdate}
@@ -57,9 +60,10 @@ export default class Item extends Component {
               </select>
             </div>
 
-            <div>
+            <div className="item__qty">
               <p>Qty</p>
               <input
+                className="item__input"
                 type="number"
                 value={qty}
                 name="qty"
@@ -71,7 +75,7 @@ export default class Item extends Component {
             <div>
               <button onClick={this.handleDelete}>Delete</button>
             </div>
-          </section>
+          </ItemContainer>
         )}
       </Draggable>
     );
