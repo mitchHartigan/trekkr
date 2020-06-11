@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import Item from "../Item/Item";
-import { CategoryContainer } from "./Category.elem";
+import {
+  CategoryContainer,
+  CategoryTitle,
+  AddANewItemButton
+} from "./Category.elem";
 
 export default class Category extends Component {
   constructor(props) {
@@ -24,7 +28,7 @@ export default class Category extends Component {
   render() {
     return (
       <div>
-        <input
+        <CategoryTitle
           type="text"
           placeholder="Category Title"
           value={this.state.title}
@@ -53,7 +57,9 @@ export default class Category extends Component {
             </CategoryContainer>
           )}
         </Droppable>
-        <button onClick={this.handleAddItem}>+ Add item</button>
+        <AddANewItemButton onClick={this.handleAddItem}>
+          + Add an item
+        </AddANewItemButton>
       </div>
     );
   }
