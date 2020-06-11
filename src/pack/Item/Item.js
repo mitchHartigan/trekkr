@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import "./_item.scss";
-import { ItemContainer } from "./Item.elem";
+import { ItemContainer, ItemInput } from "./Item.elem";
 
 export default class Item extends Component {
   constructor(props) {
@@ -35,8 +35,9 @@ export default class Item extends Component {
             ref={provided.innerRef}
           >
             <div>
-              <input
+              <ItemInput
                 className="item__input"
+                isDragging={snapshot.isDragging}
                 type="text"
                 name="name"
                 placeholder={"Name"}
