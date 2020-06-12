@@ -9,16 +9,15 @@ export const ItemContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: ${props =>
-    props.isDragging ? colorSecondary : colorPrimary};
+  background-color: ${props => (props.isDragging ? "white" : "transparent")};
+  box-shadow: ${props => (props.isDragging ? "1px 2px 10px grey" : "none")};
   transition: background-color 0.3 ease-out;
   &: hover {
-    background-color: ${colorSecondary};
-    transition: background-color 0.4s ease-out;
+    box-shadow: 1px 2px 10px grey;
+    transition: box-shadow 0.2s ease-out;
   }
 `;
 
 export const ItemInput = styled.input`
-  background-color: ${props =>
-    props.isDragging ? colorSecondary : colorPrimary};
+  background-color: ${props => (props.isDragging ? "white" : "transparent")};
 `;

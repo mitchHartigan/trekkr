@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CategoryContainer = styled.div`
   background-color: ${props =>
-    props.isDraggingOver ? "lightgreen" : "transparent"};
+    props.isDraggingOver ? "#89b09f" : "transparent"};
   transition: background-color 0.3s ease;
   display: flex;
   justify-content: center;
@@ -13,6 +13,11 @@ export const CategoryTitle = styled.input`
   border: none;
   font-size: 16pt;
   margin: 10px;
+  padding-left: 5px;
+  border: none;
+  &:hover {
+    outline: 2px solid black;
+  }
 `;
 
 export const AddANewItemButton = styled.button`
