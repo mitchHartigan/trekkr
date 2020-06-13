@@ -17,24 +17,46 @@ export default class BackpackData extends Component {
     this.state = data;
   }
 
+  saveStateToLocalStorage = () => {
+    localStorage.setItem("state", JSON.stringify(this.state));
+  };
+
+  componentWillMount() {
+    const localState = JSON.parse(localStorage.getItem("state"));
+
+    if (localState) {
+      this.setState(localState);
+    }
+  }
+
   handleDrag = result => {
-    this.setState(handleDrag(result, this.state));
+    this.setState(handleDrag(result, this.state), () => {
+      this.saveStateToLocalStorage();
+    });
   };
 
   updateItemContents = (itemId, key, value) => {
-    this.setState(handleUpdateItem(itemId, key, value, this.state));
+    this.setState(handleUpdateItem(itemId, key, value, this.state), () => {
+      this.saveStateToLocalStorage();
+    });
   };
 
   addItem = category => {
-    this.setState(handleAddItem(category, this.state));
+    this.setState(handleAddItem(category, this.state), () => {
+      this.saveStateToLocalStorage();
+    });
   };
 
   addCategory = () => {
-    this.setState(handleAddCategory(this.state));
+    this.setState(handleAddCategory(this.state), () => {
+      this.saveStateToLocalStorage();
+    });
   };
 
   deleteItem = (item, category) => {
-    this.setState(handleDeleteItem(item, category, this.state));
+    this.setState(handleDeleteItem(item, category, this.state), () => {
+      this.saveStateToLocalStorage();
+    });
   };
 
   render() {
@@ -60,6 +82,7 @@ export default class BackpackData extends Component {
           })}
         </DragDropContext>
         <button onClick={this.addCategory}>+ Add a category</button>
+        <div id="chart"></div>
       </>
     );
   }

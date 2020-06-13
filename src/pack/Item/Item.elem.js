@@ -1,8 +1,5 @@
 import styled from "styled-components";
 
-const colorPrimary = "transparent";
-const colorSecondary = "lightgrey";
-
 export const ItemContainer = styled.div`
   padding: 10px;
   padding-left: 30px;
@@ -19,5 +16,9 @@ export const ItemContainer = styled.div`
 `;
 
 export const ItemInput = styled.input`
+  background-color: ${props => (props.isDragging ? "white" : "transparent")};
+`;
+
+export const ItemSelect = styled.select`
   background-color: ${props => (props.isDragging ? "white" : "transparent")};
 `;

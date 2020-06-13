@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import "./_item.scss";
-import { ItemContainer, ItemInput } from "./Item.elem";
+import { ItemContainer, ItemInput, ItemSelect } from "./Item.elem";
 
 export default class Item extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ export default class Item extends Component {
             </div>
 
             <div>
-              <input
+              <ItemInput
                 className="item__weightInput"
                 name="weight"
                 type="text"
@@ -55,15 +55,15 @@ export default class Item extends Component {
                 placeholder="0"
                 onChange={this.handleUpdate}
               />
-              <select name="units">
+              <ItemSelect name="units">
                 <option value="g">g</option>
                 <option value="kg">kg</option>
-              </select>
+              </ItemSelect>
             </div>
 
             <div className="item__qty">
               <p>Qty</p>
-              <input
+              <ItemInput
                 className="item__input"
                 type="number"
                 value={qty}
