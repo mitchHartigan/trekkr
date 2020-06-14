@@ -27,36 +27,30 @@ export default class BackpackData extends Component {
     if (localState) {
       this.setState(localState);
     }
+
+    window.onbeforeunload = () => {
+      this.saveStateToLocalStorage();
+    };
   }
 
   handleDrag = result => {
-    this.setState(handleDrag(result, this.state), () => {
-      this.saveStateToLocalStorage();
-    });
+    this.setState(handleDrag(result, this.state));
   };
 
   updateItemContents = (itemId, key, value) => {
-    this.setState(handleUpdateItem(itemId, key, value, this.state), () => {
-      this.saveStateToLocalStorage();
-    });
+    this.setState(handleUpdateItem(itemId, key, value, this.state));
   };
 
   addItem = category => {
-    this.setState(handleAddItem(category, this.state), () => {
-      this.saveStateToLocalStorage();
-    });
+    this.setState(handleAddItem(category, this.state));
   };
 
   addCategory = () => {
-    this.setState(handleAddCategory(this.state), () => {
-      this.saveStateToLocalStorage();
-    });
+    this.setState(handleAddCategory(this.state));
   };
 
   deleteItem = (item, category) => {
-    this.setState(handleDeleteItem(item, category, this.state), () => {
-      this.saveStateToLocalStorage();
-    });
+    this.setState(handleDeleteItem(item, category, this.state));
   };
 
   render() {
