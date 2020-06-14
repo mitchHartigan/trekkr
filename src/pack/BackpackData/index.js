@@ -17,10 +17,6 @@ export default class BackpackData extends Component {
     this.state = data;
   }
 
-  saveStateToLocalStorage = () => {
-    localStorage.setItem("state", JSON.stringify(this.state));
-  };
-
   componentWillMount() {
     const localState = JSON.parse(localStorage.getItem("state"));
 
@@ -29,7 +25,7 @@ export default class BackpackData extends Component {
     }
 
     window.onbeforeunload = () => {
-      this.saveStateToLocalStorage();
+      localStorage.setItem("state", JSON.stringify(this.state));
     };
   }
 
