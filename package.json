@@ -21,6 +21,7 @@
     "react-fontawesome": "^1.7.1",
     "react-scripts": "3.4.1",
     "react-uuid": "^1.0.2",
+    "react-vis": "^1.11.7",
     "styled-components": "^5.0.1",
     "typescript": "^3.8.3",
     "uuid": "^8.1.0"

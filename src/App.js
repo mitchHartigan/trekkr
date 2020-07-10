@@ -1,11 +1,11 @@
 import React from "react";
-import BackpackData from "./pack/BackpackData/index";
+import Vis from "./vis/index";
 import "./index.css";
 
 function App() {
   return (
     <div className="App">
-      <BackpackData />
+      <Vis />
     </div>
   );
 }
