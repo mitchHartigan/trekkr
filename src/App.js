@@ -1,12 +1,12 @@
 import React from "react";
-import Vis from "./vis/index";
 import "./index.css";
+import BasicSunburst from "./vis/index";
 
 function App() {
   return (
-    <div className="App">
-      <Vis />
-    </div>
+    <>
+      <BasicSunburst />
+    </>
   );
 }
 
