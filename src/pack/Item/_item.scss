@@ -31,7 +31,13 @@
     text-align: center;
   }
 }
+// Overrides arrows on number input
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
 
+// Border overrides for each individual class.
 @mixin border-override {
   border-bottom: none;
   transition: border-bottom 0.1s ease;
