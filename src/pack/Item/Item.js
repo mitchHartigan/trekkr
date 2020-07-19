@@ -10,7 +10,7 @@ export default class Item extends Component {
     //TODO: refactor as functional component
   }
 
-  handleUpdate = evt => {
+  handleUpdate = (evt) => {
     this.props.updateItemContents(
       this.props.item.id,
       evt.target.name,

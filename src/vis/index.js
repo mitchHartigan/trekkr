@@ -23,33 +23,88 @@ function _getRandomData(total) {
   };
 }
 
-const treemapStyle = {
-  alignItems: "center",
-  borderRadius: "100% ",
-  display: "flex",
-  justifyContent: "center",
+const data = {
+  title: "",
+  color: 1,
+  children: [
+    {
+      title: "title",
+      color: 1,
+      children: [
+        {
+          name: "0.2",
+          size: 680.9902143327051,
+          color: 0.9877830886701155,
+          style: {
+            border: "thin solid blue",
+          },
+        },
+        {
+          name: "0.7",
+          size: 699.086062912123,
+          color: 0.8344425977692935,
+          style: {
+            border: "thin solid blue",
+          },
+        },
+        {
+          name: "0.2",
+          size: 680.9902143327051,
+          color: 0.9877830886701155,
+          style: {
+            border: "thin solid blue",
+          },
+        },
+      ],
+    },
+    {
+      name: "0.2",
+      size: 680.9902143327051,
+      color: 0.9877830886701155,
+      style: {
+        border: "thin solid red",
+      },
+    },
+    {
+      name: "0.7",
+      size: 699.086062912123,
+      color: 0.8344425977692935,
+      style: {
+        border: "thin solid red",
+      },
+    },
+    {
+      name: "0.8",
+      size: 756.3596694398784,
+      color: 0.20353843627878554,
+      style: {
+        border: "thin solid red",
+      },
+    },
+  ],
 };
 
-export default class DynamicTreemapExample extends React.Component {
+export default class TreemapGraph extends React.Component {
   state = {
     hoveredNode: false,
-    treemapData: _getRandomData(),
+    treemapData: this.props.data || data,
   };
 
   render() {
+    console.log("treemap Data", this.state.treemapData);
     const { hoveredNode } = this.state;
     const treeProps = {
       animation: {
         damping: 9,
         stiffness: 300,
       },
-      width: 350,
+      width: 600,
       data: this.state.treemapData,
-      height: 300,
+      height: 500,
       mode: "squarify",
     };
     return (
-      <div style={treemapStyle}>
+      <div>
         <Treemap {...treeProps} />
       </div>
     );

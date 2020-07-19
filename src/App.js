@@ -1,11 +1,11 @@
 import React from "react";
 import "./index.css";
-import BasicSunburst from "./vis/index";
+import BackpackData from "./pack/BackpackData";
 
 function App() {
   return (
     <>
-      <BasicSunburst />
+      <BackpackData />
     </>
   );
 }
