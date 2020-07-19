@@ -4,7 +4,7 @@ import Item from "../Item/Item";
 import {
   CategoryContainer,
   CategoryTitle,
-  AddANewItemButton
+  AddANewItemButton,
 } from "./Category.elem";
 
 export default class Category extends Component {
@@ -12,12 +12,12 @@ export default class Category extends Component {
     super(props);
 
     this.state = {
-      title: this.props.category.title || ""
+      title: this.props.category.title || "",
       // TODO: pass title state handling up to parent component
     };
   }
 
-  updateTitle = evt => {
+  updateTitle = (evt) => {
     this.setState({ title: evt.target.value });
   };
 
@@ -27,7 +27,7 @@ export default class Category extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ padding: "0vh 5vw 0vh 5vw" }}>
         <CategoryTitle
           type="text"
           placeholder="Category Title"

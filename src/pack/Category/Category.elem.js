@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CategoryContainer = styled.div`
-  background-color: ${props =>
+  background-color: ${(props) =>
     props.isDraggingOver ? "#89b09f" : "transparent"};
   transition: background-color 0.3s ease;
   display: flex;
@@ -13,8 +13,10 @@ export const CategoryTitle = styled.input`
   border: none;
   font-size: 16pt;
   margin: 10px;
+  margin-left: 0px;
   padding-left: 5px;
   border: none;
+  font-style: italic;
   &:hover {
     outline: 2px solid black;
   }

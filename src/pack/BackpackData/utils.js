@@ -159,6 +159,5 @@ export const handleUpdateItem = (itemId, key, value, currentState) => {
       [itemId]: item,
     },
   };
-  console.log("updated state from utils", updatedState);
   return updatedState;
 };
