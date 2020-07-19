@@ -31,15 +31,15 @@ export const handleDrag = (result, currentState) => {
 
     const updatedCategory = {
       ...start,
-      itemIds: newItemIds
+      itemIds: newItemIds,
     };
 
     const updatedState = {
       ...currentState,
       categories: {
         ...currentState.categories,
-        [updatedCategory.id]: updatedCategory
-      }
+        [updatedCategory.id]: updatedCategory,
+      },
     };
 
     return updatedState; //this makes sure we don't execute the code below.
@@ -52,7 +52,7 @@ export const handleDrag = (result, currentState) => {
 
   const updatedStart = {
     ...start,
-    itemIds: startItemIds
+    itemIds: startItemIds,
   };
 
   const finishItemIds = Array.from(finish.itemIds);
@@ -60,7 +60,7 @@ export const handleDrag = (result, currentState) => {
 
   const updatedFinish = {
     ...finish,
-    itemIds: finishItemIds
+    itemIds: finishItemIds,
   };
 
   const updatedState = {
@@ -68,8 +68,8 @@ export const handleDrag = (result, currentState) => {
     categories: {
       ...currentState.categories,
       [updatedStart.id]: updatedStart,
-      [updatedFinish.id]: updatedFinish
-    }
+      [updatedFinish.id]: updatedFinish,
+    },
   };
 
   return updatedState;
@@ -87,15 +87,15 @@ export const handleAddItem = (category, currentState) => {
     ...currentState,
     items: {
       ...currentState.items,
-      [uniqueId]: newItem
+      [uniqueId]: newItem,
     },
     categories: {
       ...currentState.categories,
       [category.id]: {
         ...currentState.categories[category.id],
-        itemIds: updatedItemIds
-      }
-    }
+        itemIds: updatedItemIds,
+      },
+    },
   };
   return updatedState;
 };
@@ -112,26 +112,26 @@ export const handleDeleteItem = (item, category, currentState) => {
   const updatedState = {
     ...currentState,
     items: {
-      ...updatedItems
+      ...updatedItems,
     },
     categories: {
       ...currentState.categories,
       [category.id]: {
         ...currentState.categories[category.id],
-        itemIds: updatedItemIds
-      }
-    }
+        itemIds: updatedItemIds,
+      },
+    },
   };
   return updatedState;
 };
 
-export const handleAddCategory = currentState => {
+export const handleAddCategory = (currentState) => {
   const categoryId = uuidv4();
 
   const newCategory = {
     id: categoryId,
     title: "",
-    itemIds: []
+    itemIds: [],
   };
 
   const updatedCategoryOrder = currentState.categoryOrder;
@@ -141,9 +141,9 @@ export const handleAddCategory = currentState => {
     ...currentState,
     categories: {
       ...currentState.categories,
-      [categoryId]: newCategory
+      [categoryId]: newCategory,
     },
-    categoryOrder: updatedCategoryOrder
+    categoryOrder: updatedCategoryOrder,
   };
   return updatedState;
 };
@@ -156,8 +156,9 @@ export const handleUpdateItem = (itemId, key, value, currentState) => {
     ...currentState,
     items: {
       ...currentState.items,
-      [itemId]: item
-    }
+      [itemId]: item,
+    },
   };
+  console.log("updated state from utils", updatedState);
   return updatedState;
 };

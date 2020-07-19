@@ -26,7 +26,7 @@ export default class Item extends Component {
   };
 
   render() {
-    const { name, weight, qty } = this.props.item;
+    const { name, weight, qty, units } = this.props.item;
     return (
       <StylesProvider injectFirst>
         <Draggable draggableId={this.props.item.id} index={this.props.index}>
@@ -61,7 +61,8 @@ export default class Item extends Component {
                 <Select
                   name="units"
                   className="item__select"
-                  defaultValue={"g"}
+                  defaultValue={units || "g"}
+                  onChange={this.handleUpdate}
                 >
                   <MenuItem value="g">g</MenuItem>
                   <MenuItem value="kg">kg</MenuItem>
