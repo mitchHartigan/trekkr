@@ -7,17 +7,48 @@
     background-color: grey;
   }
   &__input {
-    border: none;
-    background-color: lightgrey;
+    background-color: white;
   }
   &__weightInput {
     max-width: 40px;
     border: none;
-    text-align: right;
+    text-align: center;
     margin-right: 5px;
+    & input {
+      text-align: right;
+    }
+  }
+  &__select {
+    border: none;
   }
   &__qty {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
   }
+  &__qtyInput {
+    padding-left: 10px;
+    text-align: center;
+  }
+}
+
+@mixin border-override {
+  border-bottom: none;
+  transition: border-bottom 0.1s ease;
+}
+
+.item__input:before {
+  @include border-override();
+}
+
+.item__weightInput:before {
+  @include border-override();
+}
+
+.item__select:before {
+  @include border-override();
+}
+
+.item__qtyInput:before {
+  @include border-override();
 }
