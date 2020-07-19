@@ -58,7 +58,11 @@ export default class Item extends Component {
                   placeholder="0"
                   onChange={this.handleUpdate}
                 />
-                <Select name="units" className="item__select">
+                <Select
+                  name="units"
+                  className="item__select"
+                  defaultValue={"g"}
+                >
                   <MenuItem value="g">g</MenuItem>
                   <MenuItem value="kg">kg</MenuItem>
                 </Select>
@@ -67,7 +71,6 @@ export default class Item extends Component {
               <div className="item__qty">
                 <InputLabel id="qty">Qty</InputLabel>
                 <Input
-                  labelId="qty"
                   className="item__qtyInput"
                   type="number"
                   value={qty}
