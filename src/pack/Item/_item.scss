@@ -31,6 +31,16 @@
     text-align: center;
     max-width: 40px;
   }
+  &__deleteButton {
+    border: none;
+    background-color: transparent;
+    opacity: 50%;
+    cursor: pointer;
+    &:hover {
+      opacity: 100%;
+      transition: opacity 0.2s ease;
+    }
+  }
 }
 // Overrides arrows on number input
 input::-webkit-outer-spin-button,
@@ -58,4 +68,8 @@ input::-webkit-inner-spin-button {
 
 .item__qtyInput:before {
   @include border-override();
+}
+
+.MuiButton-startIcon {
+  margin-right: 0px;
 }

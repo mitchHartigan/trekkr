@@ -4,12 +4,16 @@ import "./_item.scss";
 import { ItemContainer } from "./Item.elem";
 import { StylesProvider } from "@material-ui/core";
 import { Input, InputLabel, Select, MenuItem } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 export default class Item extends Component {
   constructor(props) {
     super(props);
     this.state = {};
     //TODO: refactor as functional component
+    this.nameInput = React.createRef();
+    this.weightInput = React.createRef();
+    this.qtyInput = React.createRef();
   }
 
   handleUpdate = (evt) => {
@@ -27,7 +31,7 @@ export default class Item extends Component {
   render() {
     const { name, weight, qty, units } = this.props.item;
     return (
-      <StylesProvider injectFirst>
+      <StylesProvider>
         <Draggable draggableId={this.props.item.id} index={this.props.index}>
           {(provided, snapshot) => (
             <ItemContainer
@@ -39,6 +43,7 @@ export default class Item extends Component {
               <div>
                 <Input
                   className="item__input"
+                  ref={this.nameInput}
                   isDragging={snapshot.isDragging}
                   style={
                     snapshot.isDragging
@@ -56,6 +61,7 @@ export default class Item extends Component {
               <div>
                 <Input
                   className="item__weightInput"
+                  ref={this.weightInput}
                   name="weight"
                   type="number"
                   value={weight}
@@ -77,6 +83,7 @@ export default class Item extends Component {
                 <InputLabel id="qty">Qty</InputLabel>
                 <Input
                   className="item__qtyInput"
+                  ref={this.qtyInput}
                   type="number"
                   value={qty}
                   name="qty"
@@ -86,7 +93,12 @@ export default class Item extends Component {
               </div>
 
               <div>
-                <button onClick={this.handleDelete}>Delete</button>
+                <button
+                  className="item__deleteButton"
+                  onClick={this.handleDelete}
+                >
+                  <DeleteIcon />
+                </button>
               </div>
             </ItemContainer>
           )}
