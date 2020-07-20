@@ -6,6 +6,8 @@ import {
   CategoryTitle,
   AddANewItemButton,
 } from "./Category.elem";
+import { Input, StylesProvider } from "@material-ui/core";
+import "./_category.scss";
 
 export default class Category extends Component {
   constructor(props) {
@@ -27,40 +29,43 @@ export default class Category extends Component {
 
   render() {
     return (
-      <div style={{ padding: "0vh 5vw 0vh 5vw" }}>
-        <CategoryTitle
-          type="text"
-          placeholder="Category Title"
-          value={this.state.title}
-          onChange={this.updateTitle}
-        />
-        <Droppable droppableId={this.props.category.id}>
-          {(provided, snapshot) => (
-            <CategoryContainer
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              isDraggingOver={snapshot.isDraggingOver}
-            >
-              {this.props.items.map((item, index) => {
-                return (
-                  <Item
-                    key={item.id}
-                    index={index}
-                    category={this.props.category}
-                    item={item}
-                    updateItemContents={this.props.updateItemContents}
-                    deleteItem={this.props.deleteItem}
-                  />
-                );
-              })}
-              {provided.placeholder}
-            </CategoryContainer>
-          )}
-        </Droppable>
-        <AddANewItemButton onClick={this.handleAddItem}>
-          + Add an item
-        </AddANewItemButton>
-      </div>
+      <StylesProvider injectFirst>
+        <div className="category">
+          <Input
+            className="category__title"
+            type="text"
+            placeholder="Category Title"
+            value={this.state.title}
+            onChange={this.updateTitle}
+          />
+          <Droppable droppableId={this.props.category.id}>
+            {(provided, snapshot) => (
+              <CategoryContainer
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                isDraggingOver={snapshot.isDraggingOver}
+              >
+                {this.props.items.map((item, index) => {
+                  return (
+                    <Item
+                      key={item.id}
+                      index={index}
+                      category={this.props.category}
+                      item={item}
+                      updateItemContents={this.props.updateItemContents}
+                      deleteItem={this.props.deleteItem}
+                    />
+                  );
+                })}
+                {provided.placeholder}
+              </CategoryContainer>
+            )}
+          </Droppable>
+          <AddANewItemButton onClick={this.handleAddItem}>
+            + Add an item
+          </AddANewItemButton>
+        </div>
+      </StylesProvider>
     );
   }
 }

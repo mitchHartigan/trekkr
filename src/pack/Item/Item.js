@@ -21,7 +21,6 @@ export default class Item extends Component {
   };
 
   handleDelete = () => {
-    console.log("this.props.item", this.props.item);
     this.props.deleteItem(this.props.item, this.props.category);
   };
 

@@ -1,0 +1,20 @@
+@mixin border-override {
+  border-bottom: none;
+  transition: border-bottom 0.1s ease;
+}
+
+.category {
+  padding: 0vh 5vw 0vh 5vw;
+  &__title {
+    font-size: 16pt;
+    margin: 10px;
+    margin-left: 0px;
+    padding-left: 5px;
+    border: none;
+    font-style: italic;
+  }
+}
+
+.category__title:before {
+  @include border-override();
+}
