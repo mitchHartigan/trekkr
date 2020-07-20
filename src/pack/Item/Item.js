@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import "./_item.scss";
-import { ItemContainer, ItemInput, ItemSelect } from "./Item.elem";
+import { ItemContainer } from "./Item.elem";
 import { StylesProvider } from "@material-ui/core";
 import { Input, InputLabel, Select, MenuItem } from "@material-ui/core";
 
@@ -40,6 +40,11 @@ export default class Item extends Component {
                 <Input
                   className="item__input"
                   isDragging={snapshot.isDragging}
+                  style={
+                    snapshot.isDragging
+                      ? { backgroundColor: "white" }
+                      : { backgroundColor: "transparent" }
+                  }
                   type="text"
                   name="name"
                   placeholder={"Name"}
