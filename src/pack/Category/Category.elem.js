@@ -2,11 +2,14 @@ import styled from "styled-components";
 
 export const CategoryContainer = styled.div`
   background-color: ${(props) =>
-    props.isDraggingOver ? "#89b09f" : "transparent"};
+    props.isDraggingOver ? "#C9F9FF" : "#90D7FF"};
   transition: background-color 0.3s ease;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  padding: 0vh 5vw 0vh 5vw;
+  margin: 4vh 2vw 4vh 2vw;
+  border-radius: 10px;
 `;
 
 export const CategoryTitle = styled.input`
