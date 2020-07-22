@@ -6,10 +6,20 @@ import { StylesProvider } from "@material-ui/core";
 import { Input, InputLabel, Select, MenuItem } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+const DeleteButton = (props) => {
+  return (
+    <button className="item__deleteButton" onClick={props.handleDelete}>
+      <DeleteIcon />
+    </button>
+  );
+};
+
 export default class Item extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      hovered: false,
+    };
     //TODO: refactor as functional component
     this.nameInput = React.createRef();
     this.weightInput = React.createRef();
@@ -39,6 +49,12 @@ export default class Item extends Component {
               {...provided.draggableProps}
               {...provided.dragHandleProps}
               ref={provided.innerRef}
+              onMouseEnter={() => {
+                this.setState({ hovered: true });
+              }}
+              onMouseLeave={() => {
+                this.setState({ hovered: false });
+              }}
             >
               <div>
                 <Input
@@ -92,12 +108,9 @@ export default class Item extends Component {
               </div>
 
               <div>
-                <button
-                  className="item__deleteButton"
-                  onClick={this.handleDelete}
-                >
-                  <DeleteIcon />
-                </button>
+                {this.state.hovered && (
+                  <DeleteButton handleDelete={this.handleDelete} />
+                )}
               </div>
             </ItemContainer>
           )}
