@@ -80,7 +80,6 @@ export default class Item extends Component {
               </div>
 
               <div className="item__qtyContainer">
-                <InputLabel className="item__qty">Qty</InputLabel>
                 <Input
                   className="item__qtyInput"
                   ref={this.qtyInput}
