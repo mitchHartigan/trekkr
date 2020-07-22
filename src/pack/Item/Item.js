@@ -7,11 +7,22 @@ import { Input, InputLabel, Select, MenuItem } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 const DeleteButton = (props) => {
-  return (
-    <button className="item__deleteButton" onClick={props.handleDelete}>
-      <DeleteIcon />
-    </button>
-  );
+  if (props.display) {
+    return (
+      <button className="item__deleteButton" onClick={props.handleDelete}>
+        <DeleteIcon />
+      </button>
+    );
+  } else {
+    return (
+      <button
+        className="item__deleteButton--hidden"
+        onClick={props.handleDelete}
+      >
+        <DeleteIcon />
+      </button>
+    );
+  }
 };
 
 export default class Item extends Component {
@@ -108,9 +119,10 @@ export default class Item extends Component {
               </div>
 
               <div>
-                {this.state.hovered && (
-                  <DeleteButton handleDelete={this.handleDelete} />
-                )}
+                <DeleteButton
+                  handleDelete={this.handleDelete}
+                  display={this.state.hovered}
+                />
               </div>
             </ItemContainer>
           )}

@@ -51,6 +51,10 @@
       opacity: 100%;
       transition: opacity 200ms ease-out;
     }
+    &--hidden {
+      @extend .item__deleteButton;
+      visibility: hidden;
+    }
   }
 }
 
