@@ -44,7 +44,7 @@
     border: none;
     background-color: transparent;
     animation-name: fadeIn;
-    animation-duration: 0.2s;
+    animation-duration: 200ms;
     cursor: pointer;
     opacity: 50%;
     &:hover {
@@ -52,7 +52,8 @@
       transition: opacity 200ms ease-out;
     }
     &--hidden {
-      @extend .item__deleteButton;
+      border: none;
+      background-color: transparent;
       visibility: hidden;
     }
   }
