@@ -53,26 +53,33 @@ export default class BackpackData extends Component {
     return (
       <>
         <DragDropContext onDragEnd={this.handleDrag}>
-          {this.state.categoryOrder.map((categoryId) => {
-            const category = this.state.categories[categoryId];
-            const items = category.itemIds.map(
-              (itemId) => this.state.items[itemId]
-              // get each item from the state
-            );
-            return (
-              <Category
-                key={category.id}
-                category={category}
-                items={items}
-                updateItemContents={this.updateItemContents}
-                addItem={this.addItem}
-                deleteItem={this.deleteItem}
-              />
-            );
-          })}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              overflowX: "scroll",
+            }}
+          >
+            {this.state.categoryOrder.map((categoryId) => {
+              const category = this.state.categories[categoryId];
+              const items = category.itemIds.map(
+                (itemId) => this.state.items[itemId]
+                // get each item from the state
+              );
+              return (
+                <Category
+                  key={category.id}
+                  category={category}
+                  items={items}
+                  updateItemContents={this.updateItemContents}
+                  addItem={this.addItem}
+                  deleteItem={this.deleteItem}
+                />
+              );
+            })}
+          </div>
         </DragDropContext>
         <button onClick={this.addCategory}>+ Add a category</button>
-        <div id="chart"></div>
       </>
     );
   }

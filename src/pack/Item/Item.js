@@ -79,8 +79,8 @@ export default class Item extends Component {
                 </Select>
               </div>
 
-              <div className="item__qty">
-                <InputLabel id="qty">Qty</InputLabel>
+              <div className="item__qtyContainer">
+                <InputLabel className="item__qty">Qty</InputLabel>
                 <Input
                   className="item__qtyInput"
                   ref={this.qtyInput}

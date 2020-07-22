@@ -6,15 +6,15 @@
 .category {
   padding: 0vh 5vw 0vh 5vw;
   background-color: lightblue;
-  margin: 4vh 2vw 4vh 2vw;
+  margin: 4vh 1vw 4vh 1vw;
   border-radius: 10px;
   &__title {
     font-size: 16pt;
     margin: 10px;
     margin-left: 0px;
     padding-left: 5px;
+    width: 200px;
     border: none;
-    font-style: italic;
   }
 }
 
