@@ -58,6 +58,8 @@ export default class BackpackData extends Component {
               display: "flex",
               flexDirection: "row",
               overflowX: "scroll",
+              alignItems: "flex-start",
+              height: "100vh",
             }}
           >
             {this.state.categoryOrder.map((categoryId) => {

@@ -2,13 +2,14 @@
   padding: 10px;
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   &:hover {
     background-color: grey;
   }
   &__input {
     background-color: white;
-    font-size: 14px;
+    font-size: 13px;
   }
   &__weightInput {
     max-width: 40px;
