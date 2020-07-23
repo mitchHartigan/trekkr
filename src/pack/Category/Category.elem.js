@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CategoryContainer = styled.div`
   background-color: ${(props) =>
-    props.isDraggingOver ? "#5CC3FF" : "#90D7FF"};
+    props.isDraggingOver ? "#E9F2CF " : "#F9F5F1"};
   transition: background-color 0.3s ease;
   display: flex;
   justify-content: flex-start;
@@ -11,8 +11,9 @@ export const CategoryContainer = styled.div`
   margin: 4vh 10px 4vh 10px;
   min-width: 25vw;
   max-height: 60vh;
-  border-radius: 10px;
+  border-radius: 0px;
   overflow-y: scroll;
+  box-shadow: 10px 10px 20px #ebebeb;
   ::-webkit-scrollbar {
     display: none;
   }
