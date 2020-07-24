@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CategoryContainer = styled.div`
   background-color: ${(props) =>
-    props.isDraggingOver ? "#E9F2CF " : "#F9F5F1"};
+    props.isDraggingOver ? "#E7D7C5" : "#EDE1D4"};
   transition: background-color 0.3s ease;
   display: flex;
   justify-content: flex-start;
@@ -33,16 +33,19 @@ export const CategoryTitle = styled.input`
 
 export const AddANewItemButton = styled.button`
   border: none;
-  padding: 10px 10px 10px 10px;
-  width: 100%;
+  padding: 10px;
+  margin: 10px 10px 20px 10px;
+  height: 42px;
   text-align: center;
-  background-color: transparent;
+  background-color: #c2dbff;
+  transition: background-color 50ms ease;
   padding-left: 0px;
   cursor: pointer;
-  color: darkgreen;
+  color: black;
+  border-radius: 3px;
   &: hover {
-    text-decoration: underline;
-    transition: text-decoration 1s ease;
+    background-color: #89bbfe;
+    transition: background-color 50ms;
   }
   outline: none;
 `;

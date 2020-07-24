@@ -29,9 +29,14 @@
     justify-content: space-around;
     align-items: center;
     font-size: 14px;
+    margin: 0px 5px 0px 15px;
   }
   &__qty {
     font-size: 14px;
+  }
+  &__qtyLabel {
+    font-size: 0.75rem;
+    padding-top: 2px;
   }
   &__qtyInput {
     padding-left: 10px;
