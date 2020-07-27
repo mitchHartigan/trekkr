@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CategoryContainer = styled.div`
   background-color: ${(props) =>
-    props.isDraggingOver ? "#E7D7C5" : "#EDE1D4"};
+    props.isDraggingOver ? "#E1CDB7" : "#EDE1D4"};
   transition: background-color 0.3s ease;
   display: flex;
   justify-content: flex-start;
@@ -37,7 +37,7 @@ export const AddANewItemButton = styled.button`
   margin: 10px 10px 20px 10px;
   height: 42px;
   text-align: center;
-  background-color: #c2dbff;
+  background-color: #9ac5fe;
   transition: background-color 50ms ease;
   padding-left: 0px;
   cursor: pointer;

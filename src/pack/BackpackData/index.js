@@ -9,6 +9,8 @@ import {
   handleDeleteItem,
   handleUpdateItem,
 } from "./utils";
+import { parseDataForVis } from "./utils";
+import Vis from "../../vis/index";
 
 export default class BackpackData extends Component {
   constructor(props) {
@@ -53,15 +55,7 @@ export default class BackpackData extends Component {
     return (
       <>
         <DragDropContext onDragEnd={this.handleDrag}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              overflowX: "scroll",
-              alignItems: "flex-start",
-              height: "100vh",
-            }}
-          >
+          <div style={{}}>
             {this.state.categoryOrder.map((categoryId) => {
               const category = this.state.categories[categoryId];
               const items = category.itemIds.map(
@@ -82,6 +76,7 @@ export default class BackpackData extends Component {
           </div>
         </DragDropContext>
         <button onClick={this.addCategory}>+ Add a category</button>
+        <Vis data={parseDataForVis(this.state)} />
       </>
     );
   }

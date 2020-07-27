@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ItemContainer = styled.div`
-  padding: 10px;
+  padding: 5px;
   margin: 10px;
   padding-left: 30px;
   display: flex;

@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { format } from "path";
 
 export const handleDrag = (result, currentState) => {
   const { destination, source, draggableId } = result;
@@ -160,4 +161,45 @@ export const handleUpdateItem = (itemId, key, value, currentState) => {
     },
   };
   return updatedState;
+};
+
+export const parseDataForVis = (initialData) => {
+  let formattedCategories = [];
+
+  const items = initialData.items;
+  // { 'item-1': {id: 'item-1', name: 'Water Filter, weight: 200}...}
+
+  let categoryKeys = Object.keys(initialData.categories);
+  // [category-1, category-2, category-3]...
+
+  categoryKeys.forEach((key) => {
+    let initialCategory = initialData.categories[key];
+
+    const formattedCategory = {
+      title: initialCategory.title || "",
+    };
+
+    let formattedChildren = [];
+
+    initialCategory.itemIds.forEach((id) => {
+      let formattedItem = {
+        name: id,
+        size: items[id].weight * items[id].qty,
+        style: {
+          border: "thin solid blue",
+        },
+      };
+      formattedChildren.push(formattedItem);
+    });
+
+    formattedCategory.children = formattedChildren;
+    formattedCategories.push(formattedCategory);
+  });
+
+  const formattedData = {
+    title: "",
+    children: formattedCategories,
+  };
+  console.log("formattedData", formattedData);
+  return formattedData;
 };
