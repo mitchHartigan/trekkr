@@ -58,9 +58,17 @@ export default class BackpackData extends Component {
 
   render() {
     return (
-      <>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "flex-start",
+        }}
+      >
         <DragDropContext onDragEnd={this.handleDrag}>
-          <div style={{}}>
+          <div
+            style={{ width: "50vw", display: "flex", flexDirection: "column" }}
+          >
             {this.state.categoryOrder.map((categoryId) => {
               const category = this.state.categories[categoryId];
               const items = category.itemIds.map(
@@ -79,11 +87,15 @@ export default class BackpackData extends Component {
                 />
               );
             })}
+            <button onClick={this.addCategory}>+ Add a category</button>
           </div>
         </DragDropContext>
-        <button onClick={this.addCategory}>+ Add a category</button>
-        <Vis data={parseDataForVis(this.state)} />
-      </>
+        <div
+          style={{ position: "fixed", marginLeft: "50vw", marginTop: "4vh" }}
+        >
+          <Vis data={parseDataForVis(this.state)} />
+        </div>
+      </div>
     );
   }
 }

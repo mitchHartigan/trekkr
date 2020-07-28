@@ -1,7 +1,7 @@
 import React from "react";
 import "./main.scss";
 
-import { Treemap } from "react-vis";
+import { Treemap, makeWidthFlexible } from "react-vis";
 
 function _getRandomData(total) {
   const totalLeaves = total || Math.random() * 20;
@@ -84,22 +84,22 @@ const data = {
   ],
 };
 
+const FlexibleTreemap = makeWidthFlexible(Treemap);
+
 export default class TreemapGraph extends React.Component {
   render() {
-    console.log("treemap Data", this.props.data);
     const treeProps = {
       animation: {
         damping: 9,
         stiffness: 300,
       },
-      width: 1000,
       data: this.props.data || data,
       height: 500,
       mode: "squarify",
     };
     return (
-      <div>
-        <Treemap {...treeProps} />
+      <div style={{ width: "40vw" }}>
+        <FlexibleTreemap {...treeProps} />
       </div>
     );
   }
