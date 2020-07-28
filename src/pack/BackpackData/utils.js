@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import initialData from "../../components/initial-data";
 
 export const handleDrag = (result, currentState) => {
   const { destination, source, draggableId } = result;
@@ -201,4 +202,14 @@ export const parseDataForVis = (initialData) => {
   };
 
   return formattedData;
+};
+
+export const handleDeleteCategory = (id, initialData) => {
+  // remove category object stored in 'categories' object
+  delete initialData.categories[id];
+
+  // remove id of deleted category from categoryOrder object.
+  initialData.categoryOrder.splice(initialData.categoryOrder.indexOf(id), 1);
+
+  return initialData;
 };

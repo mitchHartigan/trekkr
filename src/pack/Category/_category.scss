@@ -16,6 +16,12 @@
     width: 200px;
     border: none;
   }
+  &__deleteButton {
+    padding-right: 20px;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+  }
 }
 
 .category__title:before {

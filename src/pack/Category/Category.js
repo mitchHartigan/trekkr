@@ -12,8 +12,13 @@ export default class Category extends Component {
     this.state = {
       title: this.props.category.title || "",
       // TODO: pass title state handling up to parent component
+      isEmpty: false,
     };
   }
+
+  handleDelete = () => {
+    this.props.deleteCategory(this.props.category.id);
+  };
 
   updateTitle = (evt) => {
     this.setState({ title: evt.target.value });
@@ -33,13 +38,32 @@ export default class Category extends Component {
               {...provided.droppableProps}
               isDraggingOver={snapshot.isDraggingOver}
             >
-              <Input
-                className="category__title"
-                type="text"
-                placeholder="Category Title"
-                value={this.state.title}
-                onChange={this.updateTitle}
-              />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Input
+                  className="category__title"
+                  type="text"
+                  placeholder="Category Title"
+                  value={this.state.title}
+                  onChange={this.updateTitle}
+                />
+
+                {this.props.items.length == 0 && (
+                  <button
+                    className="category__deleteButton"
+                    onClick={this.handleDelete}
+                  >
+                    x
+                  </button>
+                )}
+              </div>
+
               {this.props.items.map((item, index) => {
                 return (
                   <Item
@@ -52,6 +76,7 @@ export default class Category extends Component {
                   />
                 );
               })}
+
               {provided.placeholder}
               <AddANewItemButton onClick={this.handleAddItem}>
                 + Add an item
