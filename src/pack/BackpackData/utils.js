@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from "uuid";
-import { format } from "path";
 
 export const handleDrag = (result, currentState) => {
   const { destination, source, draggableId } = result;
@@ -200,6 +199,6 @@ export const parseDataForVis = (initialData) => {
     title: "",
     children: formattedCategories,
   };
-  console.log("formattedData", formattedData);
+
   return formattedData;
 };

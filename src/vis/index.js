@@ -85,21 +85,15 @@ const data = {
 };
 
 export default class TreemapGraph extends React.Component {
-  state = {
-    hoveredNode: false,
-    treemapData: this.props.data || data,
-  };
-
   render() {
-    console.log("treemap Data", this.state.treemapData);
-    const { hoveredNode } = this.state;
+    console.log("treemap Data", this.props.data);
     const treeProps = {
       animation: {
         damping: 9,
         stiffness: 300,
       },
-      width: 600,
-      data: this.state.treemapData,
+      width: 1000,
+      data: this.props.data || data,
       height: 500,
       mode: "squarify",
     };
