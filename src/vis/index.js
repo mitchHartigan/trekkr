@@ -70,8 +70,8 @@ export default class TreemapGraph extends React.Component {
   render() {
     const treeProps = {
       animation: {
-        damping: 9,
-        stiffness: 300,
+        damping: 50,
+        stiffness: 500,
       },
       data: this.props.data || data,
       height: 500,

@@ -1,7 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import initialData from "../../components/initial-data";
 import tinycolor from "tinycolor2";
-import { NONAME } from "dns";
 
 export const handleDrag = (result, currentState) => {
   const { destination, source, draggableId } = result;
@@ -128,6 +127,12 @@ export const handleDeleteItem = (item, category, currentState) => {
   return updatedState;
 };
 
+export const generateCategoryColor = (seedColor) => {
+  const analogousColors = tinycolor(seedColor).analogous();
+
+  return analogousColors;
+};
+
 export const handleAddCategory = (currentState) => {
   const categoryId = uuidv4();
 
@@ -135,9 +140,11 @@ export const handleAddCategory = (currentState) => {
     id: categoryId,
     title: "",
     itemIds: [],
+    color: selectColorForCategory(currentState),
   };
 
   const updatedCategoryOrder = currentState.categoryOrder;
+
   updatedCategoryOrder.push(categoryId);
 
   const updatedState = {
@@ -210,6 +217,7 @@ export const parseDataForVis = (initialData) => {
           backgroundColor: backgroundColor,
           border: "none",
         },
+        color: "none",
       };
       formattedChildren.push(formattedItem);
     });
@@ -223,7 +231,9 @@ export const parseDataForVis = (initialData) => {
     style: {
       background: "none",
       border: "none",
+      color: "none",
     },
+
     children: formattedCategories,
   };
 
@@ -262,14 +272,46 @@ export const generateBackgroundColor = (
     maxLightenValue -
     maxLightenValue * (invertedLightenValue / maxLightenValue);
 
-  console.log(
-    tinycolor(currentColor).saturate(0).lighten(mappedLightenValue).toRgb()
-  );
-
   console.log(tinycolor(currentColor).saturate(10).lighten(mappedLightenValue));
   return tinycolor(currentColor).saturate(10).lighten(mappedLightenValue);
 };
 
 export const findLargestWeight = (itemArray) => {
   return Math.max(...itemArray);
+};
+
+export const selectColorForCategory = (currentState) => {
+  const getRandomValueInRange = (min, max) => {
+    return Math.floor(Math.random() * (max - min) + min);
+  };
+
+  let colors = [
+    "rgb(197, 172, 129)",
+    "rgb(45, 45, 42)",
+    "rgb(52, 84, 209)",
+    "rgb(52, 209, 191)",
+    "rgb(21, 127, 31)",
+  ];
+
+  let alreadyUsedColors = [];
+
+  Object.keys(currentState.categories).forEach((key) => {
+    let categoryColor = currentState.categories[key].color;
+    if (categoryColor) {
+      alreadyUsedColors.push(categoryColor);
+    }
+  });
+
+  // Remove the colors already in use from the colors array.
+  alreadyUsedColors.forEach((color) => {
+    let colorIndex = colors.indexOf(color);
+
+    if (colorIndex !== -1) {
+      colors.splice(colorIndex, 1);
+    }
+  });
+
+  const selectedColor = colors[getRandomValueInRange(0, colors.length)];
+
+  return selectedColor;
 };
