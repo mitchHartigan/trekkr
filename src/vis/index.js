@@ -3,26 +3,6 @@ import "./main.scss";
 
 import { Treemap, makeWidthFlexible } from "react-vis";
 
-function _getRandomData(total) {
-  const totalLeaves = total || Math.random() * 20;
-  const leaves = [];
-  for (let i = 0; i < totalLeaves; i++) {
-    leaves.push({
-      name: total ? total : String(Math.random()).slice(0, 3),
-      size: Math.random() * 1000,
-      color: Math.random(),
-      style: {
-        border: "thin solid red",
-      },
-    });
-  }
-  return {
-    title: "",
-    color: 1,
-    children: leaves,
-  };
-}
-
 const data = {
   title: "",
   color: 1,
@@ -98,7 +78,7 @@ export default class TreemapGraph extends React.Component {
       mode: "squarify",
     };
     return (
-      <div style={{ width: "40vw" }}>
+      <div style={{ width: "50vw" }}>
         <FlexibleTreemap {...treeProps} />
       </div>
     );

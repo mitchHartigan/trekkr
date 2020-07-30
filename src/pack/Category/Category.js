@@ -59,7 +59,7 @@ export default class Category extends Component {
                     className="category__deleteButton"
                     onClick={this.handleDelete}
                   >
-                    x
+                    X
                   </button>
                 )}
               </div>

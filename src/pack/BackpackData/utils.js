@@ -1,5 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import initialData from "../../components/initial-data";
+import tinycolor from "tinycolor2";
+import { NONAME } from "dns";
 
 export const handleDrag = (result, currentState) => {
   const { destination, source, draggableId } = result;
@@ -164,6 +166,8 @@ export const handleUpdateItem = (itemId, key, value, currentState) => {
 };
 
 export const parseDataForVis = (initialData) => {
+  // TODO: abstract this function out into its own file, that calls smaller functions.
+
   let formattedCategories = [];
 
   const items = initialData.items;
@@ -181,12 +185,30 @@ export const parseDataForVis = (initialData) => {
 
     let formattedChildren = [];
 
+    let allCategoryItemsWeight = [];
+
     initialCategory.itemIds.forEach((id) => {
+      allCategoryItemsWeight.push(parseInt(items[id].weight * items[id].qty));
+    });
+
+    let largestWeightInCategory = findLargestWeight(allCategoryItemsWeight);
+
+    initialCategory.itemIds.forEach((id) => {
+      let currentItemWeight = items[id].weight * items[id].qty;
+
+      let backgroundColor = generateBackgroundColor(
+        currentItemWeight,
+        largestWeightInCategory,
+        40,
+        "rgb(77, 157, 224)"
+      );
+
       let formattedItem = {
         name: id,
-        size: items[id].weight * items[id].qty,
+        size: currentItemWeight,
         style: {
-          border: "thin solid blue",
+          backgroundColor: backgroundColor,
+          border: "none",
         },
       };
       formattedChildren.push(formattedItem);
@@ -198,6 +220,10 @@ export const parseDataForVis = (initialData) => {
 
   const formattedData = {
     title: "",
+    style: {
+      background: "none",
+      border: "none",
+    },
     children: formattedCategories,
   };
 
@@ -212,4 +238,38 @@ export const handleDeleteCategory = (id, initialData) => {
   initialData.categoryOrder.splice(initialData.categoryOrder.indexOf(id), 1);
 
   return initialData;
+};
+
+export const scale = (num, in_min, in_max, out_min, out_max) => {
+  return ((num - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
+};
+
+export const generateBackgroundColor = (
+  currentWeightValue,
+  maxWeightValue,
+  maxLightenValue,
+  currentColor
+) => {
+  const invertedLightenValue = scale(
+    currentWeightValue,
+    1,
+    maxWeightValue,
+    1,
+    maxLightenValue
+  );
+
+  const mappedLightenValue =
+    maxLightenValue -
+    maxLightenValue * (invertedLightenValue / maxLightenValue);
+
+  console.log(
+    tinycolor(currentColor).saturate(0).lighten(mappedLightenValue).toRgb()
+  );
+
+  console.log(tinycolor(currentColor).saturate(10).lighten(mappedLightenValue));
+  return tinycolor(currentColor).saturate(10).lighten(mappedLightenValue);
+};
+
+export const findLargestWeight = (itemArray) => {
+  return Math.max(...itemArray);
 };
