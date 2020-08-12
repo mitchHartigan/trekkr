@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from "uuid";
-import initialData from "../../components/initial-data";
 import tinycolor from "tinycolor2";
 
 export const handleDrag = (result, currentState) => {
@@ -172,9 +171,9 @@ export const handleUpdateItem = (itemId, key, value, currentState) => {
   return updatedState;
 };
 
+/* This function is a monolith...need to refactor it out into it's own file, maybe
+  it's own module or class or something, but wow she's a doozy. */
 export const parseDataForVis = (initialData) => {
-  // TODO: abstract this function out into its own file, that calls smaller functions.
-
   let formattedCategories = [];
 
   const items = initialData.items;
@@ -188,6 +187,10 @@ export const parseDataForVis = (initialData) => {
 
     const formattedCategory = {
       title: initialCategory.title || "",
+      style: {
+        border: "none",
+        margin: "0px",
+      },
     };
 
     let formattedChildren = [];
@@ -206,8 +209,8 @@ export const parseDataForVis = (initialData) => {
       let backgroundColor = generateBackgroundColor(
         currentItemWeight,
         largestWeightInCategory,
-        40,
-        "rgb(77, 157, 224)"
+        30,
+        initialCategory.color || "black"
       );
 
       let formattedItem = {
@@ -287,10 +290,10 @@ export const selectColorForCategory = (currentState) => {
 
   let colors = [
     "rgb(197, 172, 129)",
-    "rgb(45, 45, 42)",
-    "rgb(52, 84, 209)",
-    "rgb(52, 209, 191)",
-    "rgb(21, 127, 31)",
+    "rgb(221, 96, 49)",
+    "rgb(243, 201, 105)",
+    "rgb(4, 67, 137)",
+    "rgb(103, 148, 54)",
   ];
 
   let alreadyUsedColors = [];

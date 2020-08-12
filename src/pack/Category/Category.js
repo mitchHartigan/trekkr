@@ -54,7 +54,7 @@ export default class Category extends Component {
                   onChange={this.updateTitle}
                 />
 
-                {this.props.items.length == 0 && (
+                {this.props.items.length === 0 && (
                   <button
                     className="category__deleteButton"
                     onClick={this.handleDelete}

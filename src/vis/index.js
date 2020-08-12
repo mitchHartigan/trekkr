@@ -79,7 +79,7 @@ export default class TreemapGraph extends React.Component {
     };
     return (
       <div style={{ width: "50vw" }}>
-        <FlexibleTreemap {...treeProps} />
+        <FlexibleTreemap style={{ background: "none" }} {...treeProps} />
       </div>
     );
   }

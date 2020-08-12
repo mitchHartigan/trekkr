@@ -91,7 +91,7 @@ export default class BackpackData extends Component {
           </div>
         </DragDropContext>
         <div
-          style={{ position: "fixed", marginLeft: "50vw", marginTop: "4vh" }}
+          style={{ position: "fixed", marginLeft: "51vw", marginTop: "4vh" }}
         >
           <Vis data={parseDataForVis(this.state)} />
         </div>
