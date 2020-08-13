@@ -114,6 +114,6 @@ const visAnimation = keyframes`
 const VisContainer = styled.div`
   position: fixed;
   margin-left: 51vw;
-  margin-top: 4vh;
+  margin-top: 3vh;
   animation: ${visAnimation} 2s ease;
 `;
