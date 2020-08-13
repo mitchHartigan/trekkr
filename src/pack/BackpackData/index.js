@@ -8,6 +8,7 @@ import {
   handleAddCategory,
   handleDeleteItem,
   handleUpdateItem,
+  handleUpdateCategoryTitle,
   handleDeleteCategory,
 } from "./utils";
 import { parseDataForVis } from "./utils";
@@ -57,6 +58,10 @@ export default class BackpackData extends Component {
     this.setState(handleDeleteCategory(id, this.state));
   };
 
+  updateCategoryTitle = (id, title) => {
+    this.setState(handleUpdateCategoryTitle(id, title, this.state));
+  };
+
   render() {
     return (
       <div
@@ -79,12 +84,14 @@ export default class BackpackData extends Component {
               return (
                 <Category
                   key={category.id}
+                  id={category.id}
                   category={category}
                   items={items}
                   updateItemContents={this.updateItemContents}
                   addItem={this.addItem}
                   deleteItem={this.deleteItem}
                   deleteCategory={this.deleteCategory}
+                  updateCategoryTitle={this.updateCategoryTitle}
                 />
               );
             })}

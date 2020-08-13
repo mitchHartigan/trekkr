@@ -10,7 +10,6 @@ export default class Category extends Component {
     super(props);
 
     this.state = {
-      title: this.props.category.title || "",
       // TODO: pass title state handling up to parent component
     };
   }
@@ -20,7 +19,7 @@ export default class Category extends Component {
   };
 
   updateTitle = (evt) => {
-    this.setState({ title: evt.target.value });
+    this.props.updateCategoryTitle(this.props.id, evt.target.value);
   };
 
   handleAddItem = () => {
@@ -49,7 +48,7 @@ export default class Category extends Component {
                   className="category__title"
                   type="text"
                   placeholder="Category Title"
-                  value={this.state.title}
+                  value={this.props.category.title || ""}
                   onChange={this.updateTitle}
                 />
 

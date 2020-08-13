@@ -10,16 +10,19 @@ export const data = {
       id: "category-1",
       title: "Water",
       itemIds: ["item-1", "item-2", "item-3", "item-4"],
+      color: "red",
     },
     "category-2": {
       id: "category-2",
       title: undefined,
       itemIds: [],
+      color: "blue",
     },
     "category-3": {
       id: "category-3",
       title: "First Aid",
       itemIds: [],
+      color: "orange",
     },
   },
   // just to have a list of all of the category ids, to map through.

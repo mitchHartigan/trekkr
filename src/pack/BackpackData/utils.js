@@ -171,6 +171,23 @@ export const handleUpdateItem = (itemId, key, value, currentState) => {
   return updatedState;
 };
 
+export const handleUpdateCategoryTitle = (categoryId, title, currentState) => {
+  // currentState.categories[categoryId].title = title;
+
+  const updatedState = {
+    ...currentState,
+    categories: {
+      ...currentState.categories,
+      [categoryId]: {
+        ...currentState.categories[categoryId],
+        title: title,
+      },
+    },
+  };
+
+  return updatedState;
+};
+
 /* This function is a monolith...need to refactor it out into it's own file, maybe
   it's own module or class or something, but wow she's a doozy. */
 export const parseDataForVis = (initialData) => {
@@ -275,7 +292,6 @@ export const generateBackgroundColor = (
     maxLightenValue -
     maxLightenValue * (invertedLightenValue / maxLightenValue);
 
-  console.log(tinycolor(currentColor).saturate(10).lighten(mappedLightenValue));
   return tinycolor(currentColor).saturate(10).lighten(mappedLightenValue);
 };
 
