@@ -71,7 +71,6 @@ export default class Item extends Component {
                 <Input
                   className="item__input"
                   ref={this.nameInput}
-                  isDragging={snapshot.isDragging}
                   style={
                     snapshot.isDragging
                       ? { backgroundColor: "white" }

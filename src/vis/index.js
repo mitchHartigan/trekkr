@@ -76,6 +76,7 @@ export default class TreemapGraph extends React.Component {
       data: this.props.data || data,
       height: 500,
       mode: "squarify",
+      padding: 0,
     };
     return (
       <div style={{ width: "50vw" }}>

@@ -12,7 +12,6 @@ export default class Category extends Component {
     this.state = {
       title: this.props.category.title || "",
       // TODO: pass title state handling up to parent component
-      isEmpty: false,
     };
   }
 
@@ -78,7 +77,10 @@ export default class Category extends Component {
               })}
 
               {provided.placeholder}
-              <AddANewItemButton onClick={this.handleAddItem}>
+              <AddANewItemButton
+                onClick={this.handleAddItem}
+                isDraggingOver={snapshot.isDraggingOver}
+              >
                 + Add an item
               </AddANewItemButton>
             </CategoryContainer>

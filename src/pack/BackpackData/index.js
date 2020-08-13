@@ -11,6 +11,7 @@ import {
   handleDeleteCategory,
 } from "./utils";
 import { parseDataForVis } from "./utils";
+import styled, { keyframes } from "styled-components";
 import Vis from "../../vis/index";
 
 export default class BackpackData extends Component {
@@ -20,7 +21,7 @@ export default class BackpackData extends Component {
     this.state = data;
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const localState = JSON.parse(localStorage.getItem("state"));
 
     if (localState) {
@@ -87,15 +88,32 @@ export default class BackpackData extends Component {
                 />
               );
             })}
-            <button onClick={this.addCategory}>+ Add a category</button>
+            <button style={{ marginTop: "15px" }} onClick={this.addCategory}>
+              + Add a category
+            </button>
           </div>
         </DragDropContext>
-        <div
-          style={{ position: "fixed", marginLeft: "51vw", marginTop: "4vh" }}
-        >
+
+        <VisContainer>
           <Vis data={parseDataForVis(this.state)} />
-        </div>
+        </VisContainer>
       </div>
     );
   }
 }
+
+const visAnimation = keyframes`
+  from {
+    width: 0vw;
+  }
+  to {
+    width: auto;
+  }
+`;
+
+const VisContainer = styled.div`
+  position: fixed;
+  margin-left: 51vw;
+  margin-top: 4vh;
+  animation: ${visAnimation} 2s ease;
+`;

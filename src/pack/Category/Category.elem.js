@@ -2,18 +2,18 @@ import styled from "styled-components";
 
 export const CategoryContainer = styled.div`
   background-color: ${(props) =>
-    props.isDraggingOver ? "#E1CDB7" : "#EDE1D4"};
+    props.isDraggingOver ? "#e1e8e2" : "#FFFFFF"};
   transition: background-color 0.3s ease;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
   padding: 0vh 10px 0vh 10px;
-  margin: 4vh 10px 0vh 10px;
+  margin: 4vh 1px 0vh 10px;
   min-width: 25vw;
   max-height: 80vh;
   border-radius: 0px;
   overflow-y: scroll;
-  box-shadow: 10px 10px 20px #ebebeb;
+  box-shadow: 2px 5px 10px 0px #b5b5b5;
   ::-webkit-scrollbar {
     display: none;
   }
@@ -37,15 +37,14 @@ export const AddANewItemButton = styled.button`
   margin: 10px 10px 20px 10px;
   height: 42px;
   text-align: center;
-  background-color: #9ac5fe;
-  transition: background-color 50ms ease;
+  background-color: #99c4a3;
   padding-left: 0px;
   cursor: pointer;
   color: black;
   border-radius: 3px;
   &: hover {
-    background-color: #89bbfe;
-    transition: background-color 50ms;
+    background-color: #7dab87;
+    transition: background-color 150ms;
   }
   outline: none;
 `;
