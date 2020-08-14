@@ -67,6 +67,10 @@ const data = {
 const FlexibleTreemap = makeWidthFlexible(Treemap);
 
 export default class TreemapGraph extends React.Component {
+  componentDidMount() {
+    console.log("vis mounted!!");
+  }
+
   render() {
     const treeProps = {
       animation: {

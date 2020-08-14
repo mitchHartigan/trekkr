@@ -101,9 +101,11 @@ export default class BackpackData extends Component {
           </div>
         </DragDropContext>
 
-        <VisContainer>
-          <Vis data={parseDataForVis(this.state)} />
-        </VisContainer>
+        {this.state.categories.length >= 1 && (
+          <VisContainer>
+            <Vis data={parseDataForVis(this.state)} />
+          </VisContainer>
+        )}
       </div>
     );
   }
