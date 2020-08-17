@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Category from "../Category/Category";
 import { DragDropContext } from "react-beautiful-dnd";
-import { data } from "./data";
+import { data } from "./exampleData";
+import { defaultState } from "./defaultState";
 import {
   handleDrag,
   handleAddItem,
@@ -19,7 +20,7 @@ export default class BackpackData extends Component {
   constructor(props) {
     super(props);
 
-    this.state = data;
+    this.state = defaultState;
   }
 
   componentDidMount() {
@@ -116,11 +117,9 @@ export default class BackpackData extends Component {
 
 const visAnimation = keyframes`
   from {
-    width: 0vw;
     opacity: 0%;
   }
   to {
-    width: auto;
     opacity: 100%;
   }
 `;
