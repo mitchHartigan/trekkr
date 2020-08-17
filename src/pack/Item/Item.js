@@ -97,7 +97,7 @@ export default class Item extends Component {
                 <Select
                   name="units"
                   className="item__select"
-                  defaultValue={units || "g"}
+                  value={units || "g"}
                   onChange={this.handleUpdate}
                 >
                   <MenuItem value="g">g</MenuItem>
