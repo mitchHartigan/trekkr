@@ -78,7 +78,7 @@ export const handleDrag = (result, currentState) => {
 
 export const handleAddItem = (category, currentState) => {
   let uniqueId = uuidv4();
-  const newItem = { id: uniqueId, name: "Name", weight: 0, qty: 1 };
+  const newItem = { id: uniqueId, name: "Name", weight: 1, qty: 1 };
 
   const updatedItemIds = currentState.categories[category.id].itemIds;
 

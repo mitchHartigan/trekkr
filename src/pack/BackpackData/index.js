@@ -62,15 +62,18 @@ export default class BackpackData extends Component {
     this.setState(handleUpdateCategoryTitle(id, title, this.state));
   };
 
+  checkVisWillRender = () => {
+    let currentState = this.state;
+
+    if (Object.keys(this.state.items).length === 0) {
+      return false;
+    }
+    return true;
+  };
+
   render() {
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "flex-start",
-        }}
-      >
+      <DataContainer renderVis={this.checkVisWillRender()}>
         <DragDropContext onDragEnd={this.handleDrag}>
           <div
             style={{ width: "50vw", display: "flex", flexDirection: "column" }}
@@ -101,12 +104,12 @@ export default class BackpackData extends Component {
           </div>
         </DragDropContext>
 
-        {this.state.categories.length >= 1 && (
+        {this.checkVisWillRender() && (
           <VisContainer>
             <Vis data={parseDataForVis(this.state)} />
           </VisContainer>
         )}
-      </div>
+      </DataContainer>
     );
   }
 }
@@ -114,15 +117,26 @@ export default class BackpackData extends Component {
 const visAnimation = keyframes`
   from {
     width: 0vw;
+    opacity: 0%;
   }
   to {
     width: auto;
+    opacity: 100%;
   }
 `;
 
 const VisContainer = styled.div`
   position: fixed;
-  margin-left: 51vw;
+  margin-left: 52vw;
+  width: 10vw;
   margin-top: 3vh;
-  animation: ${visAnimation} 2s ease;
+  animation: ${visAnimation} 0.5s ease;
+`;
+
+const DataContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: ${(props) => (props.renderVis ? "" : "center")};
+  transition: justify-content 1s linear;
 `;

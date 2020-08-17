@@ -60,7 +60,7 @@ export default class Item extends Component {
               {...provided.draggableProps}
               {...provided.dragHandleProps}
               ref={provided.innerRef}
-              onMouseEnter={() => {
+              onMouseOver={() => {
                 this.setState({ hovered: true });
               }}
               onMouseLeave={() => {

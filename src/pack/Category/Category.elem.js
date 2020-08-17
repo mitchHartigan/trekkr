@@ -9,7 +9,7 @@ export const CategoryContainer = styled.div`
   flex-direction: column;
   padding: 0vh 10px 0vh 10px;
   margin: 3vh 1px 0vh 10px;
-  min-width: 25vw;
+  width: 50vw;
   max-height: 80vh;
   border-radius: 0px;
   overflow-y: scroll;
