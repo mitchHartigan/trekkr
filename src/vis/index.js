@@ -1,5 +1,6 @@
 import React from "react";
 import "./main.scss";
+import styled from "styled-components";
 
 import { Treemap, makeWidthFlexible } from "react-vis";
 
@@ -67,8 +68,13 @@ const data = {
 const FlexibleTreemap = makeWidthFlexible(Treemap);
 
 export default class TreemapGraph extends React.Component {
-  componentDidMount() {
-    console.log("vis mounted!!");
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      hoveredNode: false,
+      hoveredItemWeight: "",
+    };
   }
 
   render() {
@@ -81,11 +87,20 @@ export default class TreemapGraph extends React.Component {
       height: 500,
       mode: "squarify",
       padding: 0,
+      onLeafMouseOver: (x) =>
+        this.setState(
+          { hoveredNode: true, hoveredItemWeight: x.data.weightString },
+          () => console.log(x.data)
+        ),
+      onLeafMouseOut: () => this.setState({ hoveredNode: false }),
     };
     return (
       <div style={{ width: "50vw" }}>
         <FlexibleTreemap style={{ background: "none" }} {...treeProps} />
+        <p>{this.state.hoveredItemWeight}</p>
       </div>
     );
   }
 }
+
+const ItemWeightHover = styled.div``;

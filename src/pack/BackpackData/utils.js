@@ -78,7 +78,14 @@ export const handleDrag = (result, currentState) => {
 
 export const handleAddItem = (category, currentState) => {
   let uniqueId = uuidv4();
-  const newItem = { id: uniqueId, name: "Name", weight: 1, qty: 1 };
+
+  const newItem = {
+    id: uniqueId,
+    name: "Name",
+    weight: 1,
+    qty: 1,
+    units: "kg",
+  };
 
   const updatedItemIds = currentState.categories[category.id].itemIds;
 
@@ -173,7 +180,6 @@ export const handleUpdateItem = (itemId, key, value, currentState) => {
 
 export const handleUpdateCategoryTitle = (categoryId, title, currentState) => {
   // currentState.categories[categoryId].title = title;
-
   const updatedState = {
     ...currentState,
     categories: {
@@ -215,24 +221,32 @@ export const parseDataForVis = (initialData) => {
     let allCategoryItemsWeight = [];
 
     initialCategory.itemIds.forEach((id) => {
-      allCategoryItemsWeight.push(parseInt(items[id].weight * items[id].qty));
+      allCategoryItemsWeight.push(
+        parseInt(
+          convertWeightToGrams(items[id].weight, items[id].units) *
+            items[id].qty
+        )
+      );
     });
 
     let largestWeightInCategory = findLargestWeight(allCategoryItemsWeight);
 
     initialCategory.itemIds.forEach((id) => {
-      let currentItemWeight = items[id].weight * items[id].qty;
+      let currentItemWeight =
+        convertWeightToGrams(items[id].weight, items[id].units) * items[id].qty;
 
       let backgroundColor = generateBackgroundColor(
         currentItemWeight,
         largestWeightInCategory,
         30,
-        initialCategory.color || "black"
+        initialCategory.color || "yellow"
       );
 
       let formattedItem = {
         name: id,
+        value: items[id].name,
         size: currentItemWeight,
+        weightString: `${currentItemWeight.toString()} ${items[id].units}`,
         style: {
           backgroundColor: backgroundColor,
           border: "none",
@@ -333,4 +347,12 @@ export const selectColorForCategory = (currentState) => {
   const selectedColor = colors[getRandomValueInRange(0, colors.length)];
 
   return selectedColor;
+};
+
+export const convertWeightToGrams = (weight, units) => {
+  if (units === "kg") {
+    const convertedWeight = weight * 1000;
+    return convertedWeight;
+  }
+  return weight;
 };
