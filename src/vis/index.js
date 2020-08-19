@@ -33,22 +33,13 @@ export default class TreemapGraph extends React.Component {
     super(props);
 
     this.state = {
-      hovered: false,
       hoveredItemWeight: "",
       hoveredNode: null,
     };
   }
 
-  _handleMouseEnter = () => {
-    this.setState({ hovered: true });
-  };
-
-  _handleMouseLeave = () => {
-    this.setState({ hovered: false });
-  };
-
   render() {
-    const { hovered, hoveredNode, hoveredItemWeight } = this.state;
+    const { hoveredNode, hoveredItemWeight } = this.state;
 
     const treeProps = {
       animation: {
@@ -66,13 +57,12 @@ export default class TreemapGraph extends React.Component {
         ),
       getLabel: (x) => {
         return (
-          <Container style={{}}>
+          <Container>
             <VisLabel>{`${x.value} (${x.weightString})`}</VisLabel>
           </Container>
         );
       },
-      onLeafMouseOut: () =>
-        this.setState({ hoveredNode: false, hoveredNode: null }),
+      onLeafMouseOut: () => this.setState({ hoveredNode: null }),
     };
 
     const breadcrumbProps = {
@@ -88,9 +78,6 @@ export default class TreemapGraph extends React.Component {
           width: "50vw",
           height: "auto",
         }}
-        onMouseEnter={this._handleMouseEnter}
-        // onMouseMove={this._handleMouseMove}
-        onMouseLeave={this._handleMouseLeave}
       >
         <FlexibleTreemap style={{ background: "none" }} {...treeProps} />
         <Breadcrumb {...breadcrumbProps} />
@@ -118,9 +105,3 @@ const VisLabel = styled.p`
   color: white;
   font-family: Cardo;
 `;
-
-// const Breadcrumb = styled.h2`
-//   visibility: ${(props) => (props.hidden ? "hidden" : "visible")};
-//   font-family: Cardo;
-//   font-size: 18px;
-// `;
