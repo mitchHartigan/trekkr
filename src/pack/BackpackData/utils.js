@@ -242,11 +242,16 @@ export const parseDataForVis = (initialData) => {
         initialCategory.color || "yellow"
       );
 
+      // JFC this is disgusting.
+      // TODO: refactor this to be...not this.
       let formattedItem = {
         name: id,
         value: items[id].name,
         size: currentItemWeight,
-        weightString: `${currentItemWeight.toString()} ${items[id].units}`,
+        weightString: `${convertWeightToKilograms(
+          currentItemWeight,
+          items[id].units
+        ).toString()} ${items[id].units}`,
         style: {
           backgroundColor: backgroundColor,
           border: "none",
@@ -349,9 +354,22 @@ export const selectColorForCategory = (currentState) => {
   return selectedColor;
 };
 
+// The graph should always function in grams, as it is the easiest base weight value to work with for
+// the d3 flare dataset.
 export const convertWeightToGrams = (weight, units) => {
   if (units === "kg") {
     const convertedWeight = weight * 1000;
+    return convertedWeight;
+  }
+  return weight;
+};
+
+// Takes the data from the treemap dataset and converts it back to whichever unit is displayed on the item.
+// Since we're only using metric at the moment, this will simply just convert back to kg (but should amend to work
+// with the imperial units as well later)
+export const convertWeightToKilograms = (weight, units) => {
+  if (units === "kg") {
+    const convertedWeight = weight / 1000;
     return convertedWeight;
   }
   return weight;

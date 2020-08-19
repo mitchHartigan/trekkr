@@ -1,6 +1,7 @@
 import React from "react";
 import "./main.scss";
 import styled from "styled-components";
+import Breadcrumb from "./Breadcrumb";
 
 import { Treemap, makeWidthFlexible } from "react-vis";
 
@@ -20,47 +21,7 @@ const data = {
             border: "thin solid blue",
           },
         },
-        {
-          name: "0.7",
-          size: 699.086062912123,
-          color: 0.8344425977692935,
-          style: {
-            border: "thin solid blue",
-          },
-        },
-        {
-          name: "0.2",
-          size: 680.9902143327051,
-          color: 0.9877830886701155,
-          style: {
-            border: "thin solid blue",
-          },
-        },
       ],
-    },
-    {
-      name: "0.2",
-      size: 680.9902143327051,
-      color: 0.9877830886701155,
-      style: {
-        border: "thin solid red",
-      },
-    },
-    {
-      name: "0.7",
-      size: 699.086062912123,
-      color: 0.8344425977692935,
-      style: {
-        border: "thin solid red",
-      },
-    },
-    {
-      name: "0.8",
-      size: 756.3596694398784,
-      color: 0.20353843627878554,
-      style: {
-        border: "thin solid red",
-      },
     },
   ],
 };
@@ -72,12 +33,23 @@ export default class TreemapGraph extends React.Component {
     super(props);
 
     this.state = {
-      hoveredNode: false,
+      hovered: false,
       hoveredItemWeight: "",
+      hoveredNode: null,
     };
   }
 
+  _handleMouseEnter = () => {
+    this.setState({ hovered: true });
+  };
+
+  _handleMouseLeave = () => {
+    this.setState({ hovered: false });
+  };
+
   render() {
+    const { hovered, hoveredNode, hoveredItemWeight } = this.state;
+
     const treeProps = {
       animation: {
         damping: 50,
@@ -89,18 +61,66 @@ export default class TreemapGraph extends React.Component {
       padding: 0,
       onLeafMouseOver: (x) =>
         this.setState(
-          { hoveredNode: true, hoveredItemWeight: x.data.weightString },
-          () => console.log(x.data)
+          { hoveredItemWeight: x.data.weightString, hoveredNode: x },
+          () => console.log(x)
         ),
-      onLeafMouseOut: () => this.setState({ hoveredNode: false }),
+      getLabel: (x) => {
+        return (
+          <Container style={{}}>
+            <VisLabel>{`${x.value} (${x.weightString})`}</VisLabel>
+          </Container>
+        );
+      },
+      onLeafMouseOut: () =>
+        this.setState({ hoveredNode: false, hoveredNode: null }),
     };
+
+    const breadcrumbProps = {
+      hidden: !hoveredNode,
+      category: hoveredNode ? hoveredNode.parent.data.title : "Category Title",
+      item: hoveredNode ? hoveredNode.data.value : "",
+      weight: hoveredNode ? hoveredItemWeight : "",
+    };
+
     return (
-      <div style={{ width: "50vw" }}>
+      <div
+        style={{
+          width: "50vw",
+          height: "auto",
+        }}
+        onMouseEnter={this._handleMouseEnter}
+        // onMouseMove={this._handleMouseMove}
+        onMouseLeave={this._handleMouseLeave}
+      >
         <FlexibleTreemap style={{ background: "none" }} {...treeProps} />
-        <p>{this.state.hoveredItemWeight}</p>
+        <Breadcrumb {...breadcrumbProps} />
       </div>
     );
   }
 }
 
-const ItemWeightHover = styled.div``;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  opacity: 0%;
+  transition: opacity 150ms linear;
+  &:hover {
+    opacity: 100%;
+    transition: opacity 150ms linear;
+  }
+`;
+
+const VisLabel = styled.p`
+  color: white;
+  font-family: Cardo;
+`;
+
+// const Breadcrumb = styled.h2`
+//   visibility: ${(props) => (props.hidden ? "hidden" : "visible")};
+//   font-family: Cardo;
+//   font-size: 18px;
+// `;
