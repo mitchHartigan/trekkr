@@ -13,6 +13,7 @@ export default function Breadcrumb(props) {
 const BreadcrumbText = styled.h1`
   visibility: ${(props) => (props.hidden ? "hidden" : "visible")};
   font-family: Open Sans Condensed;
-  font-size: 2vw;
+  font-size: 1.5vw;
   font-weight: 300;
+  margin-top: -3vh;
 `;
