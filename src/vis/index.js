@@ -2,6 +2,7 @@ import React from "react";
 import "./main.scss";
 import styled from "styled-components";
 import Breadcrumb from "./Breadcrumb";
+import Label from "./Label";
 
 import { Treemap, makeWidthFlexible } from "react-vis";
 
@@ -55,12 +56,17 @@ export default class TreemapGraph extends React.Component {
           { hoveredItemWeight: x.data.weightString, hoveredNode: x },
           () => console.log(x)
         ),
-      getLabel: (x) => {
-        return (
-          <Container>
-            <VisLabel>{`${x.value} (${x.weightString})`}</VisLabel>
-          </Container>
-        );
+      getLabel: () => {
+        if (hoveredNode) {
+          return (
+            <Label
+              containerHeight={hoveredNode.y1 - hoveredNode.y0}
+              containerWidth={hoveredNode.x1 - hoveredNode.x0}
+            >
+              {`${hoveredNode.data.value} (${hoveredNode.data.weightString})`}
+            </Label>
+          );
+        }
       },
       onLeafMouseOut: () => this.setState({ hoveredNode: null }),
     };
@@ -93,15 +99,10 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-  opacity: 0%;
-  transition: opacity 150ms linear;
-  &:hover {
-    opacity: 100%;
-    transition: opacity 150ms linear;
-  }
 `;
 
 const VisLabel = styled.p`
   color: white;
   font-family: Cardo;
+  font-size: 12px;
 `;
