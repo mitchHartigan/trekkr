@@ -13,16 +13,19 @@ export default class Label extends Component {
 
   componentDidMount() {
     this.setState({
-      fontSize: this._getFontSize(this.props.containerHeight),
+      fontSize: this._getFontSize(
+        this.props.containerHeight,
+        this.props.containerWidth
+      ),
     });
     this._abbreviateText(this.props.containerHeight, this.props.containerWidth);
   }
 
-  _getFontSize(containerHeight) {
-    const minFontSize = 10;
+  _getFontSize(containerHeight, containerWidth) {
+    const minFontSize = 14;
     const maxFontSize = 50;
 
-    let dynamicFontSize = Math.floor(containerHeight / 8);
+    let dynamicFontSize = Math.floor(containerWidth / 10);
 
     // rewrite these both as a ternary?
     if (dynamicFontSize > maxFontSize) {

@@ -254,7 +254,7 @@ export const parseDataForVis = (initialData) => {
         ).toString()} ${items[id].units}`,
         style: {
           backgroundColor: backgroundColor,
-          border: "none",
+          border: "1px solid #f6f5f0",
         },
         color: "none",
       };
