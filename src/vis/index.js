@@ -3,29 +3,9 @@ import "./main.scss";
 import styled from "styled-components";
 import Breadcrumb from "./Breadcrumb";
 import Label from "./Label";
+import { data } from "./exampleData";
 
 import { Treemap, makeWidthFlexible } from "react-vis";
-
-const data = {
-  title: "",
-  color: 1,
-  children: [
-    {
-      title: "title",
-      color: 1,
-      children: [
-        {
-          name: "0.2",
-          size: 680.9902143327051,
-          color: 0.9877830886701155,
-          style: {
-            border: "thin solid blue",
-          },
-        },
-      ],
-    },
-  ],
-};
 
 const FlexibleTreemap = makeWidthFlexible(Treemap);
 
@@ -91,18 +71,3 @@ export default class TreemapGraph extends React.Component {
     );
   }
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-`;
-
-const VisLabel = styled.p`
-  color: white;
-  font-family: Cardo;
-  font-size: 12px;
-`;
