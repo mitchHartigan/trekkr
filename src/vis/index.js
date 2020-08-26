@@ -1,6 +1,5 @@
 import React from "react";
 import "./main.scss";
-import styled from "styled-components";
 import Breadcrumb from "./Breadcrumb";
 import Label from "./Label";
 import { data } from "./exampleData";
@@ -15,12 +14,19 @@ export default class TreemapGraph extends React.Component {
 
     this.state = {
       hoveredItemWeight: "",
+      hoveredItem: "",
+      hoveredCategory: "",
       hoveredNode: null,
     };
   }
 
   render() {
-    const { hoveredNode, hoveredItemWeight } = this.state;
+    const {
+      hoveredNode,
+      hoveredItemWeight,
+      hoveredCategory,
+      hoveredItem,
+    } = this.state;
 
     const treeProps = {
       animation: {
@@ -33,7 +39,12 @@ export default class TreemapGraph extends React.Component {
       padding: 0,
       onLeafMouseOver: (x) =>
         this.setState(
-          { hoveredItemWeight: x.data.weightString, hoveredNode: x },
+          {
+            hoveredItemWeight: x.data.weightString,
+            hoveredNode: x,
+            hoveredCategory: x.parent.data.title,
+            hoveredItem: x.data.value,
+          },
           () => console.log(x)
         ),
       getLabel: () => {
@@ -53,9 +64,9 @@ export default class TreemapGraph extends React.Component {
 
     const breadcrumbProps = {
       hidden: !hoveredNode,
-      category: hoveredNode ? hoveredNode.parent.data.title : "Category Title",
-      item: hoveredNode ? hoveredNode.data.value : "",
-      weight: hoveredNode ? hoveredItemWeight : "",
+      category: hoveredCategory,
+      item: hoveredItem,
+      weight: hoveredItemWeight,
     };
 
     return (

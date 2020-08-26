@@ -73,6 +73,6 @@ const Container = styled.div`
 
 const Text = styled.p`
   color: white;
-  font-family: Open Sans;
+  font-family: "Alata", sans serif;
   font-size: ${(props) => `${props.fontSize}px`};
 `;
