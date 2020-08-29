@@ -84,7 +84,7 @@ export const handleAddItem = (category, currentState) => {
     name: "Name",
     weight: 1,
     qty: 1,
-    units: "kg",
+    units: "g",
   };
 
   const updatedItemIds = currentState.categories[category.id].itemIds;
@@ -256,7 +256,7 @@ export const parseDataForVis = (initialData) => {
           backgroundColor: backgroundColor,
           border: "1px solid #f6f5f0",
         },
-        color: "none",
+        baseColor: initialCategory.color,
       };
       formattedChildren.push(formattedItem);
     });
