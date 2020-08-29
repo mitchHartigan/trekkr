@@ -4,16 +4,9 @@ import Item from "../Item/Item";
 import { AddANewItemButton, CategoryContainer } from "./Category.elem";
 import { Input, StylesProvider } from "@material-ui/core";
 import "./_category.scss";
+import { CategoryColor } from "./CategoryColor.elem";
 
 export default class Category extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      // TODO: pass title state handling up to parent component
-    };
-  }
-
   handleDelete = () => {
     this.props.deleteCategory(this.props.category.id);
   };
@@ -44,14 +37,23 @@ export default class Category extends Component {
                   justifyContent: "space-between",
                 }}
               >
-                <Input
-                  className="category__title"
-                  type="text"
-                  placeholder="Category Title"
-                  value={this.props.category.title || ""}
-                  onChange={this.updateTitle}
-                />
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <CategoryColor color={this.props.category.color} />
 
+                  <Input
+                    className="category__title"
+                    type="text"
+                    placeholder="Category Title"
+                    value={this.props.category.title || ""}
+                    onChange={this.updateTitle}
+                  />
+                </div>
                 {this.props.items.length === 0 && (
                   <button
                     className="category__deleteButton"

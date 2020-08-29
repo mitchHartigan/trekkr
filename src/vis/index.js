@@ -16,6 +16,7 @@ export default class TreemapGraph extends React.Component {
       hoveredItemWeight: "",
       hoveredItem: "",
       hoveredCategory: "",
+      hoveredItemBaseColor: "",
       hoveredNode: null,
     };
   }
@@ -26,6 +27,7 @@ export default class TreemapGraph extends React.Component {
       hoveredItemWeight,
       hoveredCategory,
       hoveredItem,
+      hoveredItemBaseColor,
     } = this.state;
 
     const treeProps = {
@@ -44,6 +46,7 @@ export default class TreemapGraph extends React.Component {
             hoveredNode: x,
             hoveredCategory: x.parent.data.title,
             hoveredItem: x.data.value,
+            hoveredItemBaseColor: x.data.baseColor,
           },
           () => console.log(x)
         ),
@@ -67,6 +70,7 @@ export default class TreemapGraph extends React.Component {
       category: hoveredCategory,
       item: hoveredItem,
       weight: hoveredItemWeight,
+      baseColor: hoveredItemBaseColor,
     };
 
     return (

@@ -23,7 +23,7 @@ export const CategoryTitle = styled.input`
   border: none;
   font-size: 16pt;
   margin: 10px;
-  margin-left: 0px;
+  margin-left: 5px;
   padding-left: 5px;
   border: none;
   &:hover {

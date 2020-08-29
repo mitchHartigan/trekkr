@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
+import { CategoryColor } from "../pack/Category/CategoryColor.elem";
+
 export default class Label extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +29,9 @@ export default class Label extends Component {
 
     let dynamicFontSize = Math.floor(containerWidth / 10);
 
+    if (dynamicFontSize > containerHeight / 2) {
+      dynamicFontSize = containerHeight / 2;
+    }
     // rewrite these both as a ternary?
     if (dynamicFontSize > maxFontSize) {
       dynamicFontSize = maxFontSize;
@@ -66,11 +71,11 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-  opacity: 0%;
-  transition: opacity 50ms linear;
+  opacity: 0;
+  transition: opacity 200ms ease;
   &:hover {
-    opacity: 100%;
-    transition: opacity 50ms linear;
+    opacity: 1;
+    transition: opacity 200ms ease;
   }
 `;
 
@@ -78,4 +83,5 @@ const Text = styled.p`
   color: white;
   font-family: "Alata", sans serif;
   font-size: ${(props) => `${props.fontSize}px`};
+  text-shadow: 0px 0.12vw 0.05vw black;
 `;
