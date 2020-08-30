@@ -9,13 +9,15 @@
   }
   &__input {
     background-color: white;
-    font-size: 13px;
+    font-size: 14px;
+    font-family: Alata;
   }
   &__weightInput {
     max-width: 40px;
     border: none;
     text-align: center;
     font-size: 14px;
+    font-family: Alata;
     margin-right: 5px;
     & input {
       text-align: right;
@@ -29,14 +31,17 @@
     justify-content: space-around;
     align-items: center;
     font-size: 14px;
+    font-family: Alata;
     margin: 0px 5px 0px 15px;
   }
   &__qty {
     font-size: 14px;
+    font-family: Alata;
   }
   &__qtyLabel {
     font-size: 0.75rem;
     padding-top: 2px;
+    font-family: Alata;
   }
   &__qtyInput {
     padding-left: 10px;
@@ -45,6 +50,7 @@
     }
     max-width: 40px;
     font-size: 14px;
+    font-family: Alata;
   }
   &__deleteButton {
     border: none;
