@@ -6,6 +6,7 @@ import { StylesProvider } from "@material-ui/core";
 import { Input, InputLabel, Select, MenuItem } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+// Looks like we can re-write this as a styled component...let's look into it.
 const DeleteButton = (props) => {
   if (props.display) {
     return (
@@ -31,10 +32,6 @@ export default class Item extends Component {
     this.state = {
       hovered: false,
     };
-    //TODO: refactor as functional component
-    this.nameInput = React.createRef();
-    this.weightInput = React.createRef();
-    this.qtyInput = React.createRef();
   }
 
   handleUpdate = (evt) => {
@@ -51,6 +48,7 @@ export default class Item extends Component {
 
   render() {
     const { name, weight, qty, units } = this.props.item;
+
     return (
       <StylesProvider>
         <Draggable draggableId={this.props.item.id} index={this.props.index}>
@@ -70,7 +68,6 @@ export default class Item extends Component {
               <div>
                 <Input
                   className="item__input"
-                  ref={this.nameInput}
                   style={
                     snapshot.isDragging
                       ? { backgroundColor: "white" }

@@ -49,7 +49,7 @@ export default class Category extends Component {
                   <Input
                     className="category__title"
                     type="text"
-                    placeholder="Category Title"
+                    placeholder={"Category Title"}
                     value={this.props.category.title || ""}
                     onChange={this.updateTitle}
                   />

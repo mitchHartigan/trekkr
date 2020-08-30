@@ -13,7 +13,7 @@ export default class Breadcrumb extends React.Component {
             isHidden={this.props.hidden}
           />
           <BreadcrumbText isHidden={this.props.hidden}>
-            {`${this.props.category} → ${this.props.item} (${this.props.weight})`}
+            {`${this.props.category} ⤚ ${this.props.item} (${this.props.weight})`}
           </BreadcrumbText>
         </div>
       </Container>

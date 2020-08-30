@@ -64,8 +64,6 @@ export default class BackpackData extends Component {
   };
 
   checkVisWillRender = () => {
-    let currentState = this.state;
-
     if (Object.keys(this.state.items).length === 0) {
       return false;
     }
@@ -99,9 +97,9 @@ export default class BackpackData extends Component {
                 />
               );
             })}
-            <button style={{ marginTop: "15px" }} onClick={this.addCategory}>
+            <AddANewItemButton onClick={this.addCategory}>
               + Add a category
-            </button>
+            </AddANewItemButton>
           </div>
         </DragDropContext>
 
@@ -115,6 +113,26 @@ export default class BackpackData extends Component {
   }
 }
 
+const AddANewItemButton = styled.button`
+  padding: 10px;
+  margin: 28px 0px 10px 20px;
+  text-align: center;
+  border: 2px solid #7dab87;
+  cursor: pointer;
+  color: black;
+  border-radius: 3px;
+  &: hover {
+    background-color: #7dab87;
+    transition: background-color 50ms ease;
+    color: white;
+    transition: color 50ms ease;
+    box-shadow: 3px 7px 10px #abb6a5;
+    transition: box-shadow 30ms ease-out;
+  }
+  font-family: Alata;
+  font-weight: 300;
+  font-size: 14px;
+`;
 const visAnimation = keyframes`
   from {
     opacity: 0%;

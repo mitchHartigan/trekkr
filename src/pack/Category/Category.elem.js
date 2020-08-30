@@ -37,14 +37,17 @@ export const AddANewItemButton = styled.button`
   margin: 10px 10px 20px 10px;
   height: 42px;
   text-align: center;
-  background-color: #99c4a3;
+  background-color: #9cbfa3;
   padding-left: 0px;
   cursor: pointer;
   color: black;
   border-radius: 3px;
   &: hover {
     background-color: #7dab87;
+    color: black;
     transition: background-color 150ms;
   }
   outline: none;
+  font-family: Alata;
+  font-size: 14px;
 `;
