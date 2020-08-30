@@ -34,6 +34,7 @@ export default class TreemapGraph extends React.Component {
       animation: {
         damping: 50,
         stiffness: 500,
+        noWobble: true,
       },
       data: this.props.data || data,
       height: 500,

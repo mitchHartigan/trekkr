@@ -126,7 +126,7 @@ const AddANewItemButton = styled.button`
     transition: background-color 50ms ease;
     color: white;
     transition: color 50ms ease;
-    box-shadow: 3px 7px 10px #abb6a5;
+    box-shadow: 2px 5px 7px #abb6a5;
     transition: box-shadow 30ms ease-out;
   }
   font-family: Alata;
