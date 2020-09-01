@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Category from "../Category/Category";
 import { DragDropContext } from "react-beautiful-dnd";
-import { data } from "./exampleData";
 import { defaultState } from "./defaultState";
 import {
   handleDrag,
@@ -15,6 +14,7 @@ import {
 import { parseDataForVis } from "./utils";
 import styled, { keyframes } from "styled-components";
 import Vis from "../../vis/index";
+import { NewCategoryButton } from "./NewCategoryButton.elem";
 
 export default class BackpackData extends Component {
   constructor(props) {
@@ -74,9 +74,13 @@ export default class BackpackData extends Component {
     return (
       <DataContainer renderVis={this.checkVisWillRender()}>
         <DragDropContext onDragEnd={this.handleDrag}>
-          <div
-            style={{ width: "50vw", display: "flex", flexDirection: "column" }}
-          >
+          {this.checkVisWillRender() && (
+            <VisContainer>
+              <Vis data={parseDataForVis(this.state)} />
+            </VisContainer>
+          )}
+
+          <ListContainer id="listContainer">
             {this.state.categoryOrder.map((categoryId) => {
               const category = this.state.categories[categoryId];
               const items = category.itemIds.map(
@@ -97,42 +101,16 @@ export default class BackpackData extends Component {
                 />
               );
             })}
-            <AddANewItemButton onClick={this.addCategory}>
-              + Add a category
-            </AddANewItemButton>
-          </div>
+            <NewCategoryButton onClick={this.handleAddCategory}>
+              + Add a new category
+            </NewCategoryButton>
+          </ListContainer>
         </DragDropContext>
-
-        {this.checkVisWillRender() && (
-          <VisContainer>
-            <Vis data={parseDataForVis(this.state)} />
-          </VisContainer>
-        )}
       </DataContainer>
     );
   }
 }
 
-const AddANewItemButton = styled.button`
-  padding: 10px;
-  margin: 28px 0px 10px 20px;
-  text-align: center;
-  border: 2px solid #7dab87;
-  cursor: pointer;
-  color: black;
-  border-radius: 3px;
-  &: hover {
-    background-color: #7dab87;
-    transition: background-color 50ms ease;
-    color: white;
-    transition: color 50ms ease;
-    box-shadow: 2px 5px 7px #abb6a5;
-    transition: box-shadow 30ms ease-out;
-  }
-  font-family: Alata;
-  font-weight: 300;
-  font-size: 14px;
-`;
 const visAnimation = keyframes`
   from {
     opacity: 0%;
@@ -143,17 +121,26 @@ const visAnimation = keyframes`
 `;
 
 const VisContainer = styled.div`
-  position: fixed;
-  margin-left: 52vw;
-  width: 10vw;
+  margin-left: 0.3vw;
   margin-top: 3vh;
   animation: ${visAnimation} 0.5s ease;
+  position: sticky;
+  top: 3vh;
+  left: 0.5vw;
+`;
+
+const ListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: -1vw;
+  width: 100%;
 `;
 
 const DataContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  margin: ${(props) => (props.renderVis ? "0vw" : "3vh 30vw 0vh 30vw")};
   justify-content: ${(props) => (props.renderVis ? "" : "center")};
   transition: justify-content 1s linear;
 `;

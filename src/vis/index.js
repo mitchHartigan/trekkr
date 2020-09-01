@@ -32,13 +32,13 @@ export default class TreemapGraph extends React.Component {
 
     const treeProps = {
       animation: {
-        damping: 50,
-        stiffness: 500,
+        damping: 30,
+        stiffness: 200,
         noWobble: true,
       },
       data: this.props.data || data,
       height: 500,
-      mode: "squarify",
+      mode: "binary",
       padding: 0,
       onLeafMouseOver: (x) =>
         this.setState(
@@ -77,12 +77,13 @@ export default class TreemapGraph extends React.Component {
     return (
       <div
         style={{
-          width: "50vw",
+          width: "48vw",
           height: "auto",
         }}
       >
         <FlexibleTreemap style={{ background: "none" }} {...treeProps} />
         <Breadcrumb {...breadcrumbProps} />
+        <p style={{ textAlign: "center" }}>Here is some more shit</p>
       </div>
     );
   }

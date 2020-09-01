@@ -8,9 +8,7 @@ export const CategoryContainer = styled.div`
   justify-content: flex-start;
   flex-direction: column;
   padding: 0vh 10px 0vh 10px;
-  margin: 3vh 1vw 0vh 0vw;
-  width: 50vw;
-  max-height: 80vh;
+  margin: 3vh 1vw 1vh 0.5vw;
   border-radius: 0px;
   overflow-y: scroll;
   box-shadow: 2px 5px 10px 0px #b5b5b5;
