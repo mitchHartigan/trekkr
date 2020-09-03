@@ -24,7 +24,7 @@ export default class Category extends Component {
     this.props.deleteCategory(this.props.category.id);
   };
 
-  updateTitle = evt => {
+  updateTitle = (evt) => {
     this.props.updateCategoryTitle(this.props.id, evt.target.value);
   };
 
@@ -47,14 +47,14 @@ export default class Category extends Component {
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
-                  justifyContent: "space-between"
+                  justifyContent: "space-between",
                 }}
               >
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "center"
+                    alignItems: "center",
                   }}
                 >
                   <CategoryColor color={this.props.category.color} />
@@ -92,6 +92,7 @@ export default class Category extends Component {
               })}
 
               {provided.placeholder}
+
               <AddANewItemButton
                 onClick={this.handleAddItem}
                 isDraggingOver={snapshot.isDraggingOver}

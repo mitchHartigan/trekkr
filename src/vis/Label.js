@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { getWidthOfText } from "../pack/BackpackData/utils";
+import { get } from "http";
 
 export default class Label extends Component {
   constructor(props) {
@@ -13,13 +14,17 @@ export default class Label extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      fontSize: this._getFontSize(
-        this.props.containerHeight,
-        this.props.containerWidth
-      ),
-    });
-    this._abbreviateText(this.props.containerHeight, this.props.containerWidth);
+    const fontSize = this._getFontSize(
+      this.props.containerHeight,
+      this.props.containerWidth
+    );
+    this.setState({ fontSize: fontSize });
+
+    this._abbreviateText(
+      this.props.containerHeight,
+      this.props.containerWidth,
+      fontSize
+    );
   }
 
   _getFontSize(containerHeight, containerWidth) {
@@ -49,13 +54,16 @@ export default class Label extends Component {
     return dynamicFontSize;
   }
 
-  _abbreviateText(containerHeight, containerWidth) {
+  _abbreviateText(containerHeight, containerWidth, fontSize) {
     const minContainerWidth = 100;
     const minContainerHeight = 60;
 
+    const labelWidth = getWidthOfText(this.state.text, fontSize, "Alata");
+
     if (
       containerWidth < minContainerWidth ||
-      containerHeight < minContainerHeight
+      containerHeight < minContainerHeight ||
+      labelWidth >= containerWidth
     ) {
       this.setState({ text: "..." });
     }
