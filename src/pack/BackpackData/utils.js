@@ -8,6 +8,7 @@ export const getWidthOfText = (text, fontSize, fontFamily) => {
   context.font = `${fontSize}px ${fontFamily}`;
   const width = context.measureText(text).width;
 
+  console.log("width of text", width);
   return width;
 };
 
@@ -176,6 +177,12 @@ export const handleAddCategory = (currentState) => {
 };
 
 export const handleUpdateItem = (itemId, key, value, currentState) => {
+  // checks if value is from a number input (by attempting to convert to a number)
+  // and then sets it to 0 if that number is a negative value.
+  if (Number(value) !== NaN && Number(value) <= 0) {
+    value = 0;
+  }
+
   const item = currentState.items[itemId];
   item[key] = value;
 
