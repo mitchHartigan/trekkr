@@ -8,7 +8,6 @@ export const getWidthOfText = (text, fontSize, fontFamily) => {
   context.font = `${fontSize}px ${fontFamily}`;
   const width = context.measureText(text).width;
 
-  console.log("width of text", width);
   return width;
 };
 
