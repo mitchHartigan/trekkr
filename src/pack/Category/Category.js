@@ -2,16 +2,35 @@ import React, { Component } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import Item from "../Item/Item";
 import { AddANewItemButton, CategoryContainer } from "./Category.elem";
-import { Input, StylesProvider } from "@material-ui/core";
+import { StylesProvider } from "@material-ui/core";
 import "./_category.scss";
 import { CategoryColor } from "./CategoryColor.elem";
-
+import styled from "styled-components";
+import { NameInput } from "./NameInput.elem";
 export default class Category extends Component {
+  constructor(props) {
+    super(props);
+
+    this.nameInput = React.createRef();
+
+    this.state = {
+      firstTimeLoaded: false
+    };
+  }
+
+  componentDidMount() {
+    if (this.props.category.firstTimeLoaded) {
+      this.nameInput.current.focus();
+      console.log("name input focused!");
+    }
+    console.log("name input not focused!");
+  }
+
   handleDelete = () => {
     this.props.deleteCategory(this.props.category.id);
   };
 
-  updateTitle = (evt) => {
+  updateTitle = evt => {
     this.props.updateCategoryTitle(this.props.id, evt.target.value);
   };
 
@@ -34,20 +53,21 @@ export default class Category extends Component {
                   display: "flex",
                   flexDirection: "row",
                   alignItems: "center",
-                  justifyContent: "space-between",
+                  justifyContent: "space-between"
                 }}
               >
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "center",
-                    alignItems: "center",
+                    alignItems: "center"
                   }}
                 >
                   <CategoryColor color={this.props.category.color} />
 
-                  <Input
-                    className="category__title"
+                  <NameInput
+                    id={"nameinputbby"}
+                    ref={this.nameInput}
                     type="text"
                     placeholder={"Category Title"}
                     value={this.props.category.title || ""}

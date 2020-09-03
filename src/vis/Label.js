@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import { CategoryColor } from "../pack/Category/CategoryColor.elem";
-
 export default class Label extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       fontSize: 12,
-      text: this.props.children,
+      text: this.props.children
     };
   }
 
@@ -18,7 +16,7 @@ export default class Label extends Component {
       fontSize: this._getFontSize(
         this.props.containerHeight,
         this.props.containerWidth
-      ),
+      )
     });
     this._abbreviateText(this.props.containerHeight, this.props.containerWidth);
   }
@@ -82,6 +80,6 @@ const Container = styled.div`
 const Text = styled.p`
   color: white;
   font-family: "Alata", sans serif;
-  font-size: ${(props) => `${props.fontSize}px`};
+  font-size: ${props => `${props.fontSize}px`};
   text-shadow: 0px 0.12vw 0.05vw black;
 `;

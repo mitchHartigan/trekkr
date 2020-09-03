@@ -5,9 +5,10 @@ import { ItemContainer } from "./Item.elem";
 import { StylesProvider } from "@material-ui/core";
 import { Input, InputLabel, Select, MenuItem } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
+import styled from "styled-components";
 
 // Looks like we can re-write this as a styled component...let's look into it.
-const DeleteButton = (props) => {
+const DeleteButton = props => {
   if (props.display) {
     return (
       <button className="item__deleteButton" onClick={props.handleDelete}>
@@ -29,17 +30,30 @@ const DeleteButton = (props) => {
 export default class Item extends Component {
   constructor(props) {
     super(props);
+
+    this.nameInput = React.createRef();
+
     this.state = {
-      hovered: false,
+      hovered: false
     };
   }
 
-  handleUpdate = (evt) => {
+  componentDidMount() {
+    this.nameInput.current.focus();
+  }
+
+  handleUpdate = evt => {
     this.props.updateItemContents(
       this.props.item.id,
       evt.target.name,
       evt.target.value
     );
+  };
+
+  handleFocusToggle = evt => {
+    if (evt.keyCode === 13) {
+      this.nameInput.current.blur();
+    }
   };
 
   handleDelete = () => {
@@ -66,8 +80,8 @@ export default class Item extends Component {
               }}
             >
               <div>
-                <Input
-                  className="item__input"
+                <ItemInput
+                  ref={this.nameInput}
                   style={
                     snapshot.isDragging
                       ? { backgroundColor: "white" }
@@ -75,9 +89,10 @@ export default class Item extends Component {
                   }
                   type="text"
                   name="name"
-                  placeholder={"Name"}
-                  value={name}
+                  placeholder="Name"
+                  value={name ? name : ""}
                   onChange={this.handleUpdate}
+                  onKeyDown={this.handleFocusToggle}
                 />
               </div>
 
@@ -128,3 +143,11 @@ export default class Item extends Component {
     );
   }
 }
+
+const ItemInput = styled.input`
+  border: none;
+  outline: none;
+  background-color: white;
+  font-size: 14px;
+  font-family: Alata;
+`;
