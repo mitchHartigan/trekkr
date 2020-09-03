@@ -7,6 +7,7 @@ export const NameInput = styled.input`
   margin-left: 0px;
   padding-left: 5px;
   width: 200px;
+  background-color: transparent;
   border: none;
   outline: none;
 `;

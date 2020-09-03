@@ -5,25 +5,19 @@ import { AddANewItemButton, CategoryContainer } from "./Category.elem";
 import { StylesProvider } from "@material-ui/core";
 import "./_category.scss";
 import { CategoryColor } from "./CategoryColor.elem";
-import styled from "styled-components";
 import { NameInput } from "./NameInput.elem";
 export default class Category extends Component {
   constructor(props) {
     super(props);
 
     this.nameInput = React.createRef();
-
-    this.state = {
-      firstTimeLoaded: false
-    };
+    this.state = {};
   }
 
   componentDidMount() {
     if (this.props.category.firstTimeLoaded) {
       this.nameInput.current.focus();
-      console.log("name input focused!");
     }
-    console.log("name input not focused!");
   }
 
   handleDelete = () => {
