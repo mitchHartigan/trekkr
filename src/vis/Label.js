@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { getWidthOfText } from "../pack/BackpackData/utils";
-import { get } from "http";
 
 export default class Label extends Component {
   constructor(props) {
