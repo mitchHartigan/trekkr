@@ -4,15 +4,16 @@ import "./_item.scss";
 import { ItemContainer } from "./Item.elem";
 import { StylesProvider } from "@material-ui/core";
 import { Input, InputLabel, Select, MenuItem } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
+// import DeleteIcon from "@material-ui/icons/Delete";
+import DeleteIcon from "../../delete-button.svg";
 import styled from "styled-components";
 
 // Looks like we can re-write this as a styled component...let's look into it.
-const DeleteButton = props => {
+const DeleteButton = (props) => {
   if (props.display) {
     return (
       <button className="item__deleteButton" onClick={props.handleDelete}>
-        <DeleteIcon />
+        <img src={DeleteIcon} width="25" height="25" />
       </button>
     );
   } else {
@@ -21,7 +22,7 @@ const DeleteButton = props => {
         className="item__deleteButton--hidden"
         onClick={props.handleDelete}
       >
-        <DeleteIcon />
+        <img src={DeleteIcon} width="25" height="25" />
       </button>
     );
   }
@@ -34,7 +35,7 @@ export default class Item extends Component {
     this.nameInput = React.createRef();
 
     this.state = {
-      hovered: false
+      hovered: false,
     };
   }
 
@@ -42,7 +43,7 @@ export default class Item extends Component {
     this.nameInput.current.focus();
   }
 
-  handleUpdate = evt => {
+  handleUpdate = (evt) => {
     this.props.updateItemContents(
       this.props.item.id,
       evt.target.name,
@@ -50,7 +51,7 @@ export default class Item extends Component {
     );
   };
 
-  handleFocusToggle = evt => {
+  handleFocusToggle = (evt) => {
     if (evt.keyCode === 13) {
       this.nameInput.current.blur();
     }
