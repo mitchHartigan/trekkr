@@ -4,7 +4,7 @@ import "./_item.scss";
 import { ItemContainer } from "./Item.elem";
 import { StylesProvider } from "@material-ui/core";
 import { Input, InputLabel, Select, MenuItem } from "@material-ui/core";
-import ItemInput from "./ItemInput.elem";
+import DynamicTextInput from "./DynamicTextInput.elem";
 import DeleteIcon from "../../delete-button.svg";
 import styled from "styled-components";
 
@@ -81,7 +81,7 @@ export default class Item extends Component {
               }}
             >
               <NameInputContainer>
-                <ItemInput
+                <DynamicTextInput
                   fontSize="14"
                   fontFamily="Alata"
                   inputRef={this.nameInput}

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { getWidthOfText } from "../BackpackData/utils";
 import PropTypes from "prop-types";
-export default class ItemInput extends Component {
+export default class DynamicTextInput extends Component {
   constructor(props) {
     super(props);
 
@@ -12,6 +12,7 @@ export default class ItemInput extends Component {
       width: "",
       minWidth: "",
       id: null,
+      isHovered: false,
     };
   }
 
@@ -28,7 +29,7 @@ export default class ItemInput extends Component {
     this.setState(
       {
         id: id,
-        value: this.props.inputValue,
+        value: this.props.inputValue || this.props.inputPlaceholder,
       },
       () => {
         this.setState({ width: this._getSpanWidth(id), minWidth: minWidth });
@@ -54,6 +55,10 @@ export default class ItemInput extends Component {
     });
   };
 
+  _handleHover = (isHovered) => {
+    this.setState({ isHovered: isHovered });
+  };
+
   render() {
     const {
       inputName,
@@ -64,23 +69,35 @@ export default class ItemInput extends Component {
     } = this.props;
     return (
       <>
-        <DynamicInput
-          type="text"
-          width={this.state.width}
-          ref={inputRef}
-          isDragging={isDragging}
-          name={inputName}
-          placeholder={inputPlaceholder}
-          value={inputValue}
-          onChange={this._handleUpdate}
-        />
+        <Container>
+          <DynamicInput
+            type="text"
+            width={this.state.width}
+            ref={inputRef}
+            isDragging={isDragging}
+            name={inputName}
+            placeholder={inputPlaceholder}
+            value={inputValue}
+            onChange={this._handleUpdate}
+            onMouseOver={() => this.setState({ hovered: true })}
+            onMouseLeave={() => this.setState({ hovered: false })}
+            onFocus={() => this.setState({ focused: true })}
+            onBlur={() => this.setState({ focused: false })}
+          />
+          <Underline
+            isHovered={this.state.hovered}
+            isFocused={this.state.focused}
+            width={this.state.width}
+          ></Underline>
+        </Container>
+
         <MeasurementSpan id={this.state.id}>{this.state.value}</MeasurementSpan>
       </>
     );
   }
 }
 
-ItemInput.propTypes = {
+DynamicTextInput.propTypes = {
   inputRef: PropTypes.object.isRequired,
   inputPlaceholder: PropTypes.string.isRequired,
   inputName: PropTypes.string.isRequired,
@@ -106,4 +123,18 @@ const MeasurementSpan = styled.span`
   position: absolute;
   left: -9999px;
   top: -9999px;
+`;
+
+const Underline = styled.span`
+  opacity: ${(props) => (props.isFocused || props.isHovered ? "1" : "0")};
+  background-color: ${(props) => (props.isFocused ? "green" : "black")};
+  width: ${(props) => props.width};
+  height: 2px;
+  color: red;
+  transition: opacity 50ms ease;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
