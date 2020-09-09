@@ -6,7 +6,7 @@ export const getWidthOfText = (text, fontSize, fontFamily) => {
   const context = canvas.getContext("2d");
 
   context.font = `${fontSize}px ${fontFamily}`;
-  const width = context.measureText(text).width;
+  const width = Math.floor(context.measureText(text).width);
 
   return width;
 };

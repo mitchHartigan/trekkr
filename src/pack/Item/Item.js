@@ -82,6 +82,8 @@ export default class Item extends Component {
             >
               <NameInputContainer>
                 <ItemInput
+                  fontSize="14"
+                  fontFamily="Alata"
                   inputRef={this.nameInput}
                   inputName="name"
                   inputPlaceholder="Name"
