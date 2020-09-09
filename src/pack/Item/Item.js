@@ -4,7 +4,7 @@ import "./_item.scss";
 import { ItemContainer } from "./Item.elem";
 import { StylesProvider } from "@material-ui/core";
 import { Input, InputLabel, Select, MenuItem } from "@material-ui/core";
-// import DeleteIcon from "@material-ui/icons/Delete";
+import ItemInput from "./ItemInput.elem";
 import DeleteIcon from "../../delete-button.svg";
 import styled from "styled-components";
 
@@ -39,9 +39,9 @@ export default class Item extends Component {
     };
   }
 
-  componentDidMount() {
-    this.nameInput.current.focus();
-  }
+  // componentDidMount() {
+  //   this.nameInput.current.focus();
+  // }
 
   handleUpdate = (evt) => {
     this.props.updateItemContents(
@@ -80,22 +80,15 @@ export default class Item extends Component {
                 this.setState({ hovered: false });
               }}
             >
-              <div>
+              <NameInputContainer>
                 <ItemInput
-                  ref={this.nameInput}
-                  style={
-                    snapshot.isDragging
-                      ? { backgroundColor: "white" }
-                      : { backgroundColor: "transparent" }
-                  }
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  value={name ? name : ""}
-                  onChange={this.handleUpdate}
-                  onKeyDown={this.handleFocusToggle}
+                  inputRef={this.nameInput}
+                  inputName="name"
+                  inputPlaceholder="Name"
+                  inputValue={name ? name : ""}
+                  handleUpdate={this.handleUpdate}
                 />
-              </div>
+              </NameInputContainer>
 
               <div>
                 <Input
@@ -145,10 +138,14 @@ export default class Item extends Component {
   }
 }
 
-const ItemInput = styled.input`
-  border: none;
-  outline: none;
-  background-color: white;
-  font-size: 14px;
-  font-family: Alata;
+// const ItemInput = styled.input`
+//   border: none;
+//   outline: none;
+//   background-color: white;
+//   font-size: 14px;
+//   font-family: Alata;
+// `;
+
+const NameInputContainer = styled.div`
+  width: 25vw;
 `;
