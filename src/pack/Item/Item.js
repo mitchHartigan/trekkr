@@ -4,9 +4,9 @@ import "./_item.scss";
 import { ItemContainer } from "./Item.elem";
 import { StylesProvider } from "@material-ui/core";
 import { Input, InputLabel, Select, MenuItem } from "@material-ui/core";
-import DynamicTextInput from "./DynamicTextInput.elem";
+import DynamicInput from "./DynamicInput.elem";
 import DeleteIcon from "../../delete-button.svg";
-import styled from "styled-components";
+import styled, { StyleSheetManager } from "styled-components";
 
 // Looks like we can re-write this as a styled component...let's look into it.
 const DeleteButton = (props) => {
@@ -81,7 +81,8 @@ export default class Item extends Component {
               }}
             >
               <NameInputContainer>
-                <DynamicTextInput
+                <DynamicInput
+                  inputType="text"
                   fontSize="14"
                   fontFamily="Alata"
                   inputRef={this.nameInput}
@@ -92,15 +93,17 @@ export default class Item extends Component {
                 />
               </NameInputContainer>
 
-              <div>
-                <Input
-                  className="item__weightInput"
-                  ref={this.weightInput}
-                  name="weight"
-                  type="number"
-                  value={weight}
-                  placeholder="0"
-                  onChange={this.handleUpdate}
+              <WeightInputContainer>
+                <DynamicInput
+                  inputType="number"
+                  fontSize="14"
+                  fontFamily="Alata"
+                  textAlign="center"
+                  inputRef={this.weightInput}
+                  inputName="weight"
+                  inputPlaceholder="0"
+                  inputValue={weight}
+                  handleUpdate={this.handleUpdate}
                 />
                 <Select
                   name="units"
@@ -111,18 +114,20 @@ export default class Item extends Component {
                   <MenuItem value="g">g</MenuItem>
                   <MenuItem value="kg">kg</MenuItem>
                 </Select>
-              </div>
+              </WeightInputContainer>
 
               <div className="item__qtyContainer">
                 <InputLabel className="item__qtyLabel">x</InputLabel>
-                <Input
-                  className="item__qtyInput"
-                  ref={this.qtyInput}
-                  type="number"
-                  value={qty}
-                  name="qty"
-                  placeholder="1"
-                  onChange={this.handleUpdate}
+                <DynamicInput
+                  inputType="number"
+                  fontSize="14"
+                  fontFamily="Alata"
+                  textAlign="center"
+                  inputRef={this.qtyInput}
+                  inputName="qty"
+                  inputPlaceholder="1"
+                  inputValue={qty}
+                  handleUpdate={this.handleUpdate}
                 />
               </div>
 
@@ -140,13 +145,12 @@ export default class Item extends Component {
   }
 }
 
-// const ItemInput = styled.input`
-//   border: none;
-//   outline: none;
-//   background-color: white;
-//   font-size: 14px;
-//   font-family: Alata;
-// `;
+const WeightInputContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
 
 const NameInputContainer = styled.div`
   width: 25vw;

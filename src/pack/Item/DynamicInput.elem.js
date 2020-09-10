@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import { getWidthOfText } from "../BackpackData/utils";
 import PropTypes from "prop-types";
-export default class DynamicTextInput extends Component {
+
+export default class DynamicInput extends Component {
   constructor(props) {
     super(props);
 
@@ -19,28 +20,36 @@ export default class DynamicTextInput extends Component {
   componentDidMount() {
     const id = uuidv4();
     // Uses the width of the placeholder text as the minimum allowed
-    // width of the input elem.
-    const minWidth = getWidthOfText(
+    // width of the input elem, or 15px (whichever is larger).
+    let minWidth = getWidthOfText(
       this.props.inputPlaceholder,
       this.props.fontSize,
       this.props.fontFamily
     );
 
+    console.log("minWidth", minWidth);
+
+    if (minWidth < 20) minWidth = 20;
+
+    console.log(minWidth);
+
     this.setState(
       {
         id: id,
-        value: this.props.inputValue || this.props.inputPlaceholder,
+        value: this.props.inputValue,
+        minWidth: minWidth,
       },
       () => {
-        this.setState({ width: this._getSpanWidth(id), minWidth: minWidth });
+        this.setState({ width: this._getSpanWidth(id) });
       }
     );
   }
 
   _getSpanWidth = (id) => {
-    let width = document.getElementById(id).offsetWidth;
+    let width = document.getElementById(id).offsetWidth * 1.05;
     if (width < this.state.minWidth) width = this.state.minWidth;
 
+    console.log("width from _getSpanWidth", width);
     return `${width}px`;
   };
 
@@ -51,7 +60,7 @@ export default class DynamicTextInput extends Component {
     this.props.handleUpdate(evt);
 
     this.setState({ value: evt.target.value }, () => {
-      this.setState({ width: this._getSpanWidth(this.state.id) });
+      this.setState({ width: this._getSpanWidth(this.state.id) }, () => {});
     });
   };
 
@@ -65,24 +74,35 @@ export default class DynamicTextInput extends Component {
       inputRef,
       inputPlaceholder,
       inputValue,
+      inputType,
       isDragging,
+      fontFamily,
+      fontSize,
+      textAlign,
+      inputStyles,
+      containerStyles,
     } = this.props;
+
     return (
       <>
-        <Container>
-          <DynamicInput
-            type="text"
+        <Container containerStyles={containerStyles}>
+          <Input
+            type={inputType}
             width={this.state.width}
             ref={inputRef}
             isDragging={isDragging}
             name={inputName}
             placeholder={inputPlaceholder}
             value={inputValue}
+            fontFamily={fontFamily}
+            fontSize={fontSize}
+            textAlign={textAlign}
             onChange={this._handleUpdate}
             onMouseOver={() => this.setState({ hovered: true })}
             onMouseLeave={() => this.setState({ hovered: false })}
             onFocus={() => this.setState({ focused: true })}
             onBlur={() => this.setState({ focused: false })}
+            inputStyles={inputStyles}
           />
           <Underline
             isHovered={this.state.hovered}
@@ -91,35 +111,48 @@ export default class DynamicTextInput extends Component {
           ></Underline>
         </Container>
 
-        <MeasurementSpan id={this.state.id}>{this.state.value}</MeasurementSpan>
+        <MeasurementSpan
+          id={this.state.id}
+          fontFamily={fontFamily}
+          fontSize={fontSize}
+        >
+          {this.state.value}
+        </MeasurementSpan>
       </>
     );
   }
 }
 
-DynamicTextInput.propTypes = {
+DynamicInput.propTypes = {
   inputRef: PropTypes.object.isRequired,
   inputPlaceholder: PropTypes.string.isRequired,
   inputName: PropTypes.string.isRequired,
-  inputValue: PropTypes.string.isRequired,
+  inputValue: PropTypes.any.isRequired,
+  inputType: PropTypes.string.isRequired,
   fontSize: PropTypes.string.isRequired,
   fontFamily: PropTypes.string.isRequired,
+  textAlign: "left",
   handleUpdate: PropTypes.func.isRequired,
+  inputStyles: PropTypes.string,
+  containerStyles: PropTypes.string,
 };
 
-const DynamicInput = styled.input`
+const Input = styled.input`
   border: none;
   outline: none;
   background-color: white;
-  font-size: 14px;
-  font-family: Alata;
+  font-size: ${(props) => props.fontSize}px;
+  font-family: ${(props) => props.fontFamily};
+  text-align: ${(props) => props.textAlign};
   width: ${(props) => props.width};
   max-width: 100%;
   background-color: ${(props) => (props.isDragging ? "white" : "transparent")};
+  ${(props) => props.inputStyles}
 `;
 
 const MeasurementSpan = styled.span`
-  white-space: pre;
+  font-family: ${(props) => props.fontFamily};
+  font-size: ${(props) => props.fontSize}px;
   position: absolute;
   left: -9999px;
   top: -9999px;
@@ -131,10 +164,14 @@ const Underline = styled.span`
   width: ${(props) => props.width};
   height: 2px;
   color: red;
-  transition: opacity 50ms ease;
+  transition: opacity 100ms ease;
 `;
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  margin: 0px 5px 0px 5px;
+  overflow: hidden;
+  ${(props) => props.containerStyles}
 `;

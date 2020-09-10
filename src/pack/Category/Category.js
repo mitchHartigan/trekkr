@@ -6,6 +6,8 @@ import { StylesProvider } from "@material-ui/core";
 import "./_category.scss";
 import { CategoryColor } from "./CategoryColor.elem";
 import { NameInput } from "./NameInput.elem";
+import DynamicInput from "../Item/DynamicInput.elem";
+import styled from "styled-components";
 export default class Category extends Component {
   constructor(props) {
     super(props);
@@ -14,11 +16,11 @@ export default class Category extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    if (this.props.category.firstTimeLoaded) {
-      this.nameInput.current.focus();
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.category.firstTimeLoaded) {
+  //     this.nameInput.current.focus();
+  //   }
+  // }
 
   handleDelete = () => {
     this.props.deleteCategory(this.props.category.id);
@@ -53,20 +55,24 @@ export default class Category extends Component {
                 <div
                   style={{
                     display: "flex",
-                    justifyContent: "center",
                     alignItems: "center",
                   }}
                 >
                   <CategoryColor color={this.props.category.color} />
-
-                  <NameInput
-                    id={"nameinputbby"}
-                    ref={this.nameInput}
-                    type="text"
-                    placeholder={"Category Title"}
-                    value={this.props.category.title || ""}
-                    onChange={this.updateTitle}
-                  />
+                  <NameInputContainer>
+                    <DynamicInput
+                      inputType="text"
+                      fontSize="20"
+                      fontFamily="Alata"
+                      textAlign="left"
+                      inputRef={this.nameInput}
+                      inputName="categoryName"
+                      inputPlaceholder={"Category Title"}
+                      inputValue={this.props.category.title || ""}
+                      handleUpdate={this.updateTitle}
+                      containerStyles={`margin: 10px; width: 25vw`}
+                    />
+                  </NameInputContainer>
                 </div>
                 {this.props.items.length === 0 && (
                   <button
@@ -106,3 +112,7 @@ export default class Category extends Component {
     );
   }
 }
+
+const NameInputContainer = styled.div`
+  width: 20vw;
+`;
