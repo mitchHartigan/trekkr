@@ -179,7 +179,7 @@ export const handleUpdateItem = (itemId, key, value, currentState) => {
   // checks if value is from a number input (by attempting to convert to a number)
   // and then sets it to 0 if that number is a negative value.
   if (Number(value) !== NaN && Number(value) <= 0) {
-    value = null;
+    value = "";
   }
 
   const item = currentState.items[itemId];
