@@ -1,9 +1,9 @@
 import React from "react";
 import "./main.scss";
 import Breadcrumb from "./Breadcrumb";
-import Label from "./Label";
 import { data } from "./exampleData";
 import styled from "styled-components";
+import { Tooltip } from "./Tooltip";
 
 import { Treemap, makeWidthFlexible } from "react-vis";
 
@@ -54,22 +54,10 @@ export default class TreemapGraph extends React.Component {
           },
           () => console.log(x)
         ),
-      // getLabel: () => {
-      //   if (hoveredNode) {
-      //     return (
-      //       <Label
-      //         containerHeight={hoveredNode.y1 - hoveredNode.y0}
-      //         containerWidth={hoveredNode.x1 - hoveredNode.x0}
-      //       >
-      //         {`${hoveredNode.data.value} (${hoveredNode.data.weightString})`}
-      //       </Label>
-      //     );
-      //   }
-      // },
       onLeafMouseOut: () => this.setState({ hoveredNode: null }),
     };
 
-    const breadcrumbProps = {
+    const displayProps = {
       hidden: !hoveredNode,
       category: hoveredCategory,
       item: hoveredItem,
@@ -86,24 +74,24 @@ export default class TreemapGraph extends React.Component {
           width: "48vw",
           height: "auto",
         }}
-        onMouseMove={(evt) => this.setState({ x: evt.clientX, y: evt.clientY })}
       >
-        <FlexibleTreemap style={{ background: "none" }} {...treeProps} />
-        <Breadcrumb {...breadcrumbProps} />
-        <Tooltip x={this.state.x} y={this.state.y} />
+        <div
+          style={{
+            display: "flex",
+            width: "48vw",
+            height: "auto",
+          }}
+          onMouseMove={(evt) => {
+            this.setState({ x: evt.clientX, y: evt.clientY });
+          }}
+        >
+          <FlexibleTreemap style={{ background: "none" }} {...treeProps} />
+          <Tooltip x={this.state.x} y={this.state.y} {...displayProps} />
+        </div>
         <p style={{ textAlign: "center" }}>Here is some more shit</p>
       </div>
     );
   }
 }
 
-const Tooltip = styled.div`
-  width: 100px;
-  height: 20px;
-  position: absolute;
-  top: ${(props) => props.y}px;
-  left: ${(props) => props.x}px;
-  background-color: red;
-  margin-top: -40px;
-  margin-left: 0px;
-`;
+const MouseArea = styled.div``;
