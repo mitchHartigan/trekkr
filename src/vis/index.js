@@ -77,6 +77,9 @@ export default class TreemapGraph extends React.Component {
     return (
       <div
         style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
           width: "48vw",
           height: "auto",
         }}

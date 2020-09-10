@@ -8,5 +8,6 @@ export const CategoryColor = styled.div`
   background-color: ${(props) => props.color};
   margin-right: 5px;
   margin-left: 10px;
-  border-radius: 50%;
+  border-radius: 30%;
+  flex-shrink: 0;
 `;

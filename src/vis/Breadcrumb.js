@@ -7,15 +7,13 @@ export default class Breadcrumb extends React.Component {
   render() {
     return (
       <Container>
-        <div>
-          <CategoryColor
-            color={this.props.baseColor}
-            isHidden={this.props.hidden}
-          />
-          <BreadcrumbText isHidden={this.props.hidden}>
-            {`${this.props.category} ⤚ ${this.props.item} (${this.props.weight})`}
-          </BreadcrumbText>
-        </div>
+        <CategoryColor
+          color={this.props.baseColor}
+          isHidden={this.props.hidden}
+        />
+        <BreadcrumbText isHidden={this.props.hidden}>
+          {`${this.props.category} ⤚ ${this.props.item} (${this.props.weight})`}
+        </BreadcrumbText>
       </Container>
     );
   }
@@ -26,16 +24,20 @@ const BreadcrumbText = styled.h1`
   opacity: ${(props) => (props.isHidden ? "0" : "1")};
   font-family: "Alata", sans serif;
   font-size: 1.5vw;
-  width: 100%;
   text-align: center;
   font-weight: 300;
-  margin-top: -3vh;
-  margin-left: 1vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-top: 10px;
 `;
 
 const Container = styled.div`
   opacity: ${(props) => (props.isHidden ? "0" : "1")};
   display: flex;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  width: 45vw;
+  margin-top: -3vh;
 `;
