@@ -1,7 +1,6 @@
 import React from "react";
 import "./main.scss";
-import Breadcrumb from "./Breadcrumb";
-import { data } from "./exampleData";
+import { data } from "../pack/BackpackData/exampleData";
 import styled from "styled-components";
 import { Tooltip } from "./Tooltip";
 
@@ -31,6 +30,7 @@ export default class TreemapGraph extends React.Component {
       hoveredCategory,
       hoveredItem,
       hoveredItemBaseColor,
+      hovered,
     } = this.state;
 
     const treeProps = {
@@ -48,17 +48,19 @@ export default class TreemapGraph extends React.Component {
           {
             hoveredItemWeight: x.data.weightString,
             hoveredNode: x,
+            hovered: true,
             hoveredCategory: x.parent.data.title,
             hoveredItem: x.data.value,
             hoveredItemBaseColor: x.data.baseColor,
           },
           () => console.log(x)
         ),
-      onLeafMouseOut: () => this.setState({ hoveredNode: null }),
+      onLeafMouseOut: () =>
+        this.setState({ hoveredNode: null, hovered: false }),
     };
 
     const displayProps = {
-      hidden: !hoveredNode,
+      hidden: !hovered,
       category: hoveredCategory,
       item: hoveredItem,
       weight: hoveredItemWeight,
@@ -75,23 +77,21 @@ export default class TreemapGraph extends React.Component {
           height: "auto",
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            width: "48vw",
-            height: "auto",
-          }}
+        <MouseArea
           onMouseMove={(evt) => {
             this.setState({ x: evt.clientX, y: evt.clientY });
           }}
         >
           <FlexibleTreemap style={{ background: "none" }} {...treeProps} />
-          <Tooltip x={this.state.x} y={this.state.y} {...displayProps} />
-        </div>
-        <p style={{ textAlign: "center" }}>Here is some more shit</p>
+        </MouseArea>
+        <Tooltip x={this.state.x} y={this.state.y} {...displayProps} />
       </div>
     );
   }
 }
 
-const MouseArea = styled.div``;
+const MouseArea = styled.div`
+  display: flex;
+  width: 48vw;
+  height: auto;
+`;
