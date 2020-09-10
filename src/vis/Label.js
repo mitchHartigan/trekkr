@@ -27,7 +27,7 @@ export default class Label extends Component {
   }
 
   _getFontSize(containerHeight, containerWidth) {
-    const minFontSize = 14;
+    const minFontSize = 15;
     const maxFontSize = 50;
 
     let dynamicFontSize = Math.floor(containerWidth / 10);
@@ -96,5 +96,5 @@ const Text = styled.p`
   color: white;
   font-family: "Alata", sans serif;
   font-size: ${(props) => `${props.fontSize}px`};
-  text-shadow: 0px 0.12vw 0.05vw black;
+  text-shadow: 0px 0.1vw 0.05vw black;
 `;
