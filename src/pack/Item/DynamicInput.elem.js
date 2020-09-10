@@ -27,29 +27,21 @@ export default class DynamicInput extends Component {
       this.props.fontFamily
     );
 
-    console.log("minWidth", minWidth);
-
     if (minWidth < 20) minWidth = 20;
 
-    console.log(minWidth);
-
     this.setState(
-      {
-        id: id,
-        value: this.props.inputValue,
-        minWidth: minWidth,
-      },
+      { id: id, value: this.props.inputValue, minWidth: minWidth },
       () => {
         this.setState({ width: this._getSpanWidth(id) });
       }
     );
   }
 
+  // TODO: refactor to use a ref instead of document.getELementById.
   _getSpanWidth = (id) => {
     let width = document.getElementById(id).offsetWidth * 1.05;
     if (width < this.state.minWidth) width = this.state.minWidth;
 
-    console.log("width from _getSpanWidth", width);
     return `${width}px`;
   };
 
@@ -60,7 +52,7 @@ export default class DynamicInput extends Component {
     this.props.handleUpdate(evt);
 
     this.setState({ value: evt.target.value }, () => {
-      this.setState({ width: this._getSpanWidth(this.state.id) }, () => {});
+      this.setState({ width: this._getSpanWidth(this.state.id) });
     });
   };
 
@@ -124,14 +116,14 @@ export default class DynamicInput extends Component {
 }
 
 DynamicInput.propTypes = {
-  inputRef: PropTypes.object.isRequired,
+  inputRef: PropTypes.object,
   inputPlaceholder: PropTypes.string.isRequired,
   inputName: PropTypes.string.isRequired,
   inputValue: PropTypes.any.isRequired,
   inputType: PropTypes.string.isRequired,
   fontSize: PropTypes.string.isRequired,
   fontFamily: PropTypes.string.isRequired,
-  textAlign: "left",
+  textAlign: PropTypes.string,
   handleUpdate: PropTypes.func.isRequired,
   inputStyles: PropTypes.string,
   containerStyles: PropTypes.string,
