@@ -44,23 +44,18 @@ export default class TreemapGraph extends React.Component {
       mode: "binary",
       padding: 0,
       onLeafMouseOver: (x) =>
-        this.setState(
-          {
-            hoveredItemWeight: x.data.weightString,
-            hoveredNode: x,
-            hovered: true,
-            hoveredCategory: x.parent.data.title,
-            hoveredItem: x.data.value,
-            hoveredItemBaseColor: x.data.baseColor,
-          },
-          () => console.log(x)
-        ),
-      onLeafMouseOut: () =>
-        this.setState({ hoveredNode: null, hovered: false }),
+        this.setState({
+          hoveredItemWeight: x.data.weightString,
+          hoveredNode: x,
+          hoveredCategory: x.parent.data.title,
+          hoveredItem: x.data.value,
+          hoveredItemBaseColor: x.data.baseColor,
+        }),
+      onLeafMouseOut: () => this.setState({ hoveredNode: null }),
     };
 
     const displayProps = {
-      hidden: !hovered,
+      hidden: !hoveredNode,
       category: hoveredCategory,
       item: hoveredItem,
       weight: hoveredItemWeight,
@@ -83,8 +78,8 @@ export default class TreemapGraph extends React.Component {
           }}
         >
           <FlexibleTreemap style={{ background: "none" }} {...treeProps} />
+          <Tooltip x={this.state.x} y={this.state.y} {...displayProps} />
         </MouseArea>
-        <Tooltip x={this.state.x} y={this.state.y} {...displayProps} />
       </div>
     );
   }
