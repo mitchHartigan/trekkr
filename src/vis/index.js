@@ -43,14 +43,16 @@ export default class TreemapGraph extends React.Component {
       height: 500,
       mode: "binary",
       padding: 0,
-      onLeafMouseOver: x =>
+      onLeafMouseOver: (x, evt) => {
+        evt.stopPropagation();
         this.setState({
           hoveredItemWeight: x.data.weightString,
           hoveredNode: x,
           hoveredCategory: x.parent.data.title,
           hoveredItem: x.data.value,
           hoveredItemBaseColor: x.data.baseColor
-        }),
+        });
+      },
       onLeafMouseOut: () => this.setState({ hoveredNode: null })
     };
 
