@@ -14,8 +14,8 @@ export default function LoginCard(props) {
 }
 
 const Container = styled.div`
-  width: 20vw;
-  height: 20vw;
+  width: 380px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   align-content: space-around;
@@ -29,5 +29,6 @@ const Description = styled.p`
   font-family: Titillium Web;
   font-size: 20px;
   font-weight: 300px;
-  margin-bottom: 10px;
+  margin: 30px 0px 40px 0px;
+  text-align: center;
 `;

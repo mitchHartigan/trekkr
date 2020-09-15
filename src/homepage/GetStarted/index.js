@@ -28,6 +28,7 @@ export default function GetStarted() {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 5vh;
 `;
 
 const CardsContainer = styled.div`
@@ -35,4 +36,5 @@ const CardsContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-top: 5vh;
 `;
