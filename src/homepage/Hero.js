@@ -50,7 +50,9 @@ const Spacer = styled.div`
 const HeroTextContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 150px;
+  padding-top: 212px;
+  margin-bottom: -75px;
+  z-index: 1;
 `;
 
 const BackgroundImage = styled.img`
