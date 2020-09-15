@@ -1,6 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Open+Sans+Condensed&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400&display=swap");
 
 body {
   background-color: #f6f5f0;
+  margin: 0px;
 }

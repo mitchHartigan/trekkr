@@ -139,6 +139,8 @@ const Input = styled.input`
   width: ${(props) => props.width};
   max-width: 100%;
   background-color: ${(props) => (props.isDragging ? "white" : "transparent")};
+  flex-grow: 0;
+  flex-shrink: 0;
   ${(props) => props.inputStyles}
 `;
 
@@ -165,6 +167,7 @@ const Container = styled.div`
   justify-content: center;
   margin: 0px 5px 0px 5px;
   overflow: hidden;
+  flex-grow: 0;
   flex-shrink: 0;
   ${(props) => props.containerStyles}
 `;
