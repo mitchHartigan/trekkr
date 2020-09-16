@@ -13,12 +13,14 @@ export default function GetStarted() {
           description={`Sign up with your name and email to save your data.
           Easily share your breakdown with others via a link.`}
           buttonText="Coming Soon"
+          disabled={true}
         />
         <LoginCard
           title="Start without an Account"
           description={`Continue without making an account. Your data will 
           be saved locally, but you won’t be able to share it with others until you sign up.`}
           buttonText="Start Now"
+          link={"/pack"}
         />
       </CardsContainer>
     </Container>

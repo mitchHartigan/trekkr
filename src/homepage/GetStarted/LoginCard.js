@@ -8,7 +8,9 @@ export default function LoginCard(props) {
     <Container>
       <PageTitle>{props.title}</PageTitle>
       <Description>{props.description}</Description>
-      <Button>{props.buttonText}</Button>
+      <Button link={props.link} disabled={props.disabled}>
+        {props.buttonText}
+      </Button>
     </Container>
   );
 }

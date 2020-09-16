@@ -1,12 +1,23 @@
 import React from "react";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 export default function Button(props) {
-  return (
-    <ButtonContainer>
-      <ButtonElem>{props.children}</ButtonElem>
-    </ButtonContainer>
-  );
+  if (props.link) {
+    return (
+      <ButtonContainer>
+        <NavLink to={{ pathname: props.link }}>
+          <ButtonElem disabled={props.disabled}>{props.children}</ButtonElem>
+        </NavLink>
+      </ButtonContainer>
+    );
+  } else {
+    return (
+      <ButtonContainer>
+        <ButtonElem disabled={props.disabled}>{props.children}</ButtonElem>
+      </ButtonContainer>
+    );
+  }
 }
 
 const ButtonElem = styled.button`
@@ -14,19 +25,27 @@ const ButtonElem = styled.button`
   font-family: Alata;
   font-size: 20px;
   text-align: center;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? "" : "pointer")};
   color: #f6f5f0;
   background-color: #303d00;
   border: none;
   border-radius: 5px;
   outline: none;
   &: hover {
-    background-color: #222b00;
-    color: white;
-    box-shadow: 0px 2px 3px grey;
+    ${(props) => {
+      if (props.disabled) {
+        return "";
+      }
+      return `
+        background-color: #222b00;
+        color: white;
+        box-shadow: 0px 2px 3px grey;
+      `;
+    }}
   }
   transition: background-color 150ms ease;
   transition: box-shadow 150ms ease;
+  opacity: ${(props) => (props.disabled ? "30%" : "100%")};
 `;
 
 const ButtonContainer = styled.div`
