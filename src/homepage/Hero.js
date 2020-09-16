@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from "./Button";
 import { Parallax, Background } from "react-parallax";
+import ScrollWrapper from "./ScrollWrapper";
 
 export default function Hero() {
   return (
@@ -9,8 +10,12 @@ export default function Hero() {
       <HeroTextContainer>
         <TitleText>Welcome to Pakkit.</TitleText>
         <SubtitleText>The simplest way to visualize your pack.</SubtitleText>
-        <Button>Get Started</Button>
+
+        <ScrollWrapper target="signup-cards">
+          <Button>Get Started</Button>
+        </ScrollWrapper>
       </HeroTextContainer>
+
       <Parallax blur={0} strength={300}>
         <Spacer />
         <Background className="custom-bg">

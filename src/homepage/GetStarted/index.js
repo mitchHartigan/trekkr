@@ -5,7 +5,7 @@ import PageTitle from "./PageTitle";
 
 export default function GetStarted() {
   return (
-    <Container>
+    <Container id="signup-cards">
       <PageTitle>Start using Pakkit</PageTitle>
       <CardsContainer>
         <LoginCard
