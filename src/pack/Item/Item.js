@@ -5,15 +5,14 @@ import { ItemContainer } from "./Item.elem";
 import { StylesProvider } from "@material-ui/core";
 import { Input, InputLabel, Select, MenuItem } from "@material-ui/core";
 import DynamicInput from "./DynamicInput.elem";
-import DeleteIcon from "../../delete-button.svg";
-import styled, { StyleSheetManager } from "styled-components";
+import styled from "styled-components";
 
 // Looks like we can re-write this as a styled component...let's look into it.
 const DeleteButton = (props) => {
   if (props.display) {
     return (
       <button className="item__deleteButton" onClick={props.handleDelete}>
-        <img src={DeleteIcon} width="25" height="25" />
+        <img src="delete-button.svg" width="25" height="25" />
       </button>
     );
   } else {
@@ -22,7 +21,7 @@ const DeleteButton = (props) => {
         className="item__deleteButton--hidden"
         onClick={props.handleDelete}
       >
-        <img src={DeleteIcon} width="25" height="25" />
+        <img src="delete-button.svg" width="25" height="25" />
       </button>
     );
   }
