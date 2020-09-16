@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
+// TODO: refactor using HOC
 export default function Button(props) {
   if (props.link) {
     return (

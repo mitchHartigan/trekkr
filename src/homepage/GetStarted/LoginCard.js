@@ -31,6 +31,6 @@ const Description = styled.p`
   font-family: Titillium Web;
   font-size: 20px;
   font-weight: 300px;
-  margin: 30px 0px 40px 0px;
+  margin: 40px 0px 35px 0px;
   text-align: center;
 `;
