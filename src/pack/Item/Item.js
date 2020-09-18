@@ -38,9 +38,9 @@ export default class Item extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.nameInput.current.focus();
-  // }
+  componentDidMount() {
+    this.nameInput.current.focus();
+  }
 
   handleUpdate = (evt) => {
     this.props.updateItemContents(
@@ -52,6 +52,7 @@ export default class Item extends Component {
 
   handleFocusToggle = (evt) => {
     if (evt.keyCode === 13) {
+      console.log("enter key pressed");
       this.nameInput.current.blur();
     }
   };

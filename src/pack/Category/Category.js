@@ -76,6 +76,8 @@ export default class Category extends Component {
                 </div>
                 {this.props.items.length === 0 && (
                   <button
+
+                  
                     className="category__deleteButton"
                     onClick={this.handleDelete}
                   >

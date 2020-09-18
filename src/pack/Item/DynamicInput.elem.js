@@ -60,6 +60,17 @@ export default class DynamicInput extends Component {
     this.setState({ isHovered: isHovered });
   };
 
+  _handleFocus = (evt) => {
+    this.setState({ focused: evt.type === "focus" ? true : false });
+  };
+
+  _handleKeyPress = (evt) => {
+    if (evt.which === 13) {
+      this.setState({ focused: false });
+      this.props.inputRef.current.blur();
+    }
+  };
+
   render() {
     const {
       inputName,
@@ -92,9 +103,10 @@ export default class DynamicInput extends Component {
             onChange={this._handleUpdate}
             onMouseOver={() => this.setState({ hovered: true })}
             onMouseLeave={() => this.setState({ hovered: false })}
-            onFocus={() => this.setState({ focused: true })}
-            onBlur={() => this.setState({ focused: false })}
+            onFocus={this._handleFocus}
+            onBlur={this._handleFocus}
             inputStyles={inputStyles}
+            onKeyPress={this._handleKeyPress}
           />
           <Underline
             isHovered={this.state.hovered}
