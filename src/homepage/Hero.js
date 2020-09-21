@@ -1,30 +1,51 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "./Button";
-import { Parallax, Background } from "react-parallax";
 import ScrollWrapper from "./ScrollWrapper";
 
-export default function Hero() {
-  return (
-    <Container>
-      <HeroTextContainer>
-        <TitleText>Welcome to Pakkit.</TitleText>
-        <SubtitleText>The simplest way to visualize your pack.</SubtitleText>
+export default class Hero extends React.Component {
+  state = { scrollPos: 0 };
 
-        <ScrollWrapper target="signup-cards">
-          <Button>Get Started</Button>
-        </ScrollWrapper>
-      </HeroTextContainer>
+  componentDidMount() {
+    window.addEventListener("scroll", this._captureScrollPos);
+  }
 
-      <Parallax blur={0} strength={300}>
-        <Spacer />
-        <Background className="custom-bg">
-          <BackgroundImage src="mountains.png" />
-        </Background>
-      </Parallax>
-    </Container>
-  );
+  _captureScrollPos = () => {
+    this.setState({ scrollPos: window.pageYOffset });
+  };
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this._captureScrollPos);
+  }
+
+  render() {
+    const { scrollPos } = this.state;
+    return (
+      <Container>
+        <HeroTextContainer>
+          <TitleText>Welcome to Pakkit.</TitleText>
+          <SubtitleText>The simplest way to visualize your pack.</SubtitleText>
+
+          <ScrollWrapper target="signup-cards">
+            <Button>Get Started</Button>
+          </ScrollWrapper>
+        </HeroTextContainer>
+        <ParallaxBackground scrollPos={scrollPos} src="mountains.png" alt="" />
+      </Container>
+    );
+  }
 }
+
+const ParallaxBackground = styled.img.attrs((props) => ({
+  style: {
+    transform: `translate3d(0px, ${props.scrollPos * 0.21}px, 0px)`,
+  },
+}))`
+  align-self: flex-end;
+  width: 100%;
+  height: auto;
+  z-index: -1;
+`;
 
 const TitleText = styled.h1`
   font-family: Titillium Web;
@@ -32,6 +53,7 @@ const TitleText = styled.h1`
   font-weight: 400;
   text-align: center;
   margin-bottom: 0px;
+  margin-top: 0px;
   background-color: transparent;
 `;
 
@@ -45,23 +67,18 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: transparent;
+  justify-content: space-between;
   height: 100vh;
 `;
 
-const Spacer = styled.div`
-  height: 50vh;
-`;
-
 const HeroTextContainer = styled.div`
+  height: 100%;
   display: flex;
   flex-direction: column;
-  padding-top: 212px;
-  margin-bottom: -75px;
-  z-index: 1;
-`;
-
-const BackgroundImage = styled.img`
-  width: auto;
-  height: 500px;
-  margin-top: 200px;
+  justify-content: flex-end;
+  padding-top: 10%;
+  @media (max-width: 1500px) {
+    justify-content: center;
+    padding-top: 20%;
+  }
 `;
