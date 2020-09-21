@@ -162,6 +162,7 @@ const MeasurementSpan = styled.span`
   position: absolute;
   left: -9999px;
   top: -9999px;
+  white-space: pre;
 `;
 
 const Underline = styled.span`
