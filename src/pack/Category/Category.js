@@ -13,7 +13,9 @@ export default class Category extends Component {
     super(props);
 
     this.nameInput = React.createRef();
-    this.state = {};
+    this.state = {
+      collapsed: false,
+    };
   }
 
   // componentDidMount() {
@@ -44,14 +46,7 @@ export default class Category extends Component {
               {...provided.droppableProps}
               isDraggingOver={snapshot.isDraggingOver}
             >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
+              <CategoryControlsContainer>
                 <div
                   style={{
                     display: "flex",
@@ -74,17 +69,16 @@ export default class Category extends Component {
                     />
                   </NameInputContainer>
                 </div>
+
                 {this.props.items.length === 0 && (
                   <button
-
-                  
                     className="category__deleteButton"
                     onClick={this.handleDelete}
                   >
                     X
                   </button>
                 )}
-              </div>
+              </CategoryControlsContainer>
 
               {this.props.items.map((item, index) => {
                 return (
@@ -117,4 +111,11 @@ export default class Category extends Component {
 
 const NameInputContainer = styled.div`
   width: 20vw;
+`;
+
+const CategoryControlsContainer = styled.div`
+  display: flex,
+  flex-direction: row,
+  align-items: center,
+  justify-content: space-between,
 `;
