@@ -115,8 +115,41 @@ export const handleAddItem = (category, currentState) => {
       },
     },
   };
+
   return updatedState;
 };
+
+const findCategoryByItemId = (itemId, currentState) => {
+  const { categories } = currentState;
+  let categoryId = "";
+
+  Object.keys(categories).forEach((key) => {
+    if (categoryId === "") {
+      categories[key].itemIds.forEach((id) => {
+        if (id === itemId) categoryId = key;
+      });
+    }
+  });
+  return categoryId;
+};
+
+// export const SumCategoryWeight = (updatedItem, currentState) => {
+//   let totalWeight = 0;
+
+//   itemIds.forEach((id) => (totalWeight += items[id].weight));
+
+//   const updatedState = {
+//     ...currentState,
+//     categories: {
+//       ...currentState.categories,
+//       [categoryId]: {
+//         ...currentState.categories[categoryId],
+//         totalWeight: totalWeight,
+//       },
+//     },
+//   };
+//   return updatedState;
+// };
 
 export const handleDeleteItem = (item, category, currentState) => {
   const updatedItems = currentState.items;
@@ -157,6 +190,7 @@ export const handleAddCategory = (currentState) => {
     firstTimeLoaded: true,
     title: "",
     itemIds: [],
+    totalWeight: 0,
     color: selectColorForCategory(currentState),
   };
 
@@ -192,6 +226,8 @@ export const handleUpdateItem = (itemId, key, value, currentState) => {
       [itemId]: item,
     },
   };
+
+  console.log(findCategoryByItemId(itemId, currentState));
   return updatedState;
 };
 
