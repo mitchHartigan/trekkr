@@ -64,34 +64,37 @@ export default class TreemapGraph extends React.Component {
     };
 
     return (
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          width: "48vw",
-          height: "auto",
-        }}
-      >
+      <Container>
         <MouseArea
+          id="fuckingHello?"
           onMouseMove={(evt) => {
             evt.stopPropagation();
+            evt.preventDefault();
             this.setState({ x: evt.clientX, y: evt.clientY });
           }}
-          onMouseLeave={() => {
+          onMouseLeave={(evt) => {
+            evt.preventDefault();
             this.setState({ hoveredNode: null });
           }}
         >
           <FlexibleTreemap style={{ background: "none" }} {...treeProps} />
           <Tooltip x={this.state.x} y={this.state.y} {...displayProps} />
         </MouseArea>
-      </div>
+      </Container>
     );
   }
 }
 
 const MouseArea = styled.div`
   display: flex;
+  width: 48vw;
+  height: auto;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 48vw;
   height: auto;
 `;
