@@ -98,20 +98,22 @@ export const handleAddItem = (category, currentState) => {
   };
 
   const updatedItemIds = currentState.categories[category.id].itemIds;
-
   updatedItemIds.push(uniqueId);
+
+  const updatedItems = {
+    ...currentState.items,
+    [uniqueId]: newItem,
+  };
 
   let updatedState = {
     ...currentState,
-    items: {
-      ...currentState.items,
-      [uniqueId]: newItem,
-    },
+    items: updatedItems,
     categories: {
       ...currentState.categories,
       [category.id]: {
         ...currentState.categories[category.id],
         itemIds: updatedItemIds,
+        totalWeight: SumCategoryWeight(updatedItemIds, updatedItems),
       },
     },
   };
@@ -133,13 +135,15 @@ const findCategoryByItemId = (itemId, currentState) => {
   return categoryId;
 };
 
-export const SumCategoryWeight = (itemId, currentState) => {
-  const categoryId = findCategoryByItemId(itemId, currentState);
-  const items = currentState.categories[categoryId].itemIds;
+export const SumCategoryWeight = (categoryItemIds, items) => {
+  /* Note - this operation must take place after all other updates
+  to the state. Ie, if an items weight is being updated, it should
+  wait until it can pull that new/fresh weight value just updated
+  in the state. */
   let totalSumWeight = 0;
 
-  items.forEach((id) => {
-    totalSumWeight += Number(currentState.items[id].weight);
+  categoryItemIds.forEach((id) => {
+    totalSumWeight += Number(items[id].weight);
   });
 
   return totalSumWeight;
@@ -164,6 +168,7 @@ export const handleDeleteItem = (item, category, currentState) => {
       [category.id]: {
         ...currentState.categories[category.id],
         itemIds: updatedItemIds,
+        totalWeight: SumCategoryWeight(updatedItemIds, updatedItems),
       },
     },
   };
@@ -229,7 +234,10 @@ export const handleUpdateItem = (itemId, key, value, currentState) => {
       ...currentState.categories,
       [categoryId]: {
         ...currentState.categories[categoryId],
-        totalWeight: SumCategoryWeight(itemId, updatedItems),
+        totalWeight: SumCategoryWeight(
+          currentState.categories[categoryId].itemIds,
+          updatedItems.items
+        ),
       },
     },
   };
