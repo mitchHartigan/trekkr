@@ -167,6 +167,7 @@ export const handleDeleteItem = (item, category, currentState) => {
       },
     },
   };
+
   return updatedState;
 };
 
@@ -203,11 +204,9 @@ export const handleAddCategory = (currentState) => {
 };
 
 export const handleUpdateItem = (itemId, key, value, currentState) => {
-  // checks if value is from a number input (by attempting to convert to a number)
-  // and then sets it to 0 if that number is a negative value.
-  value = Number(value);
-
-  if (value !== NaN && value <= 0) {
+  /* Checks if value is from a number input (by attempting to convert to a number)
+  and then sets it to 0 if that number is a negative value. */
+  if (Number(value) !== NaN && Number(value) <= 0) {
     value = "";
   }
 
