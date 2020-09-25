@@ -117,7 +117,7 @@ const CollapseButton = styled.button`
   cursor: pointer;
   outline: none;
   background: transparent;
-  transform: ${(props) => (props.collapsed ? "rotate(180deg)" : "")};
+  transform: ${(props) => (props.collapsed ? "rotate(-180deg)" : "")};
   transform-origin: center;
   transition: transform 150ms;
   flex-shrink: 0;
