@@ -133,23 +133,17 @@ const findCategoryByItemId = (itemId, currentState) => {
   return categoryId;
 };
 
-// export const SumCategoryWeight = (updatedItem, currentState) => {
-//   let totalWeight = 0;
+export const SumCategoryWeight = (itemId, currentState) => {
+  const categoryId = findCategoryByItemId(itemId, currentState);
+  const items = currentState.categories[categoryId].itemIds;
+  let totalSumWeight = 0;
 
-//   itemIds.forEach((id) => (totalWeight += items[id].weight));
+  items.forEach((id) => {
+    totalSumWeight += Number(currentState.items[id].weight);
+  });
 
-//   const updatedState = {
-//     ...currentState,
-//     categories: {
-//       ...currentState.categories,
-//       [categoryId]: {
-//         ...currentState.categories[categoryId],
-//         totalWeight: totalWeight,
-//       },
-//     },
-//   };
-//   return updatedState;
-// };
+  return totalSumWeight;
+};
 
 export const handleDeleteItem = (item, category, currentState) => {
   const updatedItems = currentState.items;
@@ -187,7 +181,6 @@ export const handleAddCategory = (currentState) => {
 
   const newCategory = {
     id: categoryId,
-    firstTimeLoaded: true,
     title: "",
     itemIds: [],
     totalWeight: 0,
@@ -212,14 +205,18 @@ export const handleAddCategory = (currentState) => {
 export const handleUpdateItem = (itemId, key, value, currentState) => {
   // checks if value is from a number input (by attempting to convert to a number)
   // and then sets it to 0 if that number is a negative value.
-  if (Number(value) !== NaN && Number(value) <= 0) {
+  value = Number(value);
+
+  if (value !== NaN && value <= 0) {
     value = "";
   }
 
   const item = currentState.items[itemId];
   item[key] = value;
 
-  let updatedState = {
+  const categoryId = findCategoryByItemId(itemId, currentState);
+
+  const updatedItems = {
     ...currentState,
     items: {
       ...currentState.items,
@@ -227,7 +224,16 @@ export const handleUpdateItem = (itemId, key, value, currentState) => {
     },
   };
 
-  console.log(findCategoryByItemId(itemId, currentState));
+  const updatedState = {
+    ...updatedItems,
+    categories: {
+      ...currentState.categories,
+      [categoryId]: {
+        ...currentState.categories[categoryId],
+        totalWeight: SumCategoryWeight(itemId, updatedItems),
+      },
+    },
+  };
   return updatedState;
 };
 

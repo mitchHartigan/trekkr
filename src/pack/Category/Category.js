@@ -18,11 +18,8 @@ export default class Category extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   if (this.props.category.firstTimeLoaded) {
-  //     this.nameInput.current.focus();
-  //   }
-  // }
+  // TODO: refactor controls/heading of the category out into its own component.
+  // Yeah man, this file is wayy too big.
 
   handleDelete = () => {
     this.props.deleteCategory(this.props.category.id);
@@ -37,6 +34,7 @@ export default class Category extends Component {
   };
 
   render() {
+    const { collapsed } = this.state;
     return (
       <StylesProvider injectFirst>
         <Droppable droppableId={this.props.category.id}>
@@ -46,7 +44,7 @@ export default class Category extends Component {
               {...provided.droppableProps}
               isDraggingOver={snapshot.isDraggingOver}
             >
-              <CategoryControlsContainer>
+              <CategoryControlsContainer id="asdf">
                 <div
                   style={{
                     display: "flex",
@@ -70,37 +68,42 @@ export default class Category extends Component {
                   </NameInputContainer>
                 </div>
 
-                {this.props.items.length === 0 && (
-                  <button
-                    className="category__deleteButton"
-                    onClick={this.handleDelete}
-                  >
-                    X
-                  </button>
-                )}
+                <CollapseButton
+                  onClick={() =>
+                    this.setState({ collapsed: !this.state.collapsed })
+                  }
+                  collapsed={this.state.collapsed}
+                >
+                  <CollapseIcon src="collapse-button.png" alt="" />
+                </CollapseButton>
+
+                <DeleteButton onClick={this.handleDelete} show={!collapsed}>
+                  X
+                </DeleteButton>
               </CategoryControlsContainer>
+              <ItemsContainer show={!collapsed}>
+                {this.props.items.map((item, index) => {
+                  return (
+                    <Item
+                      key={item.id}
+                      index={index}
+                      category={this.props.category}
+                      item={item}
+                      updateItemContents={this.props.updateItemContents}
+                      deleteItem={this.props.deleteItem}
+                    />
+                  );
+                })}
 
-              {this.props.items.map((item, index) => {
-                return (
-                  <Item
-                    key={item.id}
-                    index={index}
-                    category={this.props.category}
-                    item={item}
-                    updateItemContents={this.props.updateItemContents}
-                    deleteItem={this.props.deleteItem}
-                  />
-                );
-              })}
+                {provided.placeholder}
 
-              {provided.placeholder}
-
-              <AddANewItemButton
-                onClick={this.handleAddItem}
-                isDraggingOver={snapshot.isDraggingOver}
-              >
-                + Add an item
-              </AddANewItemButton>
+                <AddANewItemButton
+                  onClick={this.handleAddItem}
+                  isDraggingOver={snapshot.isDraggingOver}
+                >
+                  + Add an item
+                </AddANewItemButton>
+              </ItemsContainer>
             </CategoryContainer>
           )}
         </Droppable>
@@ -109,13 +112,46 @@ export default class Category extends Component {
   }
 }
 
+const CollapseButton = styled.button`
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background: transparent;
+  transform: ${(props) => (props.collapsed ? "rotate(180deg)" : "")};
+  transform-origin: center;
+  transition: transform 150ms;
+  flex-shrink: 0;
+`;
+
+const DeleteButton = styled.button`
+  visibility: ${(props) => (props.show ? "visible" : "hidden")};
+  font-family: Alata;
+  padding-right: 25px;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+`;
+
+const ItemsContainer = styled.div`
+  display: ${(props) => (props.show ? "flex" : "none")};
+  flex-direction: column;
+`;
+
+const CategoryWeightSum = styled.p`
+  font-family: Alata;
+  font-size: 14px;
+`;
+
+const CollapseIcon = styled.img``;
+
 const NameInputContainer = styled.div`
   width: 20vw;
 `;
 
 const CategoryControlsContainer = styled.div`
-  display: flex,
-  flex-direction: row,
-  align-items: center,
-  justify-content: space-between,
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 10px;
 `;
