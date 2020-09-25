@@ -20,10 +20,9 @@ export function Tooltip(props) {
 }
 
 const Container = styled.div`
-  display: flex;
+  display: ${(props) => (props.isHidden ? "none" : "flex")};
   flex-direction: row;
   align-items: center;
-  opacity: ${(props) => (props.isHidden ? "0" : "1")};
   max-width: 350px;
   position: absolute;
   margin-top: -40px;
@@ -31,7 +30,6 @@ const Container = styled.div`
   background-color: white;
   box-shadow: 2px 2px 5px grey;
   border-radius: 2px;
-  transition: opacity 100ms ease;
 `;
 
 const WeightText = styled.p`
