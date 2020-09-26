@@ -74,7 +74,7 @@ export default class Category extends Component {
                   }
                   collapsed={this.state.collapsed}
                 >
-                  <CollapseIcon src="collapse-button.png" alt="" />
+                  <img src="collapse-button.png" alt="" />
                 </CollapseButton>
 
                 <DeleteButton onClick={this.handleDelete} show={!collapsed}>
@@ -141,8 +141,6 @@ const CategoryWeightSum = styled.p`
   font-family: Alata;
   font-size: 14px;
 `;
-
-const CollapseIcon = styled.img``;
 
 const NameInputContainer = styled.div`
   width: 20vw;

@@ -66,7 +66,6 @@ export default class TreemapGraph extends React.Component {
     return (
       <Container>
         <MouseArea
-          id="fuckingHello?"
           onMouseMove={(evt) => {
             evt.stopPropagation();
             evt.preventDefault();

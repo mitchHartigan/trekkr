@@ -17,7 +17,7 @@ export default class DynamicInput extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const id = uuidv4();
     // Uses the width of the placeholder text as the minimum allowed
     // width of the input elem, or 15px (whichever is larger).
