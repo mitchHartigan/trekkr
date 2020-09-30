@@ -5,8 +5,8 @@ import { AddANewItemButton, CategoryContainer } from "./Category.elem";
 import { StylesProvider } from "@material-ui/core";
 import "./_category.scss";
 import { CategoryColor } from "./CategoryColor.elem";
-import { NameInput } from "./NameInput.elem";
 import DynamicInput from "../Item/DynamicInput.elem";
+import { parseWeightValToString } from "../BackpackData/utils";
 import styled from "styled-components";
 export default class Category extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ export default class Category extends Component {
 
     this.nameInput = React.createRef();
     this.state = {
-      collapsed: false,
+      collapsed: false
     };
   }
 
@@ -25,7 +25,7 @@ export default class Category extends Component {
     this.props.deleteCategory(this.props.category.id);
   };
 
-  updateTitle = (evt) => {
+  updateTitle = evt => {
     this.props.updateCategoryTitle(this.props.id, evt.target.value);
   };
 
@@ -35,6 +35,8 @@ export default class Category extends Component {
 
   render() {
     const { collapsed } = this.state;
+    const { totalWeight } = this.props.category;
+
     return (
       <StylesProvider injectFirst>
         <Droppable droppableId={this.props.category.id}>
@@ -44,13 +46,8 @@ export default class Category extends Component {
               {...provided.droppableProps}
               isDraggingOver={snapshot.isDraggingOver}
             >
-              <CategoryControlsContainer id="asdf">
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
+              <CategoryControlsContainer>
+                <div style={{ display: "flex", alignItems: "center" }}>
                   <CategoryColor color={this.props.category.color} />
                   <NameInputContainer>
                     <DynamicInput
@@ -68,16 +65,18 @@ export default class Category extends Component {
                   </NameInputContainer>
                 </div>
 
+                <CategoryWeightSum show={collapsed}>
+                  {parseWeightValToString(totalWeight)}
+                </CategoryWeightSum>
+
                 <CollapseButton
-                  onClick={() =>
-                    this.setState({ collapsed: !this.state.collapsed })
-                  }
-                  collapsed={this.state.collapsed}
+                  onClick={() => this.setState({ collapsed: !collapsed })}
+                  collapsed={collapsed}
                 >
                   <img src="collapse-button.png" alt="" />
                 </CollapseButton>
 
-                <DeleteButton onClick={this.handleDelete} show={!collapsed}>
+                <DeleteButton onClick={this.handleDelete} show={collapsed}>
                   X
                 </DeleteButton>
               </CategoryControlsContainer>
@@ -117,14 +116,15 @@ const CollapseButton = styled.button`
   cursor: pointer;
   outline: none;
   background: transparent;
-  transform: ${(props) => (props.collapsed ? "rotate(-180deg)" : "")};
+  transform: ${props =>
+    props.collapsed ? "rotate(-180deg)" : "translate(0px, 5px)"};
   transform-origin: center;
   transition: transform 150ms;
   flex-shrink: 0;
 `;
 
 const DeleteButton = styled.button`
-  visibility: ${(props) => (props.show ? "visible" : "hidden")};
+  visibility: ${props => (props.show ? "visible" : "hidden")};
   font-family: Alata;
   padding-right: 25px;
   cursor: pointer;
@@ -133,13 +133,15 @@ const DeleteButton = styled.button`
 `;
 
 const ItemsContainer = styled.div`
-  display: ${(props) => (props.show ? "flex" : "none")};
+  display: ${props => (props.show ? "flex" : "none")};
   flex-direction: column;
 `;
 
 const CategoryWeightSum = styled.p`
+  visibility: ${props => (props.show ? "visible" : "hidden")};
   font-family: Alata;
-  font-size: 14px;
+  font-size: 18px;
+  color: red;
 `;
 
 const NameInputContainer = styled.div`
@@ -151,5 +153,5 @@ const CategoryControlsContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding-right: 10px;
+  padding-right: 20px;
 `;

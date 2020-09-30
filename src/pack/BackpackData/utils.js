@@ -1,6 +1,15 @@
 import { v4 as uuidv4 } from "uuid";
 import tinycolor from "tinycolor2";
 
+export const parseWeightValToString = weight => {
+  let units = "g";
+  if (weight >= 1000) {
+    weight = weight / 1000;
+    units = "kg";
+  }
+  return weight.toString() + units;
+};
+
 export const getWidthOfText = (text, fontSize, fontFamily) => {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
@@ -42,15 +51,15 @@ export const handleDrag = (result, currentState) => {
 
     const updatedCategory = {
       ...start,
-      itemIds: newItemIds,
+      itemIds: newItemIds
     };
 
     const updatedState = {
       ...currentState,
       categories: {
         ...currentState.categories,
-        [updatedCategory.id]: updatedCategory,
-      },
+        [updatedCategory.id]: updatedCategory
+      }
     };
 
     return updatedState; //this makes sure we don't execute the code below.
@@ -63,7 +72,7 @@ export const handleDrag = (result, currentState) => {
 
   const updatedStart = {
     ...start,
-    itemIds: startItemIds,
+    itemIds: startItemIds
   };
 
   const finishItemIds = Array.from(finish.itemIds);
@@ -71,7 +80,7 @@ export const handleDrag = (result, currentState) => {
 
   const updatedFinish = {
     ...finish,
-    itemIds: finishItemIds,
+    itemIds: finishItemIds
   };
 
   const updatedState = {
@@ -79,8 +88,8 @@ export const handleDrag = (result, currentState) => {
     categories: {
       ...currentState.categories,
       [updatedStart.id]: updatedStart,
-      [updatedFinish.id]: updatedFinish,
-    },
+      [updatedFinish.id]: updatedFinish
+    }
   };
 
   return updatedState;
@@ -94,7 +103,7 @@ export const handleAddItem = (category, currentState) => {
     name: "",
     weight: 1,
     qty: 1,
-    units: "g",
+    units: "g"
   };
 
   const updatedItemIds = currentState.categories[category.id].itemIds;
@@ -102,7 +111,7 @@ export const handleAddItem = (category, currentState) => {
 
   const updatedItems = {
     ...currentState.items,
-    [uniqueId]: newItem,
+    [uniqueId]: newItem
   };
 
   let updatedState = {
@@ -113,9 +122,9 @@ export const handleAddItem = (category, currentState) => {
       [category.id]: {
         ...currentState.categories[category.id],
         itemIds: updatedItemIds,
-        totalWeight: SumCategoryWeight(updatedItemIds, updatedItems),
-      },
-    },
+        totalWeight: SumCategoryWeight(updatedItemIds, updatedItems)
+      }
+    }
   };
 
   return updatedState;
@@ -125,9 +134,9 @@ const findCategoryByItemId = (itemId, currentState) => {
   const { categories } = currentState;
   let categoryId = "";
 
-  Object.keys(categories).forEach((key) => {
+  Object.keys(categories).forEach(key => {
     if (categoryId === "") {
-      categories[key].itemIds.forEach((id) => {
+      categories[key].itemIds.forEach(id => {
         if (id === itemId) categoryId = key;
       });
     }
@@ -142,7 +151,7 @@ export const SumCategoryWeight = (categoryItemIds, items) => {
   in the state. */
   let totalSumWeight = 0;
 
-  categoryItemIds.forEach((id) => {
+  categoryItemIds.forEach(id => {
     totalSumWeight += Number(items[id].weight);
   });
 
@@ -161,28 +170,28 @@ export const handleDeleteItem = (item, category, currentState) => {
   const updatedState = {
     ...currentState,
     items: {
-      ...updatedItems,
+      ...updatedItems
     },
     categories: {
       ...currentState.categories,
       [category.id]: {
         ...currentState.categories[category.id],
         itemIds: updatedItemIds,
-        totalWeight: SumCategoryWeight(updatedItemIds, updatedItems),
-      },
-    },
+        totalWeight: SumCategoryWeight(updatedItemIds, updatedItems)
+      }
+    }
   };
 
   return updatedState;
 };
 
-export const generateCategoryColor = (seedColor) => {
+export const generateCategoryColor = seedColor => {
   const analogousColors = tinycolor(seedColor).analogous();
 
   return analogousColors;
 };
 
-export const handleAddCategory = (currentState) => {
+export const handleAddCategory = currentState => {
   const categoryId = uuidv4();
 
   const newCategory = {
@@ -190,7 +199,7 @@ export const handleAddCategory = (currentState) => {
     title: "",
     itemIds: [],
     totalWeight: 0,
-    color: selectColorForCategory(currentState),
+    color: selectColorForCategory(currentState)
   };
 
   const updatedCategoryOrder = currentState.categoryOrder;
@@ -201,9 +210,9 @@ export const handleAddCategory = (currentState) => {
     ...currentState,
     categories: {
       ...currentState.categories,
-      [categoryId]: newCategory,
+      [categoryId]: newCategory
     },
-    categoryOrder: updatedCategoryOrder,
+    categoryOrder: updatedCategoryOrder
   };
   return updatedState;
 };
@@ -224,8 +233,8 @@ export const handleUpdateItem = (itemId, key, value, currentState) => {
     ...currentState,
     items: {
       ...currentState.items,
-      [itemId]: item,
-    },
+      [itemId]: item
+    }
   };
 
   const updatedState = {
@@ -237,9 +246,9 @@ export const handleUpdateItem = (itemId, key, value, currentState) => {
         totalWeight: SumCategoryWeight(
           currentState.categories[categoryId].itemIds,
           updatedItems.items
-        ),
-      },
-    },
+        )
+      }
+    }
   };
   return updatedState;
 };
@@ -252,9 +261,9 @@ export const handleUpdateCategoryTitle = (categoryId, title, currentState) => {
       ...currentState.categories,
       [categoryId]: {
         ...currentState.categories[categoryId],
-        title: title,
-      },
-    },
+        title: title
+      }
+    }
   };
 
   return updatedState;
@@ -262,7 +271,7 @@ export const handleUpdateCategoryTitle = (categoryId, title, currentState) => {
 
 /* This function is a monolith...need to refactor it out into it's own file, maybe
   it's own module or class or something, but wow she's a doozy. */
-export const parseDataForVis = (initialData) => {
+export const parseDataForVis = initialData => {
   let formattedCategories = [];
 
   const items = initialData.items;
@@ -271,22 +280,22 @@ export const parseDataForVis = (initialData) => {
   let categoryKeys = Object.keys(initialData.categories);
   // [category-1, category-2, category-3]...
 
-  categoryKeys.forEach((key) => {
+  categoryKeys.forEach(key => {
     let initialCategory = initialData.categories[key];
 
     const formattedCategory = {
       title: initialCategory.title || "",
       style: {
         border: "none",
-        margin: "0px",
-      },
+        margin: "0px"
+      }
     };
 
     let formattedChildren = [];
 
     let allCategoryItemsWeight = [];
 
-    initialCategory.itemIds.forEach((id) => {
+    initialCategory.itemIds.forEach(id => {
       allCategoryItemsWeight.push(
         parseInt(
           convertWeightToGrams(items[id].weight, items[id].units) *
@@ -297,7 +306,7 @@ export const parseDataForVis = (initialData) => {
 
     let largestWeightInCategory = findLargestWeight(allCategoryItemsWeight);
 
-    initialCategory.itemIds.forEach((id) => {
+    initialCategory.itemIds.forEach(id => {
       let currentItemWeight =
         convertWeightToGrams(items[id].weight, items[id].units) * items[id].qty;
 
@@ -320,9 +329,9 @@ export const parseDataForVis = (initialData) => {
         ).toString()} ${items[id].units}`,
         style: {
           backgroundColor: backgroundColor,
-          border: "1px solid #f6f5f0",
+          border: "1px solid #f6f5f0"
         },
-        baseColor: initialCategory.color,
+        baseColor: initialCategory.color
       };
       formattedChildren.push(formattedItem);
     });
@@ -336,10 +345,10 @@ export const parseDataForVis = (initialData) => {
     style: {
       background: "none",
       border: "none",
-      color: "none",
+      color: "none"
     },
 
-    children: formattedCategories,
+    children: formattedCategories
   };
 
   return formattedData;
@@ -377,14 +386,16 @@ export const generateBackgroundColor = (
     maxLightenValue -
     maxLightenValue * (invertedLightenValue / maxLightenValue);
 
-  return tinycolor(currentColor).saturate(10).lighten(mappedLightenValue);
+  return tinycolor(currentColor)
+    .saturate(10)
+    .lighten(mappedLightenValue);
 };
 
-export const findLargestWeight = (itemArray) => {
+export const findLargestWeight = itemArray => {
   return Math.max(...itemArray);
 };
 
-export const selectColorForCategory = (currentState) => {
+export const selectColorForCategory = currentState => {
   const getRandomValueInRange = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min);
   };
@@ -394,12 +405,12 @@ export const selectColorForCategory = (currentState) => {
     "rgb(221, 96, 49)",
     "rgb(243, 201, 105)",
     "rgb(4, 67, 137)",
-    "rgb(103, 148, 54)",
+    "rgb(103, 148, 54)"
   ];
 
   let alreadyUsedColors = [];
 
-  Object.keys(currentState.categories).forEach((key) => {
+  Object.keys(currentState.categories).forEach(key => {
     let categoryColor = currentState.categories[key].color;
     if (categoryColor) {
       alreadyUsedColors.push(categoryColor);
@@ -407,7 +418,7 @@ export const selectColorForCategory = (currentState) => {
   });
 
   // Remove the colors already in use from the colors array.
-  alreadyUsedColors.forEach((color) => {
+  alreadyUsedColors.forEach(color => {
     let colorIndex = colors.indexOf(color);
 
     if (colorIndex !== -1) {
