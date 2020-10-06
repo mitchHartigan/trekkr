@@ -20,7 +20,7 @@ export default class TreemapGraph extends React.Component {
       hoveredNode: null,
       hovered: false,
       x: null,
-      y: null,
+      y: null
     };
   }
 
@@ -31,14 +31,14 @@ export default class TreemapGraph extends React.Component {
       hoveredCategory,
       hoveredItem,
       hoveredItemBaseColor,
-      hovered,
+      hovered
     } = this.state;
 
     const treeProps = {
       animation: {
         damping: 30,
         stiffness: 200,
-        noWobble: true,
+        noWobble: true
       },
       data: this.props.data || data,
       height: 500,
@@ -50,9 +50,9 @@ export default class TreemapGraph extends React.Component {
           hoveredNode: x,
           hoveredCategory: x.parent.data.title,
           hoveredItem: x.data.value,
-          hoveredItemBaseColor: x.data.baseColor,
+          hoveredItemBaseColor: x.data.baseColor
         });
-      },
+      }
     };
 
     const displayProps = {
@@ -60,18 +60,18 @@ export default class TreemapGraph extends React.Component {
       category: hoveredCategory,
       item: hoveredItem,
       weight: hoveredItemWeight,
-      baseColor: hoveredItemBaseColor,
+      baseColor: hoveredItemBaseColor
     };
 
     return (
       <Container>
         <MouseArea
-          onMouseMove={(evt) => {
+          onMouseMove={evt => {
             evt.stopPropagation();
             evt.preventDefault();
             this.setState({ x: evt.clientX, y: evt.clientY });
           }}
-          onMouseLeave={(evt) => {
+          onMouseLeave={evt => {
             evt.preventDefault();
             this.setState({ hoveredNode: null });
           }}
