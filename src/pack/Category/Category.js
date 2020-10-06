@@ -85,6 +85,7 @@ export default class Category extends Component {
                   <CollapseButton
                     onClick={() => this.setState({ collapsed: !collapsed })}
                     collapsed={collapsed}
+                    show={hovered}
                   >
                     <img src="collapse-button.png" alt="" />
                   </CollapseButton>
@@ -126,6 +127,7 @@ export default class Category extends Component {
 }
 
 const CollapseButton = styled.button`
+  opacity: ${props => (props.show ? "1" : "0")};
   border: none;
   cursor: pointer;
   outline: none;
@@ -135,16 +137,18 @@ const CollapseButton = styled.button`
   transform-origin: center;
   transition: transform 150ms;
   flex-shrink: 0;
+  transition: opacity 150ms ease;
 `;
 
 const DeleteButton = styled.button`
-  visibility: ${props => (props.show ? "visible" : "hidden")};
+  opacity: ${props => (props.show ? "1" : "0")};
   font-family: Alata;
   padding: 5px 25px 0px 0px;
   font-size: 18px;
   cursor: pointer;
   border: none;
   background-color: transparent;
+  transition: opacity 150ms ease;
 `;
 
 const ItemsContainer = styled.div`
