@@ -354,14 +354,29 @@ export const parseDataForVis = initialData => {
   return formattedData;
 };
 
-export const handleDeleteCategory = (id, initialData) => {
+export const handleDeleteCategory = (id, currentState) => {
+  // sets up the Category items to be removed as an array, and
+  // all the items stored in the state as an array.
+  const categoryItems = currentState.categories[id].itemIds;
+  const stateItems = currentState.items;
+
+  Object.keys(stateItems).forEach(key => {
+    for (let i = 0; i <= categoryItems.length; i++) {
+      if (stateItems[key].id === categoryItems[i]) {
+        delete stateItems[key];
+        break;
+      }
+    }
+  });
+
   // remove category object stored in 'categories' object
-  delete initialData.categories[id];
+  delete currentState.categories[id];
 
   // remove id of deleted category from categoryOrder object.
-  initialData.categoryOrder.splice(initialData.categoryOrder.indexOf(id), 1);
+  currentState.categoryOrder.splice(currentState.categoryOrder.indexOf(id), 1);
+  currentState.items = stateItems;
 
-  return initialData;
+  return currentState;
 };
 
 export const scale = (num, in_min, in_max, out_min, out_max) => {
