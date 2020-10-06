@@ -8,13 +8,15 @@ import { CategoryColor } from "./CategoryColor.elem";
 import DynamicInput from "../Item/DynamicInput.elem";
 import { parseWeightValToString } from "../BackpackData/utils";
 import styled from "styled-components";
+
 export default class Category extends Component {
   constructor(props) {
     super(props);
 
     this.nameInput = React.createRef();
     this.state = {
-      collapsed: false
+      collapsed: false,
+      hovered: false
     };
   }
 
@@ -34,8 +36,21 @@ export default class Category extends Component {
   };
 
   render() {
-    const { collapsed } = this.state;
+    const { collapsed, hovered } = this.state;
     const { totalWeight } = this.props.category;
+
+    const nameInputProps = {
+      inputType: "text",
+      fontSize: "20",
+      fontFamily: "Alata",
+      textAlign: "left",
+      inputRef: this.nameInput,
+      inputName: "categoryName",
+      inputPlaceholder: "Category Title",
+      inputValue: this.props.category.title || "",
+      handleUpdate: this.updateTitle,
+      containerStyles: "margin: 10px; width: 25vw;"
+    };
 
     return (
       <StylesProvider injectFirst>
@@ -45,41 +60,40 @@ export default class Category extends Component {
               ref={provided.innerRef}
               {...provided.droppableProps}
               isDraggingOver={snapshot.isDraggingOver}
+              onMouseEnter={() => this.setState({ hovered: true })}
+              onMouseLeave={() => this.setState({ hovered: false })}
             >
-              <CategoryControlsContainer>
-                <div style={{ display: "flex", alignItems: "center" }}>
+              <CategoryHeader>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    width: "20%"
+                  }}
+                >
                   <CategoryColor color={this.props.category.color} />
                   <NameInputContainer>
-                    <DynamicInput
-                      inputType="text"
-                      fontSize="20"
-                      fontFamily="Alata"
-                      textAlign="left"
-                      inputRef={this.nameInput}
-                      inputName="categoryName"
-                      inputPlaceholder={"Category Title"}
-                      inputValue={this.props.category.title || ""}
-                      handleUpdate={this.updateTitle}
-                      containerStyles={`margin: 10px; width: 25vw`}
-                    />
+                    <DynamicInput {...nameInputProps} />
                   </NameInputContainer>
                 </div>
 
-                <CategoryWeightSum show={collapsed}>
-                  {parseWeightValToString(totalWeight)}
-                </CategoryWeightSum>
+                <CategoryControls>
+                  <CategoryWeightSum show={collapsed}>
+                    {parseWeightValToString(totalWeight)}
+                  </CategoryWeightSum>
 
-                <CollapseButton
-                  onClick={() => this.setState({ collapsed: !collapsed })}
-                  collapsed={collapsed}
-                >
-                  <img src="collapse-button.png" alt="" />
-                </CollapseButton>
+                  <CollapseButton
+                    onClick={() => this.setState({ collapsed: !collapsed })}
+                    collapsed={collapsed}
+                  >
+                    <img src="collapse-button.png" alt="" />
+                  </CollapseButton>
 
-                <DeleteButton onClick={this.handleDelete} show={collapsed}>
-                  X
-                </DeleteButton>
-              </CategoryControlsContainer>
+                  <DeleteButton onClick={this.handleDelete} show={hovered}>
+                    X
+                  </DeleteButton>
+                </CategoryControls>
+              </CategoryHeader>
               <ItemsContainer show={!collapsed}>
                 {this.props.items.map((item, index) => {
                   return (
@@ -126,7 +140,8 @@ const CollapseButton = styled.button`
 const DeleteButton = styled.button`
   visibility: ${props => (props.show ? "visible" : "hidden")};
   font-family: Alata;
-  padding-right: 25px;
+  padding: 5px 25px 0px 0px;
+  font-size: 18px;
   cursor: pointer;
   border: none;
   background-color: transparent;
@@ -148,10 +163,18 @@ const NameInputContainer = styled.div`
   width: 20vw;
 `;
 
-const CategoryControlsContainer = styled.div`
+const CategoryHeader = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   padding-right: 20px;
+`;
+
+const CategoryControls = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 30%;
 `;
