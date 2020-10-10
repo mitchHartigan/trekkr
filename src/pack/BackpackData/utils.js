@@ -7,7 +7,7 @@ export const parseWeightValToString = weight => {
     weight = weight / 1000;
     units = "kg";
   }
-  return weight.toString() + units;
+  return weight.toString() + " " + units;
 };
 
 export const getWidthOfText = (text, fontSize, fontFamily) => {
@@ -152,7 +152,9 @@ export const SumCategoryWeight = (categoryItemIds, items) => {
   let totalSumWeight = 0;
 
   categoryItemIds.forEach(id => {
-    totalSumWeight += Number(items[id].weight);
+    totalSumWeight += Number(
+      convertWeightToGrams(items[id].weight, items[id].units)
+    );
   });
 
   return totalSumWeight;
