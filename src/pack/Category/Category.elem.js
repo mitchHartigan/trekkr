@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const CategoryContainer = styled.div`
-  background-color: ${(props) =>
-    props.isDraggingOver ? "#e1e8e2" : "#FFFFFF"};
+  background-color: ${props => (props.isDraggingOver ? "#e1e8e2" : "#FFFFFF")};
   transition: background-color 0.3s ease;
   display: flex;
   justify-content: flex-start;
@@ -35,15 +34,14 @@ export const AddANewItemButton = styled.button`
   margin: 10px 10px 20px 10px;
   height: 42px;
   text-align: center;
-  background-color: #9cbfa3;
+  background-color: #607a00;
   padding-left: 0px;
   cursor: pointer;
-  color: black;
+  color: white;
   border-radius: 3px;
   &: hover {
-    background-color: #7dab87;
-    color: black;
-    transition: background-color 150ms;
+    background-color: #708f00;
+    transition: background-color 120ms;
   }
   outline: none;
   font-family: Alata;
