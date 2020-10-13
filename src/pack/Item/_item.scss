@@ -54,9 +54,9 @@
     animation-name: fadeIn;
     animation-duration: 200ms;
     cursor: pointer;
-    opacity: 50%;
+    opacity: 0.5;
     &:hover {
-      opacity: 100%;
+      opacity: 1;
       transition: opacity 200ms ease-out;
     }
     &--hidden {
