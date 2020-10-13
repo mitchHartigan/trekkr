@@ -15,11 +15,11 @@ const AddANewCategory = styled.button`
   padding: 10px;
   margin: 0px 10px 20px 10px;
   text-align: center;
-  height: 42px;
+  height: 51px;
   border: 2px solid #708f00;
   cursor: pointer;
   color: black;
-  border-radius: 3px;
+  border-radius: 2px;
   background-color: transparent;
   &: hover {
     background-color: #708f00;
@@ -32,7 +32,7 @@ const AddANewCategory = styled.button`
   outline: none;
   font-family: Alata;
   font-weight: 300;
-  font-size: 14px;
+  font-size: 16px;
 `;
 
 const CategoryContainer = styled.div`

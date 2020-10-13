@@ -102,7 +102,7 @@ export default class BackpackData extends Component {
               );
             })}
             <NewCategoryButton onClick={this.addCategory}>
-              + Add a new category
+              + Add a category
             </NewCategoryButton>
           </ListContainer>
         </DragDropContext>
