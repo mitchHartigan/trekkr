@@ -60,7 +60,7 @@ export default class Category extends Component {
               ref={provided.innerRef}
               {...provided.droppableProps}
               isDraggingOver={snapshot.isDraggingOver}
-              onMouseEnter={() => this.setState({ hovered: true })}
+              onMouseOver={() => this.setState({ hovered: true })}
               onMouseLeave={() => this.setState({ hovered: false })}
             >
               <CategoryHeader>
