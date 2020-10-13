@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Tooltip } from "./Tooltip";
 
 import { Treemap, makeWidthFlexible } from "react-vis";
+import WeightTotal from "./WeightTotal";
 
 const FlexibleTreemap = makeWidthFlexible(Treemap);
 
@@ -20,25 +21,26 @@ export default class TreemapGraph extends React.Component {
       hoveredNode: null,
       hovered: false,
       x: null,
-      y: null
+      y: null,
     };
   }
 
   render() {
+    const { data } = this.props;
+
     const {
       hoveredNode,
       hoveredItemWeight,
       hoveredCategory,
       hoveredItem,
       hoveredItemBaseColor,
-      hovered
     } = this.state;
 
     const treeProps = {
       animation: {
         damping: 30,
         stiffness: 200,
-        noWobble: true
+        noWobble: true,
       },
       data: this.props.data || data,
       height: 500,
@@ -50,9 +52,9 @@ export default class TreemapGraph extends React.Component {
           hoveredNode: x,
           hoveredCategory: x.parent.data.title,
           hoveredItem: x.data.value,
-          hoveredItemBaseColor: x.data.baseColor
+          hoveredItemBaseColor: x.data.baseColor,
         });
-      }
+      },
     };
 
     const displayProps = {
@@ -60,18 +62,18 @@ export default class TreemapGraph extends React.Component {
       category: hoveredCategory,
       item: hoveredItem,
       weight: hoveredItemWeight,
-      baseColor: hoveredItemBaseColor
+      baseColor: hoveredItemBaseColor,
     };
 
     return (
       <Container>
         <MouseArea
-          onMouseMove={evt => {
+          onMouseMove={(evt) => {
             evt.stopPropagation();
             evt.preventDefault();
             this.setState({ x: evt.clientX, y: evt.clientY });
           }}
-          onMouseLeave={evt => {
+          onMouseLeave={(evt) => {
             evt.preventDefault();
             this.setState({ hoveredNode: null });
           }}
@@ -79,6 +81,8 @@ export default class TreemapGraph extends React.Component {
           <FlexibleTreemap style={{ background: "none" }} {...treeProps} />
           <Tooltip x={this.state.x} y={this.state.y} {...displayProps} />
         </MouseArea>
+
+        <WeightTotal weight={data.totalWeight} />
       </Container>
     );
   }

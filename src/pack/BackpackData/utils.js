@@ -291,6 +291,7 @@ export const parseDataForVis = (initialData) => {
         border: "none",
         margin: "0px",
       },
+      totalWeight: initialCategory.totalWeight,
     };
 
     let formattedChildren = [];
@@ -349,11 +350,20 @@ export const parseDataForVis = (initialData) => {
       border: "none",
       color: "none",
     },
-
+    totalWeight: findTotalWeight(formattedCategories),
     children: formattedCategories,
   };
 
   return formattedData;
+};
+
+const findTotalWeight = (categories) => {
+  let totalWeight = 0;
+
+  categories.forEach((category) => {
+    totalWeight += category.totalWeight;
+  });
+  return parseWeightValToString(totalWeight);
 };
 
 export const handleDeleteCategory = (id, currentState) => {
