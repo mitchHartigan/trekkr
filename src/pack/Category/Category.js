@@ -147,6 +147,7 @@ const DeleteButton = styled.button`
   font-size: 18px;
   cursor: pointer;
   border: none;
+  outline: none;
   background-color: transparent;
   transition: opacity 150ms ease;
 `;

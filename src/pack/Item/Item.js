@@ -3,16 +3,16 @@ import { Draggable } from "react-beautiful-dnd";
 import "./_item.scss";
 import { ItemContainer } from "./Item.elem";
 import { StylesProvider } from "@material-ui/core";
-import { Input, InputLabel, Select, MenuItem } from "@material-ui/core";
+import { InputLabel, Select, MenuItem } from "@material-ui/core";
 import DynamicInput from "./DynamicInput.elem";
 import styled from "styled-components";
 
-// Looks like we can re-write this as a styled component...let's look into it.
+// TODO: refactor this as a styled component
 const DeleteButton = (props) => {
   if (props.display) {
     return (
       <button className="item__deleteButton" onClick={props.handleDelete}>
-        <img src="delete-button.svg" width="25" height="25" />
+        <img src="delete-button.png" />
       </button>
     );
   } else {
@@ -21,7 +21,7 @@ const DeleteButton = (props) => {
         className="item__deleteButton--hidden"
         onClick={props.handleDelete}
       >
-        <img src="delete-button.svg" width="25" height="25" />
+        <img src="delete-button.png" />
       </button>
     );
   }
@@ -52,7 +52,6 @@ export default class Item extends Component {
 
   handleFocusToggle = (evt) => {
     if (evt.keyCode === 13) {
-      console.log("enter key pressed");
       this.nameInput.current.blur();
     }
   };
