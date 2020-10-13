@@ -13,20 +13,20 @@ export function NewCategoryButton(props) {
 
 const AddANewCategory = styled.button`
   padding: 10px;
-  margin: 10px 10px 20px 10px;
+  margin: 0px 10px 20px 10px;
   text-align: center;
   height: 42px;
-  border: 2px solid #7dab87;
+  border: 2px solid #708f00;
   cursor: pointer;
   color: black;
   border-radius: 3px;
   background-color: transparent;
   &: hover {
-    background-color: #7dab87;
-    transition: background-color 50ms ease;
+    background-color: #708f00;
+    transition: background-color 70ms ease-out;
     color: white;
     transition: color 50ms ease;
-    box-shadow: 2px 5px 7px #abb6a5;
+    box-shadow: 2px 3px 5px #abb6a5;
     transition: box-shadow 30ms ease-out;
   }
   outline: none;

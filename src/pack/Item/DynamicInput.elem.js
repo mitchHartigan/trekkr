@@ -167,7 +167,7 @@ const MeasurementSpan = styled.span`
 
 const Underline = styled.span`
   opacity: ${(props) => (props.isFocused || props.isHovered ? "1" : "0")};
-  background-color: ${(props) => (props.isFocused ? "green" : "black")};
+  background-color: ${(props) => (props.isFocused ? "#708f00" : "black")};
   width: ${(props) => props.width};
   height: 2px;
   color: red;

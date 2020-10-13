@@ -16,7 +16,7 @@ export default class Category extends Component {
     this.nameInput = React.createRef();
     this.state = {
       collapsed: false,
-      hovered: false
+      hovered: false,
     };
   }
 
@@ -27,7 +27,7 @@ export default class Category extends Component {
     this.props.deleteCategory(this.props.category.id);
   };
 
-  updateTitle = evt => {
+  updateTitle = (evt) => {
     this.props.updateCategoryTitle(this.props.id, evt.target.value);
   };
 
@@ -49,7 +49,7 @@ export default class Category extends Component {
       inputPlaceholder: "Category Title",
       inputValue: this.props.category.title || "",
       handleUpdate: this.updateTitle,
-      containerStyles: "margin: 10px; width: 25vw;"
+      containerStyles: "margin: 10px; width: 25vw;",
     };
 
     return (
@@ -68,7 +68,7 @@ export default class Category extends Component {
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    width: "20%"
+                    width: "20%",
                   }}
                 >
                   <CategoryColor color={this.props.category.color} />
@@ -127,12 +127,12 @@ export default class Category extends Component {
 }
 
 const CollapseButton = styled.button`
-  opacity: ${props => (props.show ? "1" : "0")};
+  opacity: ${(props) => (props.show ? "1" : "0")};
   border: none;
   cursor: pointer;
   outline: none;
   background: transparent;
-  transform: ${props =>
+  transform: ${(props) =>
     props.collapsed ? "rotate(-180deg)" : "translate(0px, 5px)"};
   transform-origin: center;
   transition: transform 150ms;
@@ -141,7 +141,7 @@ const CollapseButton = styled.button`
 `;
 
 const DeleteButton = styled.button`
-  opacity: ${props => (props.show ? "1" : "0")};
+  opacity: ${(props) => (props.show ? "1" : "0")};
   font-family: Alata;
   padding: 5px 25px 0px 0px;
   font-size: 18px;
@@ -152,15 +152,15 @@ const DeleteButton = styled.button`
 `;
 
 const ItemsContainer = styled.div`
-  display: ${props => (props.show ? "flex" : "none")};
+  display: ${(props) => (props.show ? "flex" : "none")};
   flex-direction: column;
 `;
 
 const CategoryWeightSum = styled.p`
-  visibility: ${props => (props.show ? "visible" : "hidden")};
+  visibility: ${(props) => (props.show ? "visible" : "hidden")};
   font-family: Alata;
   font-size: 18px;
-  color: red;
+  color: #607a00;
 `;
 
 const NameInputContainer = styled.div`

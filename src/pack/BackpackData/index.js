@@ -9,7 +9,7 @@ import {
   handleDeleteItem,
   handleUpdateItem,
   handleUpdateCategoryTitle,
-  handleDeleteCategory
+  handleDeleteCategory,
 } from "./utils";
 import { parseDataForVis } from "./utils";
 import styled, { keyframes } from "styled-components";
@@ -35,7 +35,7 @@ export default class BackpackData extends Component {
     };
   }
 
-  handleDrag = result => {
+  handleDrag = (result) => {
     this.setState(handleDrag(result, this.state));
   };
 
@@ -43,7 +43,7 @@ export default class BackpackData extends Component {
     this.setState(handleUpdateItem(itemId, key, value, this.state));
   };
 
-  addItem = category => {
+  addItem = (category) => {
     this.setState(handleAddItem(category, this.state));
   };
 
@@ -55,7 +55,7 @@ export default class BackpackData extends Component {
     this.setState(handleDeleteItem(item, category, this.state));
   };
 
-  deleteCategory = id => {
+  deleteCategory = (id) => {
     this.setState(handleDeleteCategory(id, this.state));
   };
 
@@ -81,10 +81,10 @@ export default class BackpackData extends Component {
           )}
 
           <ListContainer id="listContainer">
-            {this.state.categoryOrder.map(categoryId => {
+            {this.state.categoryOrder.map((categoryId) => {
               const category = this.state.categories[categoryId];
               const items = category.itemIds.map(
-                itemId => this.state.items[itemId]
+                (itemId) => this.state.items[itemId]
                 // get each item from the state
               );
               return (
@@ -133,6 +133,7 @@ const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: -1vw;
+  margin-top: 2vh;
   width: 100%;
 `;
 
@@ -140,7 +141,7 @@ const DataContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  margin: ${props => (props.renderVis ? "0vw" : "3vh 30vw 0vh 30vw")};
-  justify-content: ${props => (props.renderVis ? "" : "center")};
+  margin: ${(props) => (props.renderVis ? "0vw" : "3vh 30vw 0vh 30vw")};
+  justify-content: ${(props) => (props.renderVis ? "" : "center")};
   transition: justify-content 1s linear;
 `;
