@@ -55,11 +55,13 @@
     animation-duration: 200ms;
     cursor: pointer;
     opacity: 0.5;
+    padding-right: 16px;
     &:hover {
       opacity: 1;
       transition: opacity 200ms ease-out;
     }
     &--hidden {
+      padding-right: 16px;
       border: none;
       background-color: transparent;
       visibility: hidden;
