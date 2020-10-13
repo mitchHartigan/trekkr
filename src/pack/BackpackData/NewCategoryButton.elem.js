@@ -32,7 +32,7 @@ const AddANewCategory = styled.button`
   outline: none;
   font-family: Alata;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 14px;
 `;
 
 const CategoryContainer = styled.div`
