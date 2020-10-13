@@ -431,6 +431,9 @@ export const selectColorForCategory = (currentState) => {
     "rgb(243, 201, 105)",
     "rgb(4, 67, 137)",
     "rgb(103, 148, 54)",
+    "rgb(232, 149, 77)",
+    "rgb(209, 134, 89)",
+    "rgb(113, 82, 114)",
   ];
 
   let alreadyUsedColors = [];
