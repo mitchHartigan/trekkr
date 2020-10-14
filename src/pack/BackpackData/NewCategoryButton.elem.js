@@ -3,11 +3,11 @@ import styled from "styled-components";
 
 export function NewCategoryButton(props) {
   return (
-    <CategoryContainer>
+    <Container>
       <AddANewCategory onClick={props.onClick}>
-        {props.children}
+        + Add a category
       </AddANewCategory>
-    </CategoryContainer>
+    </Container>
   );
 }
 
@@ -35,7 +35,7 @@ const AddANewCategory = styled.button`
   font-size: 14px;
 `;
 
-const CategoryContainer = styled.div`
+const Container = styled.div`
   background-color: transparent;
   display: flex;
   justify-content: flex-start;

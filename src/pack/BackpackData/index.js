@@ -15,6 +15,7 @@ import { parseDataForVis } from "./utils";
 import styled, { keyframes } from "styled-components";
 import Vis from "../../vis/index";
 import { NewCategoryButton } from "./NewCategoryButton.elem";
+import TutorialMessage from "./TutorialMessage";
 
 export default class BackpackData extends Component {
   constructor(props) {
@@ -70,6 +71,13 @@ export default class BackpackData extends Component {
     return true;
   };
 
+  checkTutorialWillRender = () => {
+    if (Object.keys(this.state.categories).length === 0) {
+      return true;
+    }
+    return false;
+  };
+
   render() {
     return (
       <DataContainer renderVis={this.checkVisWillRender()}>
@@ -79,32 +87,34 @@ export default class BackpackData extends Component {
               <Vis data={parseDataForVis(this.state)} />
             </VisContainer>
           )}
+          <div style={{ width: "100%" }}>
+            {this.checkTutorialWillRender() && <TutorialMessage />}
 
-          <ListContainer id="listContainer">
-            {this.state.categoryOrder.map((categoryId) => {
-              const category = this.state.categories[categoryId];
-              const items = category.itemIds.map(
-                (itemId) => this.state.items[itemId]
-                // get each item from the state
-              );
-              return (
-                <Category
-                  key={category.id}
-                  id={category.id}
-                  category={category}
-                  items={items}
-                  updateItemContents={this.updateItemContents}
-                  addItem={this.addItem}
-                  deleteItem={this.deleteItem}
-                  deleteCategory={this.deleteCategory}
-                  updateCategoryTitle={this.updateCategoryTitle}
-                />
-              );
-            })}
-            <NewCategoryButton onClick={this.addCategory}>
-              + Add a category
-            </NewCategoryButton>
-          </ListContainer>
+            <ListContainer id="listContainer">
+              {this.state.categoryOrder.map((categoryId) => {
+                const category = this.state.categories[categoryId];
+                const items = category.itemIds.map(
+                  (itemId) => this.state.items[itemId]
+                  // get each item from the state
+                );
+                return (
+                  <Category
+                    key={category.id}
+                    id={category.id}
+                    category={category}
+                    items={items}
+                    updateItemContents={this.updateItemContents}
+                    addItem={this.addItem}
+                    deleteItem={this.deleteItem}
+                    deleteCategory={this.deleteCategory}
+                    updateCategoryTitle={this.updateCategoryTitle}
+                  />
+                );
+              })}
+
+              <NewCategoryButton onClick={this.addCategory} />
+            </ListContainer>
+          </div>
         </DragDropContext>
       </DataContainer>
     );
@@ -141,7 +151,7 @@ const DataContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  margin: ${(props) => (props.renderVis ? "0vw" : "3vh 30vw 0vh 30vw")};
+  margin: ${(props) => (props.renderVis ? "0vw" : "10vh 30vw 0vh 30vw")};
   justify-content: ${(props) => (props.renderVis ? "" : "center")};
   transition: justify-content 1s linear;
 `;
