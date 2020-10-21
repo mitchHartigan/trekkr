@@ -6,8 +6,9 @@ export default function TutorialMessage() {
     <Container>
       <DescriptionText>
         Start visualizing your pack by creating a new category, and adding some
-        items to it. Or, if you're not ready to jump in just yet, take a look at
-        my own pack breakdown <ExampleLink href="#">here.</ExampleLink>
+        items to it. Or, if you want to see a finished visualization before you
+        jump in, you can view this{" "}
+        <ExampleLink href="#">sample pack breakdown.</ExampleLink>
       </DescriptionText>
     </Container>
   );

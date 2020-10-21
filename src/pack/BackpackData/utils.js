@@ -446,13 +446,16 @@ export const selectColorForCategory = (currentState) => {
   });
 
   // Remove the colors already in use from the colors array.
-  alreadyUsedColors.forEach((color) => {
-    let colorIndex = colors.indexOf(color);
+  // If all the colors have been used, start selecting random colors from the array.
+  if (alreadyUsedColors.length < colors.length) {
+    alreadyUsedColors.forEach((color) => {
+      let colorIndex = colors.indexOf(color);
 
-    if (colorIndex !== -1) {
-      colors.splice(colorIndex, 1);
-    }
-  });
+      if (colorIndex !== -1) {
+        colors.splice(colorIndex, 1);
+      }
+    });
+  }
 
   const selectedColor = colors[getRandomValueInRange(0, colors.length)];
 
