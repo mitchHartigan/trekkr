@@ -6,27 +6,6 @@ import { StylesProvider } from "@material-ui/core";
 import { InputLabel, Select, MenuItem } from "@material-ui/core";
 import DynamicInput from "./DynamicInput.elem";
 import styled from "styled-components";
-
-// TODO: refactor this as a styled component
-const DeleteButton = (props) => {
-  if (props.display) {
-    return (
-      <button className="item__deleteButton" onClick={props.handleDelete}>
-        <img src="delete-button.png" />
-      </button>
-    );
-  } else {
-    return (
-      <button
-        className="item__deleteButton--hidden"
-        onClick={props.handleDelete}
-      >
-        <img src="delete-button.png" />
-      </button>
-    );
-  }
-};
-
 export default class Item extends Component {
   constructor(props) {
     super(props);
@@ -132,9 +111,11 @@ export default class Item extends Component {
 
               <div>
                 <DeleteButton
-                  handleDelete={this.handleDelete}
+                  onClick={this.handleDelete}
                   display={this.state.hovered}
-                />
+                >
+                  <img src="delete-button.png" />
+                </DeleteButton>
               </div>
             </ItemContainer>
           )}
@@ -143,6 +124,19 @@ export default class Item extends Component {
     );
   }
 }
+
+const DeleteButton = styled.button`
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  opacity: 0.5;
+  padding-right: 16px;
+  &:hover {
+    opacity: 1;
+  }
+  visibility: ${(props) => (props.display ? "visible" : "hidden")};
+`;
 
 const WeightInputContainer = styled.div`
   display: flex;
