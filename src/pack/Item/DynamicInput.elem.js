@@ -127,6 +127,11 @@ export default class DynamicInput extends Component {
   }
 }
 
+DynamicInput.defaultProps = {
+  fontSize: "14",
+  fontFamily: "Alata",
+};
+
 DynamicInput.propTypes = {
   inputRef: PropTypes.object,
   inputPlaceholder: PropTypes.string.isRequired,

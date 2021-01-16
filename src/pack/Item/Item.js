@@ -61,8 +61,6 @@ export default class Item extends Component {
               <NameInputContainer>
                 <DynamicInput
                   inputType="text"
-                  fontSize="14"
-                  fontFamily="Alata"
                   inputRef={this.nameInput}
                   inputName="name"
                   inputPlaceholder="Name"
@@ -74,8 +72,6 @@ export default class Item extends Component {
               <WeightInputContainer>
                 <DynamicInput
                   inputType="number"
-                  fontSize="14"
-                  fontFamily="Alata"
                   textAlign="center"
                   inputRef={this.weightInput}
                   inputName="weight"
@@ -98,8 +94,6 @@ export default class Item extends Component {
                 <InputLabel className="item__qtyLabel">x</InputLabel>
                 <DynamicInput
                   inputType="number"
-                  fontSize="14"
-                  fontFamily="Alata"
                   textAlign="center"
                   inputRef={this.qtyInput}
                   inputName="qty"
