@@ -6,6 +6,7 @@ import { StylesProvider } from "@material-ui/core";
 import { InputLabel, Select, MenuItem } from "@material-ui/core";
 import DynamicInput from "./DynamicInput.elem";
 import styled from "styled-components";
+import InputLabel from "./_inputLabel";
 export default class Item extends Component {
   constructor(props) {
     super(props);
