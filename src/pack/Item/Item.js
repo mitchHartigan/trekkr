@@ -62,8 +62,6 @@ export default class Item extends Component {
               <NameInputContainer>
                 <DynamicInput
                   inputType="text"
-                  fontSize="14"
-                  fontFamily="Alata"
                   inputRef={this.nameInput}
                   inputName="name"
                   inputPlaceholder="Name"
@@ -75,8 +73,6 @@ export default class Item extends Component {
               <WeightInputContainer>
                 <DynamicInput
                   inputType="number"
-                  fontSize="14"
-                  fontFamily="Alata"
                   textAlign="center"
                   inputRef={this.weightInput}
                   inputName="weight"
@@ -95,12 +91,10 @@ export default class Item extends Component {
                 </Select>
               </WeightInputContainer>
 
-              <div className="item__qtyContainer">
+              <QuantityContainer>
                 <InputLabel className="item__qtyLabel">x</InputLabel>
                 <DynamicInput
                   inputType="number"
-                  fontSize="14"
-                  fontFamily="Alata"
                   textAlign="center"
                   inputRef={this.qtyInput}
                   inputName="qty"
@@ -108,7 +102,7 @@ export default class Item extends Component {
                   inputValue={qty}
                   handleUpdate={this.handleUpdate}
                 />
-              </div>
+              </QuantityContainer>
 
               <div>
                 <DeleteButton
@@ -144,6 +138,15 @@ const WeightInputContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+`;
+
+const QuantityContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 14px;
+  font-family: Alata;
+  margin: 0px 5px 0px 15px;
 `;
 
 const NameInputContainer = styled.div`

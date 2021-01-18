@@ -21,14 +21,6 @@
   &__select {
     border: none;
   }
-  &__qtyContainer {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    font-size: 14px;
-    font-family: Alata;
-    margin: 0px 5px 0px 15px;
-  }
   &__qty {
     font-size: 14px;
     font-family: Alata;
@@ -46,26 +38,6 @@
     max-width: 40px;
     font-size: 14px;
     font-family: Alata;
-  }
-  &__deleteButton {
-    border: none;
-    outline: none;
-    background-color: transparent;
-    animation-name: fadeIn;
-    animation-duration: 200ms;
-    cursor: pointer;
-    opacity: 0.5;
-    padding-right: 16px;
-    &:hover {
-      opacity: 1;
-      transition: opacity 200ms ease-out;
-    }
-    &--hidden {
-      padding-right: 16px;
-      border: none;
-      background-color: transparent;
-      visibility: hidden;
-    }
   }
 }
 
