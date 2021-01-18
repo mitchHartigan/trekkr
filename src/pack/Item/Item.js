@@ -3,19 +3,15 @@ import { Draggable } from "react-beautiful-dnd";
 import "./_item.scss";
 import { ItemContainer } from "./Item.elem";
 import { StylesProvider } from "@material-ui/core";
-import { InputLabel, Select, MenuItem } from "@material-ui/core";
+import { Select, MenuItem } from "@material-ui/core";
 import DynamicInput from "./DynamicInput.elem";
 import styled from "styled-components";
-import InputLabel from "./_inputLabel";
+import InputLabel from "./_InputLabel.js";
 export default class Item extends Component {
   constructor(props) {
     super(props);
-
     this.nameInput = React.createRef();
-
-    this.state = {
-      hovered: false,
-    };
+    this.state = { hovered: false };
   }
 
   componentDidMount() {
@@ -92,7 +88,7 @@ export default class Item extends Component {
               </WeightInputContainer>
 
               <QuantityContainer>
-                <InputLabel className="item__qtyLabel">x</InputLabel>
+                <InputLabel labelFor={"qty"}>x</InputLabel>
                 <DynamicInput
                   inputType="number"
                   textAlign="center"
