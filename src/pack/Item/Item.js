@@ -103,7 +103,7 @@ export default class Item extends Component {
               <div>
                 <DeleteButton
                   onClick={this.handleDelete}
-                  display={this.state.hovered}
+                  show={this.state.hovered}
                 >
                   <img src="delete-button.png" />
                 </DeleteButton>
@@ -126,7 +126,7 @@ const DeleteButton = styled.button`
   &:hover {
     opacity: 1;
   }
-  visibility: ${(props) => (props.display ? "visible" : "hidden")};
+  visibility: ${(props) => (props.show ? "visible" : "hidden")};
 `;
 
 const WeightInputContainer = styled.div`
