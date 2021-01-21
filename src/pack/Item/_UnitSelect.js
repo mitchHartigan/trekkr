@@ -10,6 +10,26 @@ export function _UnitSelect(props) {
   );
 }
 
-export const Option = styled.option``;
+export const Option = styled.option`
+  cursor: pointer;
+`;
 
-const Select = styled.select``;
+const Select = styled.select`
+  border: none;
+  box-sizing: border-box;
+  width: 45px;
+  height: 100%;
+  padding: 2px 5px 5px 5px;
+  outline: none;
+  font-family: Alata;
+  font-size: 14px;
+  background: url(selectArrow.png) no-repeat right transparent;
+  -webkit-appearance: none;
+  background-position-x: 28px;
+  background-position-y: 18px;
+  transition: background-color 100ms linear;
+  cursor: pointer;
+  &: hover {
+    background-color: #d1d6cb;
+  }
+`;
