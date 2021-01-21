@@ -26,7 +26,7 @@ const Select = styled.select`
   background: url(selectArrow.png) no-repeat right transparent;
   -webkit-appearance: none;
   background-position-x: 28px;
-  background-position-y: 18px;
+  background-position-y: 11px;
   transition: background-color 100ms linear;
   cursor: pointer;
   &: hover {
