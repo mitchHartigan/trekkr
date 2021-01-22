@@ -23,7 +23,14 @@ export default class DynamicInput extends Component {
     const id = uuidv4();
     const { inputValue, inputPlaceholder, fontFamily, fontSize } = this.props;
 
-    const minWidth = getWidthOfText(inputPlaceholder, fontSize, fontFamily);
+    const placeholderTextWidth = getWidthOfText(
+      inputPlaceholder,
+      fontSize,
+      fontFamily
+    );
+
+    // set width to 20px if the width of the placeholder text is less than that
+    const minWidth = placeholderTextWidth > 15 ? placeholderTextWidth : 15;
 
     this.setState(
       {
