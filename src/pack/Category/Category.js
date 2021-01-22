@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Droppable } from "react-beautiful-dnd";
 import Item from "../Item/Item";
 import { AddANewItemButton, CategoryContainer } from "./Category.elem";
-import { StylesProvider } from "@material-ui/core";
 import { CategoryColor } from "./CategoryColor.elem";
 import DynamicInput from "../Item/DynamicInput.elem";
 import { parseWeightValToString } from "../BackpackData/utils";
@@ -52,75 +51,73 @@ export default class Category extends Component {
     };
 
     return (
-      <StylesProvider injectFirst>
-        <Droppable droppableId={this.props.category.id}>
-          {(provided, snapshot) => (
-            <CategoryContainer
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              isDraggingOver={snapshot.isDraggingOver}
-              onMouseOver={() => this.setState({ hovered: true })}
-              onMouseLeave={() => this.setState({ hovered: false })}
-            >
-              <CategoryHeader>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    width: "20%",
-                  }}
+      <Droppable droppableId={this.props.category.id}>
+        {(provided, snapshot) => (
+          <CategoryContainer
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            isDraggingOver={snapshot.isDraggingOver}
+            onMouseOver={() => this.setState({ hovered: true })}
+            onMouseLeave={() => this.setState({ hovered: false })}
+          >
+            <CategoryHeader>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  width: "20%",
+                }}
+              >
+                <CategoryColor color={this.props.category.color} />
+                <NameInputContainer>
+                  <DynamicInput {...nameInputProps} />
+                </NameInputContainer>
+              </div>
+
+              <CategoryControls>
+                <CategoryWeightSum show={collapsed}>
+                  {parseWeightValToString(totalWeight)}
+                </CategoryWeightSum>
+
+                <CollapseButton
+                  onClick={() => this.setState({ collapsed: !collapsed })}
+                  collapsed={collapsed}
+                  show={hovered}
                 >
-                  <CategoryColor color={this.props.category.color} />
-                  <NameInputContainer>
-                    <DynamicInput {...nameInputProps} />
-                  </NameInputContainer>
-                </div>
+                  <img src="collapse-button.png" alt="" />
+                </CollapseButton>
 
-                <CategoryControls>
-                  <CategoryWeightSum show={collapsed}>
-                    {parseWeightValToString(totalWeight)}
-                  </CategoryWeightSum>
+                <DeleteButton onClick={this.handleDelete} show={hovered}>
+                  X
+                </DeleteButton>
+              </CategoryControls>
+            </CategoryHeader>
+            <ItemsContainer show={!collapsed}>
+              {this.props.items.map((item, index) => {
+                return (
+                  <Item
+                    key={item.id}
+                    index={index}
+                    category={this.props.category}
+                    item={item}
+                    updateItemContents={this.props.updateItemContents}
+                    deleteItem={this.props.deleteItem}
+                  />
+                );
+              })}
 
-                  <CollapseButton
-                    onClick={() => this.setState({ collapsed: !collapsed })}
-                    collapsed={collapsed}
-                    show={hovered}
-                  >
-                    <img src="collapse-button.png" alt="" />
-                  </CollapseButton>
+              {provided.placeholder}
 
-                  <DeleteButton onClick={this.handleDelete} show={hovered}>
-                    X
-                  </DeleteButton>
-                </CategoryControls>
-              </CategoryHeader>
-              <ItemsContainer show={!collapsed}>
-                {this.props.items.map((item, index) => {
-                  return (
-                    <Item
-                      key={item.id}
-                      index={index}
-                      category={this.props.category}
-                      item={item}
-                      updateItemContents={this.props.updateItemContents}
-                      deleteItem={this.props.deleteItem}
-                    />
-                  );
-                })}
-
-                {provided.placeholder}
-
-                <AddANewItemButton
-                  onClick={this.handleAddItem}
-                  isDraggingOver={snapshot.isDraggingOver}
-                >
-                  + Add an item
-                </AddANewItemButton>
-              </ItemsContainer>
-            </CategoryContainer>
-          )}
-        </Droppable>
-      </StylesProvider>
+              <AddANewItemButton
+                onClick={this.handleAddItem}
+                isDraggingOver={snapshot.isDraggingOver}
+              >
+                + Add an item
+              </AddANewItemButton>
+            </ItemsContainer>
+          </CategoryContainer>
+        )}
+      </Droppable>
     );
   }
 }

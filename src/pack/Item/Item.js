@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import "./_item.scss";
 import { ItemContainer } from "./Item.elem";
-import { StylesProvider } from "@material-ui/core";
-import { Select, MenuItem } from "@material-ui/core";
 import DynamicInput from "./DynamicInput.elem";
 import styled from "styled-components";
 import InputLabel from "./_InputLabel";
@@ -41,77 +38,75 @@ export default class Item extends Component {
     const { name, weight, qty, units } = this.props.item;
 
     return (
-      <StylesProvider>
-        <Draggable draggableId={this.props.item.id} index={this.props.index}>
-          {(provided, snapshot) => (
-            <ItemContainer
-              isDragging={snapshot.isDragging}
-              {...provided.draggableProps}
-              {...provided.dragHandleProps}
-              ref={provided.innerRef}
-              onMouseOver={() => {
-                this.setState({ hovered: true });
-              }}
-              onMouseLeave={() => {
-                this.setState({ hovered: false });
-              }}
-            >
-              <NameInputContainer>
-                <DynamicInput
-                  inputType="text"
-                  inputRef={this.nameInput}
-                  inputName="name"
-                  inputPlaceholder="Name"
-                  inputValue={name ? name : ""}
-                  handleUpdate={this.handleUpdate}
-                />
-              </NameInputContainer>
+      <Draggable draggableId={this.props.item.id} index={this.props.index}>
+        {(provided, snapshot) => (
+          <ItemContainer
+            isDragging={snapshot.isDragging}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+            ref={provided.innerRef}
+            onMouseOver={() => {
+              this.setState({ hovered: true });
+            }}
+            onMouseLeave={() => {
+              this.setState({ hovered: false });
+            }}
+          >
+            <NameInputContainer>
+              <DynamicInput
+                inputType="text"
+                inputRef={this.nameInput}
+                inputName="name"
+                inputPlaceholder="Name"
+                inputValue={name ? name : ""}
+                handleUpdate={this.handleUpdate}
+              />
+            </NameInputContainer>
 
-              <WeightInputContainer>
-                <DynamicInput
-                  inputType="number"
-                  textAlign="center"
-                  inputRef={this.weightInput}
-                  inputName="weight"
-                  inputPlaceholder="0"
-                  inputValue={weight}
-                  handleUpdate={this.handleUpdate}
-                />
-                <UnitSelect
-                  name="units"
-                  value={units || "g"}
-                  handleUpdate={this.handleUpdate}
-                >
-                  <Option>g</Option>
-                  <Option>kg</Option>
-                </UnitSelect>
-              </WeightInputContainer>
+            <WeightInputContainer>
+              <DynamicInput
+                inputType="number"
+                textAlign="center"
+                inputRef={this.weightInput}
+                inputName="weight"
+                inputPlaceholder="0"
+                inputValue={weight}
+                handleUpdate={this.handleUpdate}
+              />
+              <UnitSelect
+                name="units"
+                value={units || "g"}
+                handleUpdate={this.handleUpdate}
+              >
+                <Option>g</Option>
+                <Option>kg</Option>
+              </UnitSelect>
+            </WeightInputContainer>
 
-              <QuantityContainer>
-                <InputLabel labelFor={"qty"}>x</InputLabel>
-                <DynamicInput
-                  inputType="number"
-                  textAlign="center"
-                  inputRef={this.qtyInput}
-                  inputName="qty"
-                  inputPlaceholder="1"
-                  inputValue={qty}
-                  handleUpdate={this.handleUpdate}
-                />
-              </QuantityContainer>
+            <QuantityContainer>
+              <InputLabel labelFor={"qty"}>x</InputLabel>
+              <DynamicInput
+                inputType="number"
+                textAlign="center"
+                inputRef={this.qtyInput}
+                inputName="qty"
+                inputPlaceholder="1"
+                inputValue={qty}
+                handleUpdate={this.handleUpdate}
+              />
+            </QuantityContainer>
 
-              <div>
-                <DeleteButton
-                  onClick={this.handleDelete}
-                  show={this.state.hovered}
-                >
-                  <img src="delete-button.png" />
-                </DeleteButton>
-              </div>
-            </ItemContainer>
-          )}
-        </Draggable>
-      </StylesProvider>
+            <div>
+              <DeleteButton
+                onClick={this.handleDelete}
+                show={this.state.hovered}
+              >
+                <img src="delete-button.png" />
+              </DeleteButton>
+            </div>
+          </ItemContainer>
+        )}
+      </Draggable>
     );
   }
 }
