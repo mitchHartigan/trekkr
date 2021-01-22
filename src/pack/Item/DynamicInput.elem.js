@@ -14,48 +14,44 @@ export default class DynamicInput extends Component {
       value: "",
       width: "",
       minWidth: "",
-      id: null,
+      id: "",
       isHovered: false,
     };
   }
 
   async componentDidMount() {
     const id = uuidv4();
-    // Uses the width of the placeholder text as the minimum allowed
-    // width of the input elem, or 15px (whichever is larger).
-    let minWidth = getWidthOfText(
-      this.props.inputPlaceholder,
-      this.props.fontSize,
-      this.props.fontFamily
-    );
+    const { inputValue, inputPlaceholder, fontFamily, fontSize } = this.props;
 
-    if (minWidth < 20) minWidth = 20;
+    const minWidth = getWidthOfText(inputPlaceholder, fontSize, fontFamily);
 
     this.setState(
-      { id: id, value: this.props.inputValue, minWidth: minWidth },
+      {
+        id: id,
+        value: inputValue,
+        minWidth: minWidth,
+      },
       () => {
-        this.setState({ width: this._getSpanWidth(id) });
+        this.setState({ width: this._getInputWidth(inputValue) });
       }
     );
   }
 
-  // TODO: refactor to use a ref instead of document.getELementById.
-  _getSpanWidth = (id) => {
-    let width = document.getElementById(id).offsetWidth * 1.05;
-    if (width < this.state.minWidth) width = this.state.minWidth;
+  _getInputWidth = (text) => {
+    const { minWidth } = this.state;
+    const { fontSize, fontFamily } = this.props;
+
+    let width = getWidthOfText(text, fontSize, fontFamily);
+    if (width < minWidth) width = minWidth;
 
     return `${width}px`;
   };
 
-  // Takes the text value from the onchange evt and places it inside the span,
-  // then gets the width of the span (with the new text value) and uses the offset width
-  // of that elem to inform the width of the input.
   _handleUpdate = (evt) => {
     this.props.handleUpdate(evt);
+    const value = evt.target.value;
 
-    this.setState({ value: evt.target.value }, () => {
-      this.setState({ width: this._getSpanWidth(this.state.id) });
-    });
+    this.setState({ value: value, width: this._getInputWidth(value) });
   };
 
   _handleHover = (isHovered) => {
@@ -116,14 +112,6 @@ export default class DynamicInput extends Component {
             width={this.state.width}
           ></Underline>
         </Container>
-
-        <MeasurementSpan
-          id={this.state.id}
-          fontFamily={fontFamily}
-          fontSize={fontSize}
-        >
-          {this.state.value}
-        </MeasurementSpan>
       </>
     );
   }
@@ -161,15 +149,6 @@ const Input = styled.input`
   flex-grow: 0;
   flex-shrink: 0;
   ${(props) => props.inputStyles}
-`;
-
-const MeasurementSpan = styled.span`
-  font-family: ${(props) => props.fontFamily};
-  font-size: ${(props) => props.fontSize}px;
-  position: absolute;
-  left: -9999px;
-  top: -9999px;
-  white-space: pre;
 `;
 
 const Underline = styled.span`

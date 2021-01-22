@@ -17,7 +17,7 @@ export const getWidthOfText = (text, fontSize, fontFamily) => {
   context.font = `${fontSize}px ${fontFamily}`;
   const width = Math.floor(context.measureText(text).width);
 
-  return width;
+  return width * 1.05;
 };
 
 export const handleDrag = (result, currentState) => {

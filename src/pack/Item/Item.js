@@ -6,7 +6,8 @@ import { StylesProvider } from "@material-ui/core";
 import { Select, MenuItem } from "@material-ui/core";
 import DynamicInput from "./DynamicInput.elem";
 import styled from "styled-components";
-import InputLabel from "./_InputLabel.js";
+import InputLabel from "./_InputLabel";
+import { _UnitSelect as UnitSelect, Option } from "./_UnitSelect";
 export default class Item extends Component {
   constructor(props) {
     super(props);
@@ -76,15 +77,14 @@ export default class Item extends Component {
                   inputValue={weight}
                   handleUpdate={this.handleUpdate}
                 />
-                <Select
+                <UnitSelect
                   name="units"
-                  className="item__select"
                   value={units || "g"}
-                  onChange={this.handleUpdate}
+                  handleUpdate={this.handleUpdate}
                 >
-                  <MenuItem value="g">g</MenuItem>
-                  <MenuItem value="kg">kg</MenuItem>
-                </Select>
+                  <Option>g</Option>
+                  <Option>kg</Option>
+                </UnitSelect>
               </WeightInputContainer>
 
               <QuantityContainer>
