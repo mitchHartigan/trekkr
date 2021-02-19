@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { ItemContainer } from "./Item.elem";
-import DynamicInput from "./DynamicInput.elem";
+import DynamicInput from "../DynamicInput.elem";
 import styled from "styled-components";
 import InputLabel from "./_InputLabel";
 import { _UnitSelect as UnitSelect, Option } from "./_UnitSelect";
