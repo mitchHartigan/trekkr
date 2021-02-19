@@ -3,8 +3,8 @@ import { Droppable } from "react-beautiful-dnd";
 import Item from "../Item/Item";
 import { AddANewItemButton, CategoryContainer } from "./Category.elem";
 import { CategoryColor } from "./CategoryColor.elem";
-import DynamicInput from "../Item/DynamicInput.elem";
-import { parseWeightValToString } from "../BackpackData/utils";
+import DynamicInput from "../DynamicInput.elem";
+import { parseWeightValToString } from "../utils";
 import styled from "styled-components";
 
 export default class Category extends Component {

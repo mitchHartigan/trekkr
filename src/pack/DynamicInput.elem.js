@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
-import { getWidthOfText } from "../BackpackData/utils";
+import { getWidthOfText } from "./utils";
 import PropTypes from "prop-types";
 
 /* TODO: move this component outside of the Item directory, as it's acccessed by Category as well. */

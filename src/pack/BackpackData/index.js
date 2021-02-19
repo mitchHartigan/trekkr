@@ -10,8 +10,8 @@ import {
   handleUpdateItem,
   handleUpdateCategoryTitle,
   handleDeleteCategory,
-} from "./utils";
-import { parseDataForVis } from "./utils";
+} from "../utils";
+import { parseDataForVis } from "../utils";
 import styled, { keyframes } from "styled-components";
 import Vis from "../../vis/index";
 import { NewCategoryButton } from "./NewCategoryButton.elem";
