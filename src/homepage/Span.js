@@ -4,14 +4,14 @@ import styled from "styled-components";
 export default function Span(props) {
   return (
     <SpanContainer align={props.align}>
-      <SpanElem color={props.color} />
+      <SpanElem color={props.color} width={props.width} />
     </SpanContainer>
   );
 }
 
 const SpanElem = styled.span`
-  width: 10vw;
-  height: 1px;
+  width: ${(props) => (props.width ? props.width : "10vw")};
+  height: 2px;
   background: ${(props) => (props.color ? props.color : "black")};
 `;
 

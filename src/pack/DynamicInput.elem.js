@@ -89,6 +89,9 @@ export default class DynamicInput extends Component {
       textAlign,
       inputStyles,
       containerStyles,
+      underlineWidth,
+      inputWidth,
+      alwaysShowUnderline,
     } = this.props;
 
     return (
@@ -96,7 +99,7 @@ export default class DynamicInput extends Component {
         <Container containerStyles={containerStyles}>
           <Input
             type={inputType}
-            width={this.state.width}
+            width={inputWidth || this.state.width}
             ref={inputRef}
             isDragging={isDragging}
             name={inputName}
@@ -116,7 +119,8 @@ export default class DynamicInput extends Component {
           <Underline
             isHovered={this.state.hovered}
             isFocused={this.state.focused}
-            width={this.state.width}
+            width={underlineWidth || this.state.width}
+            alwaysShowUnderline={alwaysShowUnderline}
           ></Underline>
         </Container>
       </>
@@ -159,8 +163,19 @@ const Input = styled.input`
 `;
 
 const Underline = styled.span`
-  opacity: ${(props) => (props.isFocused || props.isHovered ? "1" : "0")};
-  background-color: ${(props) => (props.isFocused ? "#708f00" : "black")};
+  opacity: ${(props) =>
+    props.isFocused || props.isHovered || props.alwaysShowUnderline
+      ? "1"
+      : "0"};
+  background-color: ${(props) => {
+    if (props.alwaysShowUnderline) {
+      if (props.isHovered && !props.isFocused) {
+        return "black";
+      }
+      return props.isFocused ? "#708f00" : "lightgray";
+    }
+    return props.isFocused ? "#708f00" : "black";
+  }};
   width: ${(props) => props.width};
   height: 2px;
   color: red;
